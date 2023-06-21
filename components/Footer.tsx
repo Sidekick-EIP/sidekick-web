@@ -1,46 +1,23 @@
-import { Box, Container, Paper, Typography } from "@mui/material";
+import Image from 'next/image'
+import Link from 'next/link'
+import { Instagram, Linkedin } from 'react-feather'
 
-export default function Footer() {
+export function Footer() {
   return (
-    <Paper
-      sx={{
-        marginTop: "calc(10% + 60px)",
-        width: "100%",
-        position: "fixed",
-        bottom: 0,
-        backgroundColor: "transparent",
-      }}
-      component="footer"
-      square
-      variant="outlined"
-    >
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            flexGrow: 1,
-            justifyContent: "center",
-            display: "flex",
-            my: 1,
-          }}
-        >
-        </Box>
-
-        <Box
-          sx={{
-            flexGrow: 1,
-            justifyContent: "space-between",
-            display: "flex",
-            mb: 2,
-          }}
-        >
-        <p className="text-white">
-        prout
-        </p>
-        <p className="text-white">
-        tes
-        </p>
-        </Box>
-      </Container>
-    </Paper>
-  );
+    <div className="bg-transparent sm:flex sm:flex-row flex-col sm:justify-between space-y-6 sm:space-y-0 items-center p-8">
+      <div className='flex justify-center'>
+        <Link href="/">
+          <Image src="/logo_transparent.png" alt="Sidekick" width={32} height={32} />
+        </Link>
+      </div>
+      <div className='flex space-x-4 justify-center'>
+        <Link href="https://www.linkedin.com/company/sidekick-eip/">
+          <Linkedin />
+        </Link>
+        <Link href="https://www.instagram.com/sidekick_eip/">
+          <Instagram />
+        </Link>
+      </div>
+    </div>
+  )
 }
