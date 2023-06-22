@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,15 +10,22 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { Button } from "@mui/material";
+import Link from "next/link";
+import Image from 'next/image';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [{
+  label: 'Login',
+  href: '/signin'
+}, {
+  label: 'Signup',
+  href: '/signup'
+}];
 
 export const Header = () => {
   const mobile = useMediaQuery('(max-width:639px)');
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -29,43 +35,17 @@ export const Header = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
-    <AppBar position="relative" color="transparent">
+    <AppBar position="relative" color="transparent" elevation={0} className='p-4'>
       <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1 }}>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+        <Toolbar disableGutters className='flex justify-between'>
+          <Box>
+            <Link href="/">
+              <Image src="/logo_transparent.png" alt="Sidekick" width={32} height={32} />
+            </Link>
           </Box>
 
-          {mobile && (
-
+          {mobile ? (
             <Box sx={{ flexGrow: 0 }}>
               <IconButton
                 size="large"
@@ -78,31 +58,48 @@ export const Header = () => {
                 <MenuIcon />
               </IconButton>
               <Menu
-                sx={{ mt: '45px' }}
                 id="menu-appbar"
-                anchorEl={anchorElUser}
+                anchorEl={anchorElNav}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: 'bottom',
+                  horizontal: 'left',
                 }}
                 keepMounted
                 transformOrigin={{
                   vertical: 'top',
-                  horizontal: 'right',
+                  horizontal: 'left',
                 }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
+                {pages.map((page) => (
+                  <Link href={page.href} key={page.href}>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page.label}</Typography>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
+            </Box >
+          ) : (
+            <Box className="space-x-8" sx={{ flexGrow: 0 }}>
+              <Link href="/signin">
+                <Button variant="text" color="primary">
+                  Log in
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button variant="contained" color="primary">
+                  Sign up
+                </Button>
+              </Link>
             </Box>
           )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+        </Toolbar >
+      </Container >
+    </AppBar >
   );
 }
