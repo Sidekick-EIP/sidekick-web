@@ -26,6 +26,9 @@ const pagesAuth = [{
   label: 'Profile',
   href: '/profile',
 }, {
+  label: 'Planning',
+  href: '/planning',
+}, {
   label: 'Logout',
   href: '#',
   onClick: async () => signOut()
@@ -36,7 +39,7 @@ const pagesAuth = [{
 
 function Header() {
   const { data: session } = useSession();
-  console.log("header", session);
+  //console.log("header", session);
   const mobile = useMediaQuery('(max-width:639px)');
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
