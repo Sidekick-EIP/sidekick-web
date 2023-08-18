@@ -2,17 +2,8 @@
 import React from 'react';
 import { Container, Typography, Grid, Card, CardContent, ButtonGroup, Button, Stack } from '@mui/material';
 import Image from 'next/image'
+import Link from 'next/link';
 
-
-const handleDownload = () => {
-  const fileURL = '/app-release.apk';
-  const link = document.createElement('a');
-  link.href = fileURL;
-  link.setAttribute('download', 'app-release.apk');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
 
 
 export default function Home() {
@@ -26,9 +17,7 @@ export default function Home() {
 
   return (
     <div >
-
       <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={6}>
-
         <Container maxWidth="md">
           <Typography variant="h4" component="h1" color="#FFAA83" gutterBottom>
             The Project
@@ -39,14 +28,18 @@ export default function Home() {
             <p>With us find your sidekick for your sport adventure!</p>
           </Typography>
           
-          <div >
-            <ButtonGroup variant="text" aria-label="text button group" style={{alignItems:"center"}}>
-              <Button onClick={handleDownload} color="secondary">
-                Get for IOS
-              </Button>
-              <Button onClick={handleDownload} color="secondary">
-                Get for Android
-              </Button>
+          <div>
+            <ButtonGroup variant="text" aria-label="text button group" style={{ alignItems: "center" }}>
+              <Link href="/app-release.apk" passHref>
+                <Button color="secondary" component="a" download>
+                  Get for Android
+                </Button>
+              </Link>
+              <Link href="/app-release.ipa" passHref>
+                <Button color="secondary" component="a" download>
+                  Get for iOS
+                </Button>
+              </Link>
             </ButtonGroup>
           </div>
         </Container>
