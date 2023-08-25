@@ -21,7 +21,7 @@ export default function Home() {
         <title>Sidekick</title>
       </Head>
       <div>
-      {session.data && <p className="p-16">You are logged in as {session.data?.user.email}</p>}
+        {session.data && <p className="p-16">You are logged in as {session.data?.user.email}</p>}
       </div>
       <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={6}>
         <Container maxWidth="md">
@@ -29,23 +29,19 @@ export default function Home() {
             The Project
           </Typography>
           <Typography variant="body1" align="center">
-            <p>Sidekick is an application that connects two strangers so that they can pull each other up and achieve their common goals, whether it's for sports and/or for a food plan.</p>
-            <p>The aim is to improve the lives of our users, to make it easier for them to access sports and sports programs, and thus improve their health.</p>
-            <p>With us find your sidekick for your sport adventure!</p>
+            Sidekick is an application that connects two strangers so that they can pull each other up and achieve their common goals, whether it's for sports and/or for a food plan.
+            The aim is to improve the lives of our users, to make it easier for them to access sports and sports programs, and thus improve their health.
+            With us find your sidekick for your sport adventure!
           </Typography>
-          
+
           <div>
             <ButtonGroup variant="text" aria-label="text button group" style={{ alignItems: "center" }}>
-              <Link href="/app-release.apk" passHref>
-                <Button color="secondary" component="a" download>
-                  Get for Android
-                </Button>
-              </Link>
-              <Link href="/app-release.ipa" passHref>
-                <Button color="secondary" component="a" download>
-                  Get for iOS
-                </Button>
-              </Link>
+              <Button color="secondary" component="a" download href='/app-release.apk'>
+                Get for Android
+              </Button>
+              <Button color="secondary" component="a" download href='/app-release.ipa'>
+                Get for iOS
+              </Button>
             </ButtonGroup>
           </div>
         </Container>
@@ -54,8 +50,8 @@ export default function Home() {
           <Typography variant="h4" component="h1" color="#FFAA83" gutterBottom>
             About Us
           </Typography>
-          <Typography variant="body1" align="center"  color="#FFFFFF" gutterBottom>
-          We are a team of French computer science students, passionate about new technologies, but also, as you can imagine, about sports! We decided to found Sidekick, our own company in order to combine our passions. For the moment, we are all around the world, but we are all working together on our project!
+          <Typography variant="body1" align="center" color="#FFFFFF" gutterBottom>
+            We are a team of French computer science students, passionate about new technologies, but also, as you can imagine, about sports! We decided to found Sidekick, our own company in order to combine our passions. For the moment, we are all around the world, but we are all working together on our project!
           </Typography>
           <Grid container spacing={2}>
             {personData.map((person, index) => (
@@ -86,10 +82,8 @@ export default function Home() {
           <Typography variant="h4" component="h1" color="#FFAA83" gutterBottom>
             Contact Us
           </Typography>
-          <Typography variant="body1" align="center">
-            <h3 className="m-0">
-              Some Questions ? Send an email at : sidekick.eip@gmail.com !
-            </h3>
+          <Typography variant="body1" align="center" className='m-0'>
+            Some Questions ? Send an email at : sidekick.eip@gmail.com !
           </Typography>
         </Container>
 

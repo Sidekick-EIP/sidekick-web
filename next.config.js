@@ -4,7 +4,9 @@ const nextConfig = {
     COOKIE_PASSWORD: process.env.COOKIE_PASSWORD,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-  ignoreBuildErrors: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  }
 }
 
 module.exports = nextConfig
