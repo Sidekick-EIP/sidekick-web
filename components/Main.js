@@ -1,140 +1,125 @@
 export default function Main() {
     return (
       <section class="text-gray-600 body-font">
-        <div class="max-w-5xl pt-52 pb-24 mx-auto">
-          <h1 class="text-80 text-center font-4 lh-6 ld-04 font-bold text-white mb-6">
+        
+        <div class="max-w-5xl pt-20 pb-36 mx-auto">
+          <h1 class="text-80 text-center font-4 lh-6 ld-04 font-bold text-white mb-6 pb-10">
           Ensemble, allons plus loin !
           </h1>
           <h2 class="text-2xl font-5 lh-6 ld-04 pb-11 text-slate-300 text-center">
           Sidekick c’est la fusion d’une application de nutrition et d’exercices sportifs complets avec un espace de rencontre entre passionnés pour rester motivé.
           </h2>
-
+          <div class="text-center">
           <a
-            class="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium text-black transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-orange-400"
+            class="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium text-black transition duration-500 ease-in-out transform bg-gradient-to-r from-orange-500 to-orange-700 hover:from-pink-500 border rounded-lg"
             href="/app-release.apk"
           >
             <span class="justify-center">Get for Android</span>
           </a>
           <a
-            class="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium text-black transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-orange-400"
+            class="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium text-black transition duration-500 ease-in-out transform bg-gray border rounded-lg"
             href="/"
           >
-            <span class="justify-center">Get for iOS</span>
+            <span class="justify-center disabled">Get for iOS</span>
           </a>
+          </div>
         </div>
 
+        <div className="pt-12 pb-12 max-w-5xl mx-auto md:px-1 px-3 text-center">
+          <div class="ktq4">
+            <img class="h-20 w-20" src="../logo.png"></img>
+            <h3 class="pt-3 font-semibold text-lg text-white">
+            Decouvrir le projet
+            </h3>
+            <p class="pt-2 value-text text-md text-gray-200 fkrr1">
+              Sidekick est une application qui met en relation deux inconnus pour qu'ils puissent s'entraider et atteindre leurs objectifs communs, que ce soit pour le sport et/ou pour un plan alimentaire.
+              Le but est d'améliorer la vie de nos utilisateurs, en leur facilitant l'accés aux sports et aux programmes sportifs, et ainsi d'améliorer leur santé.
+              Avec nous trouvez votre acolyte pour votre aventure sportive !
+            </p>
+          </div>
+        </div>
 
+        <div className=" max-w-5xl mx-auto md:px-1 px-3">
+        <div class="ktq4 text-center">
+        <p className="pb-8 mx-auto text-xl text-center text-gray-300 font-semibold leading-relaxed fs521 lg:w-2/3">
+          La timeline du projet<br></br>
+        </p>
         <div className="container flex flex-col items-center justify-center mx-auto">
           <img
             className="object-cover object-center w-3/4 mb-10 border shadow-md g327"
-            alt="Placeholder Image"
+            alt="Timeline Image"
             src="../timetable.png"
           ></img>
         </div>
+        </div>
+        </div>
 
-        <h2 className="pt-40 mb-1 text-2xl font-semibold tracking-tighter text-center text-gray-200 lg:text-7xl md:text-6xl">
-          Clean and tidy code.
-        </h2>
-        <br></br>
-        <p className="mx-auto text-xl text-center text-gray-300 font-normal leading-relaxed fs521 lg:w-2/3">
-          Here is our collection of free to use templates made with Next.js &
-          styled with Tailwind CSS.
-        </p>
-        <div className="pt-12 pb-24 max-w-4xl mx-auto fsac4 md:px-1 px-3">
-          <div class="ktq4">
-            <img className="w-10" src="https://nine4.app/favicon.png"></img>
+
+        <div className="pt-12 max-w-5xl mx-auto md:px-1 px-3">
+          <div class="ktq4 text-center">
             <h3 class="pt-3 font-semibold text-lg text-white">
-              Lorem ipsum dolor sit amet
+            L'equipe
             </h3>
             <p class="pt-2 value-text text-md text-gray-200 fkrr1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              tincidunt a libero in finibus. Maecenas a nisl vitae ante rutrum
-              porttitor.
-            </p>
-          </div>
-          <div class="ktq4">
-            <img className="w-10" src="https://nine4.app/favicon.png"></img>
-            <h3 class="pt-3 font-semibold text-lg text-white">
-              Lorem ipsum dolor sit amet
-            </h3>
-            <p class="pt-2 value-text text-md text-gray-200 fkrr1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              tincidunt a libero in finibus. Maecenas a nisl vitae ante rutrum
-              porttitor.
-            </p>
-          </div>
-          <div class="ktq4">
-            <img className="w-10" src="https://nine4.app/favicon.png"></img>
-            <h3 class="pt-3 font-semibold text-lg text-white">
-              Lorem ipsum dolor sit amet
-            </h3>
-            <p class="pt-2 value-text text-md text-gray-200 fkrr1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              tincidunt a libero in finibus. Maecenas a nisl vitae ante rutrum
-              porttitor.
-            </p>
-          </div>
-          <div class="ktq4">
-            <img className="w-10" src="https://nine4.app/favicon.png"></img>
-            <h3 class="pt-3 font-semibold text-lg text-white">
-              Lorem ipsum dolor sit amet
-            </h3>
-            <p class="pt-2 value-text text-md text-gray-200 fkrr1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              tincidunt a libero in finibus. Maecenas a nisl vitae ante rutrum
-              porttitor.
+            Nous sommes une équipe d'étudiants français en informatique, passionnés par les nouvelles technologies,
+             mais aussi, comme vous vous en doutez, par le sport ! Nous avons décidé de fonder Sidekick,
+              notre propre entreprise afin d'allier nos passions.
+             Pour le moment, nous sommes partout dans le monde, mais nous travaillons tous ensemble sur notre projet !
             </p>
           </div>
         </div>
-        <div className="pt-32 pb-32 max-w-6xl mx-auto fsac4 md:px-1 px-3">
+
+        <div className="pt-12 max-w-4xl mx-auto fsac4 md:px-1 px-3">
           <div class="ktq4">
-            <img src="https://nine4.app/images/nine4-3.png"></img>
+            <img className="w-10" src="../Alizee.png"></img>
             <h3 class="pt-3 font-semibold text-lg text-white">
-              Lorem ipsum dolor sit amet
+              Alizee S
             </h3>
             <p class="pt-2 value-text text-md text-gray-200 fkrr1">
-              Fusce pharetra ligula mauris, quis faucibus lectus elementum vel.
-              Nullam vehicula, libero at euismod tristique, neque ligula faucibus
-              urna, quis ultricies massa enim in nunc. Vivamus ultricies, quam ut
-              rutrum blandit, turpis massa ornare velit, in sodales tellus ex nec
-              odio.
+              Je suis la touche graphique du groupe.
             </p>
           </div>
           <div class="ktq4">
-            <img src="https://nine4.app/images/nine4-3.png"></img>
+            <img className="w-10" src="../Gregoire.png"></img>
             <h3 class="pt-3 font-semibold text-lg text-white">
-              Lorem ipsum dolor sit amet
+              Gregoire D
             </h3>
             <p class="pt-2 value-text text-md text-gray-200 fkrr1">
-              Fusce pharetra ligula mauris, quis faucibus lectus elementum vel.
-              Nullam vehicula, libero at euismod tristique, neque ligula faucibus
-              urna, quis ultricies massa enim in nunc. Vivamus ultricies, quam ut
-              rutrum blandit, turpis massa ornare velit, in sodales tellus ex nec
-              odio.
+              Je connais mieux la salle de sport que mon appartement, je suis le coatch sportif du groupe.
+            </p>
+          </div>
+          <div class="ktq4">
+            <img className="w-10" src="../Alex.png"></img>
+            <h3 class="pt-3 font-semibold text-lg text-white">
+              Alex A
+            </h3>
+            <p class="pt-2 value-text text-md text-gray-200 fkrr1">
+              Entre deux randonnées dans les Fjords, je suis le developpeur full stack de l'equipe.
+            </p>
+          </div>
+          <div class="ktq4">
+            <img className="w-10" src="../Theo.png"></img>
+            <h3 class="pt-3 font-semibold text-lg text-white">
+              Theo P
+            </h3>
+            <p class="pt-2 value-text text-md text-gray-200 fkrr1">
+              Tout ce que vous ne voyez pas, c'est moi qui l'ai construit. Mon nom est monsieur Back End.
             </p>
           </div>
         </div>
+
+
         <section class="relative pb-24">
           <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <div class="py-24 md:py-36">
-              <h1 class="mb-5 text-6xl font-bold text-white">
-                Subscribe to our newsletter
-              </h1>
               <h1 class="mb-9 text-2xl font-semibold text-gray-200">
-                Enter your email address and get our newsletters straight away.
+                Des questions sur le projet? La page FAQ est la pour vous !
               </h1>
-              <input
-                type="email"
-                placeholder="jack@example.com"
-                name="email"
-                autocomplete="email"
-                class="border border-gray-600 w-1/4 pr-2 pl-2 py-3 mt-2 rounded-md text-gray-800 font-semibold hover:border-gray-700 bg-black"
-              />{" "}
               <a
                 class="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium text-black transition duration-500 ease-in-out transform bg-transparent border rounded-lg bg-white"
-                href="/"
+                href="/faq"
               >
-                <span class="justify-center">Subscribe</span>
+                <span class="justify-center">FAQ</span>
               </a>
             </div>
           </div>
