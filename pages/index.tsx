@@ -1,10 +1,7 @@
-"use client";
 import React from 'react';
 import Head from "next/head"
-import { useSession } from "next-auth/react";
 import { Container, Typography, Grid, Card, CardContent, ButtonGroup, Button, Stack } from '@mui/material';
 import Image from 'next/image'
-import Link from 'next/link';
 
 export default function Home() {
 
@@ -14,15 +11,11 @@ export default function Home() {
     { name: 'Alizee S', info: 'Im the artist of the group !' },
   ];
 
-  const session = useSession();
   return (
     <div >
       <Head>
         <title>Sidekick</title>
       </Head>
-      <div>
-        {session.data && <p className="p-16">You are logged in as {session.data?.user.email}</p>}
-      </div>
       <Stack direction="column" justifyContent="flex-start" alignItems="center" spacing={6}>
         <Container maxWidth="md">
           <Typography variant="h4" component="h1" color="#FFAA83" gutterBottom>
