@@ -1,11 +1,11 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; /* Fond blanc en mode clair */
+  --background-end-rgb: 255, 255, 255; /* Fond blanc en mode clair *//*
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,4 +29,105 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url(//db.onlinewebfonts.com/c/e5c490a944bc2b2746f0c851501e46c7?family=AvenirNextW10-Bold);
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Lulo Clean W01 One";
+  background-color: #000000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.g327 {
+  border-color: #302f30;
+}
+
+@font-face {
+  font-family: "Lulo Clean W01 One";
+  src: url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.eot");
+  src: url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.svg#Lulo Clean W01 One")format("svg");
+}
+
+.Avenir {
+  font-family: "Lulo Clean W01 One";
+  font-display: swap;
+}
+
+.grr {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.txg {
+  color: #b8bcbf;
+}
+
+.ld-04 {
+  letter-spacing: 0.025em;
+}
+
+.lh-6 {
+  line-height: 1.08;
+}
+
+.text-80 {
+  font-size: 60px;
+}
+
+.font-4 {
+  font-family: "Lulo Clean W01 One";
+}
+
+.font-5 {
+  font-family: 'Anonymous Pro', sans-serif;
+}
+
+.tr04 {
+  transition: 0.4s;
+}
+
+.clearNav {
+  backdrop-filter: saturate(180%) blur(5px) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.fsac4 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 32px;
+}
+
+@media (min-width: 720px) {
+  .fsac4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ktq4 {
+  background-color: #101111;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.fkrr1 {
+  font-family: "Gill Sans", sans-serif;
 }
