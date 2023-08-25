@@ -34,7 +34,7 @@ export default function Home() {
             With us find your sidekick for your sport adventure!
           </Typography>
 
-          <div>
+          <div className='flex items-center justify-center m-8'>
             <ButtonGroup variant="text" aria-label="text button group" style={{ alignItems: "center" }}>
               <Button color="secondary" component="a" download href='/app-release.apk'>
                 Get for Android
