@@ -36,7 +36,17 @@ const Email = () => {
                 label="Email"
                 type="email"
                 id="email"
-                className="w-full"
+                placeholder="test@gmail.com"
+                focused
+                variant="outlined"
+                color="white"
+                InputProps={{
+                  style: {
+                    fontStyle:'italic',
+                    color: 'grey', // Customize the color here
+                  },
+                }}
+                className="w-full placeholder-yellow-200"
               />
             </Field>
             <Field error={errors?.password}>
@@ -45,6 +55,15 @@ const Email = () => {
                 label="Password"
                 type="password"
                 id="password"
+                placeholder="********"
+                color="white"
+                focused
+                InputProps={{
+                  style: {
+                    fontStyle:'italic',
+                    color: 'grey', // Customize the color here
+                  },
+                }}
                 className="w-full"
               />
             </Field>
@@ -58,10 +77,19 @@ const Email = () => {
                 label="Confirm password"
                 type="password"
                 id="password-confirm"
+                placeholder="********"
+                focused
+                color="white"
+                InputProps={{
+                  style: {
+                    fontStyle:'italic',
+                    color: 'grey', // Customize the color here
+                  },
+                }}
                 className="w-full"
               />
             </Field>
-            <Button type="submit" variant="outlined" className="w-full">Next {">"}</Button>
+            <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
           </fieldset>
         </form>
       </div>

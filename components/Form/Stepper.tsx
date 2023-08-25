@@ -5,6 +5,7 @@ const Stepper = () => {
   const { pathname } = useRouter();
 
   const getLinkClass = (path: string) => {
+    console.log(path === pathname);
     return (
       "text-md font-semibold " + (path === pathname ? "text-orange-400" : undefined)
     );

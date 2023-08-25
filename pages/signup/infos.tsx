@@ -35,6 +35,15 @@ const Infos = () => {
                   label="First name"
                   type="text"
                   id="firstname"
+                  placeholder="Firstname"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle:'italic',
+                      color: 'grey', // Customize the color here
+                    },
+                  }}
                   className="w-full"
                 />
               </Field>
@@ -44,6 +53,15 @@ const Infos = () => {
                   label="Last name"
                   type="text"
                   id="lastname"
+                  placeholder="Lastname"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle:'italic',
+                      color: 'grey', // Customize the color here
+                    },
+                  }}
                   className="w-full"
                 />
               </Field>
@@ -53,6 +71,15 @@ const Infos = () => {
                   label="Username"
                   type="text"
                   id="username"
+                  placeholder="Username"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle:'italic',
+                      color: 'grey', // Customize the color here
+                    },
+                  }}
                   className="w-full"
                 />
               </Field>
@@ -64,6 +91,15 @@ const Infos = () => {
                   label="Description"
                   type="text"
                   id="description"
+                  placeholder="Description"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle:'italic',
+                      color: 'grey', // Customize the color here
+                    },
+                  }}
                   className="w-full"
                 />
               </Field>
@@ -74,6 +110,15 @@ const Infos = () => {
                   label="Birth date"
                   type="text"
                   id="birth_date"
+                  placeholder="Birth date"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle:'italic',
+                      color: 'grey', // Customize the color here
+                    },
+                  }}
                   className="w-full"
                 />
               </Field>
@@ -83,12 +128,21 @@ const Infos = () => {
                   label="Size (cm)"
                   type="number"
                   id="size"
+                  placeholder="Size"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle:'italic',
+                      color: 'grey', // Customize the color here
+                    },
+                  }}
                   className="w-full"
                 />
               </Field>
             </div>
           </fieldset>
-          <Button type="submit" variant="outlined" className="w-full">Next {">"}</Button>
+          <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
         </form>
       </div>
     </>
