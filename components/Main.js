@@ -109,7 +109,7 @@ export default function Main() {
         </div>
 
 
-        <section class="relative pb-24">
+        <section class="relative">
           <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <div class="py-24 md:py-36">
               <h1 class="mb-9 text-2xl font-semibold text-gray-200">
@@ -121,6 +121,11 @@ export default function Main() {
               >
                 <span class="justify-center">FAQ</span>
               </a>
+
+              <p class="pt-6 text-gray-200">
+                 Ou envoyer nous un email : <b class="text-orange-500">sidekick.eip@gmail.com</b>
+              </p>
+
             </div>
           </div>
         </section>
