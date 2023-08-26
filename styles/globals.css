@@ -93,6 +93,14 @@ a {
   font-size: 60px;
 }
 
+.text-title-faq {
+  font-size: 15px;
+}
+
+.text-faq {
+  font-size: 13px;
+}
+
 .font-4 {
   font-family: "Lulo Clean W01 One";
 }
@@ -125,6 +133,12 @@ a {
 .ktq4 {
   background-color: #101111;
   padding: 2rem;
+  border-radius: 10px;
+}
+
+.ktq5 {
+  background-color: #d39b000e;
+  padding: 1rem;
   border-radius: 10px;
 }
 
