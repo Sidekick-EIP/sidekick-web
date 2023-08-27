@@ -44,7 +44,7 @@ const Infos = () => {
                     InputProps={{
                       style: {
                         fontStyle: 'italic',
-                        color: 'grey', // Customize the color here
+                        color: "Silver",
                       },
                     }}
                     className="w-full"
@@ -63,17 +63,17 @@ const Infos = () => {
                     InputProps={{
                       style: {
                         fontStyle: 'italic',
-                        color: 'grey', // Customize the color here
+                        color: 'silver', // Customize the color here
                       },
                     }}
                     className="w-full"
                   />
                 </Field>
-                
+
               </div>
 
               <div className="w-full">
-              <Field error={errors?.lastName}>
+                <Field error={errors?.lastName}>
                   <TextField
                     {...register("lastname", { required: "Last name is required" })}
                     label="Last name"
@@ -85,7 +85,7 @@ const Infos = () => {
                     InputProps={{
                       style: {
                         fontStyle: 'italic',
-                        color: 'grey', // Customize the color here
+                        color: 'silver', // Customize the color here
                       },
                     }}
                     className="w-full"
@@ -105,54 +105,54 @@ const Infos = () => {
                     InputProps={{
                       style: {
                         fontStyle: 'italic',
-                        color: 'grey', // Customize the color here
+                        color: 'silver', // Customize the color here
                       },
                     }}
                     className="w-full"
                   />
-                </Field>                
+                </Field>
               </div>
             </fieldset>
 
             <div className="flex flex-col w-full">
               <Field error={errors?.description}>
-                  <TextField
-                    {...register("description", { required: "Description is required" })}
-                    label="Description"
-                    type="text"
-                    id="description"
-                    placeholder="Description"
-                    focused
-                    color="white"
-                    InputProps={{
-                      style: {
-                        fontStyle: 'italic',
-                        color: 'grey', // Customize the color here
-                      },
-                    }}
-                    className="w-full"
-                  />
-                </Field>
+                <TextField
+                  {...register("description", { required: "Description is required" })}
+                  label="Description"
+                  type="text"
+                  id="description"
+                  placeholder="Description"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle: 'italic',
+                      color: 'silver', // Customize the color here
+                    },
+                  }}
+                  className="w-full"
+                />
+              </Field>
 
-                <Field error={errors?.username}>
-                  <TextField
-                    {...register("username", { required: "Username is required" })}
-                    label="Username"
-                    type="text"
-                    id="username"
-                    placeholder="Username"
-                    focused
-                    color="white"
-                    InputProps={{
-                      style: {
-                        fontStyle: 'italic',
-                        color: 'grey', // Customize the color here
-                      },
-                    }}
-                    className="w-full"
-                  />
-                </Field>
-              </div>
+              <Field error={errors?.username}>
+                <TextField
+                  {...register("username", { required: "Username is required" })}
+                  label="Username"
+                  type="text"
+                  id="username"
+                  placeholder="Username"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle: 'italic',
+                      color: 'silver', // Customize the color here
+                    },
+                  }}
+                  className="w-full"
+                />
+              </Field>
+            </div>
             <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
           </form>
         </div>
