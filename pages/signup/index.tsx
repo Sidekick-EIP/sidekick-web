@@ -27,6 +27,9 @@ const Email = () => {
   return (
     <>
       <div className="max-w-5xl pt-20 pb-36 mx-auto">
+        <h1 className="text-40 text-center font-4 lh-6 ld-04 font-bold text-white mb-6 pb-10">
+          Inscription !
+        </h1>
         <div className='flex flex-col items-center justify-center space-y-4'>
           <Stepper />
           <form onSubmit={handleSubmit(saveData)} className='flex flex-col items-center space-y-4 max-w-xs w-full'>
