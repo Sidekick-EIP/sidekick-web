@@ -21,8 +21,8 @@ function Signin() {
   return (
     <div className='flex items-center justify-center'>
       <form className='flex flex-col space-y-4' onSubmit={handleSubmit}>
-        <TextField name='email' label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} />
-        <TextField name='password' type='password' label="Password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} />
+        <TextField placeholder="exemple@gmail.com" focused color="white" InputProps={{  style: { fontStyle:'italic', color: 'grey'},}} className="w-full" name='email' label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)} />
+        <TextField placeholder="******" focused color="white" InputProps={{  style: { fontStyle:'italic', color: 'grey'},}} className="w-full" name='password' type='password' label="Password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} />
         <Button className="bg-orangePrimary" variant="contained" type='submit'>Login</Button>
       </form>
     </div>
