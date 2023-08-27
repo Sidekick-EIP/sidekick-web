@@ -49,6 +49,15 @@ const Infos = () => {
                   label="Weight (kg)"
                   type="number"
                   id="weight"
+                  placeholder="Weight"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle:'italic',
+                      color: 'grey', // Customize the color here
+                    },
+                  }}
                   className="w-full"
                 />
               </Field>
@@ -111,7 +120,7 @@ const Infos = () => {
               </Field>
             </div>
           </fieldset>
-          <Button type="submit" variant="outlined" className="w-full">Submit</Button>
+          <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Submit</Button>
         </form>
       </div>
     </>

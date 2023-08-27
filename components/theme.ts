@@ -9,7 +9,10 @@ const defaultTheme = createTheme({
     secondary: {
       main: "#FFAA83",
     },
-  }
+    white: {
+      main: '#FFFFFF',
+    }
+  },
 });
 
 export default defaultTheme;
