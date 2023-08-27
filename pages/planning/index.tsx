@@ -7,6 +7,25 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import dayjs from "dayjs";
 
+type SportsExercise = {
+  name: string;
+};
+
+type Meal = {
+  name: string;
+  period: string;
+};
+
+type PlanningEvent = {
+  type: string;
+  content: {
+    moment: string;
+    repetitions?: number;
+  };
+  sports_exercise?: SportsExercise;
+  meal?: Meal;
+};
+
 async function fetchEvents(date: number, access_token: string) {
   date = new Date(new Date(date).setUTCHours(0, 0, 0, 0)).getTime();
   const response = await fetch(
@@ -142,7 +161,13 @@ export default function Planning() {
               defaultValue={dayjs()}
               label="Sélectionnez une date"
               value={dayjs(selectedDate)}
-              onChange={(newDate) => setSelectedDate(newDate.toString())}
+              onChange={(newDate) => {
+                if (newDate) {
+                  setSelectedDate(newDate.toString());
+                } else {
+                  setSelectedDate(""); // or some default value
+                }
+              }}
             />
           </LocalizationProvider>
         </ThemeProvider>
@@ -160,23 +185,25 @@ export default function Planning() {
           </Paper>
 		</>
 		: null}
-        {events.map((event, index) => (
+        {events.map((event, index) => {
+          const typedEvent = event as PlanningEvent;
+        return (
           <Paper key={index} style={{ textAlign: "center", marginTop: "20px" }}>
             {/* Contenu du jour */}
-            <Typography sx={{ pt: 1 }} variant="body1">{event.content.moment}h</Typography>
-            <Typography sx={{ pt: 1 }} variant="body1">{event.type}</Typography>
-            {event.type === "SPORTS_EXERCISE" ? (
+            <Typography sx={{ pt: 1 }} variant="body1">{typedEvent.content.moment}h</Typography>
+            <Typography sx={{ pt: 1 }} variant="body1">{typedEvent.type}</Typography>
+            {typedEvent.type === "SPORTS_EXERCISE" ? (
               <>
-                <Typography variant="body2">{event.sports_exercise.name}</Typography>
-                <Typography variant="body2">{event.content.repetitions} répétitions.</Typography>
+                <Typography variant="body2">{typedEvent.sports_exercise!.name}</Typography>
+                <Typography variant="body2">{typedEvent.content.repetitions} répétitions.</Typography>
               </>
             ) : <>
-				<Typography variant="body2">{event.meal.name}</Typography>
-				<Typography variant="body2">{event.meal.period}</Typography>
+				<Typography variant="body2">{typedEvent.meal!.name}</Typography>
+				<Typography variant="body2">{typedEvent.meal!.period}</Typography>
 		  	  </> 
 		  }
           </Paper>
-        ))}
+        )})}
       </Grid>
     </Grid>
   );

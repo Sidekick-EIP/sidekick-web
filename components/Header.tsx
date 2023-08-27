@@ -135,7 +135,7 @@ function Header() {
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button variant="contained" color="primary" sx={{ backgroundColor: "blue" }}>
+                  <Button variant="contained" className="bg-orangePrimary">
                     Sign up
                   </Button>
                 </Link>

@@ -24,7 +24,7 @@ export default function Home() {
       </Head>
 
       <div>
-      {session.data && <p className="p-16">You are logged in as {session.data?.user.email}</p>}
+        {session.data && <p className="p-16">You are logged in as {session.data?.user.email}</p>}
       </div>
 
       <Main />
