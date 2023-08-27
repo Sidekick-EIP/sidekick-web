@@ -38,6 +38,7 @@ const Infos = () => {
 
   return (
     <>
+    <div className="max-w-5xl pt-20 pb-36 mx-auto">
       <div className='flex flex-col items-center justify-center space-y-4'>
         <Stepper />
         <form onSubmit={handleSubmit(saveData)} className='flex flex-col space-y-4 max-w-md w-full'>
@@ -122,6 +123,7 @@ const Infos = () => {
           </fieldset>
           <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Submit</Button>
         </form>
+      </div>
       </div>
     </>
   );
