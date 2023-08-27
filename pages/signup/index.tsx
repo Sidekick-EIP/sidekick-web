@@ -26,74 +26,74 @@ const Email = () => {
 
   return (
     <>
-    <div className="max-w-5xl pt-20 pb-36 mx-auto">
-      <div className='flex flex-col items-center justify-center space-y-4'>
-        <Stepper />
-        <form onSubmit={handleSubmit(saveData)} className='flex flex-col items-center space-y-4 max-w-xs w-full'>
-          <fieldset className="w-full">
-            <Field error={errors?.email}>
-              <TextField
-                {...register("email", { required: "Email is required" })}
-                label="Email"
-                type="email"
-                id="email"
-                placeholder="test@gmail.com"
-                focused
-                variant="outlined"
-                color="white"
-                InputProps={{
-                  style: {
-                    fontStyle:'italic',
-                    color: 'grey', // Customize the color here
-                  },
-                }}
-                className="w-full placeholder-yellow-200"
-              />
-            </Field>
-            <Field error={errors?.password}>
-              <TextField
-                {...register("password", { required: "Password is required" })}
-                label="Password"
-                type="password"
-                id="password"
-                placeholder="********"
-                color="white"
-                focused
-                InputProps={{
-                  style: {
-                    fontStyle:'italic',
-                    color: 'grey', // Customize the color here
-                  },
-                }}
-                className="w-full"
-              />
-            </Field>
-            <Field error={errors?.confirmPassword}>
-              <TextField
-                {...register("confirmPassword", {
-                  required: "Confirm the password",
-                  validate: (value) =>
-                    value === watchPassword || "The passwords do not match",
-                })}
-                label="Confirm password"
-                type="password"
-                id="password-confirm"
-                placeholder="********"
-                focused
-                color="white"
-                InputProps={{
-                  style: {
-                    fontStyle:'italic',
-                    color: 'grey', // Customize the color here
-                  },
-                }}
-                className="w-full"
-              />
-            </Field>
-            <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
-          </fieldset>
-        </form>
-      </div>
+      <div className="max-w-5xl pt-20 pb-36 mx-auto">
+        <div className='flex flex-col items-center justify-center space-y-4'>
+          <Stepper />
+          <form onSubmit={handleSubmit(saveData)} className='flex flex-col items-center space-y-4 max-w-xs w-full'>
+            <fieldset className="w-full">
+              <Field error={errors?.email}>
+                <TextField
+                  {...register("email", { required: "Email is required" })}
+                  label="Email"
+                  type="email"
+                  id="email"
+                  placeholder="test@gmail.com"
+                  focused
+                  variant="outlined"
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle: 'italic',
+                      color: 'silver', // Customize the color here
+                    },
+                  }}
+                  className="w-full placeholder-yellow-200"
+                />
+              </Field>
+              <Field error={errors?.password}>
+                <TextField
+                  {...register("password", { required: "Password is required" })}
+                  label="Password"
+                  type="password"
+                  id="password"
+                  placeholder="********"
+                  color="white"
+                  focused
+                  InputProps={{
+                    style: {
+                      fontStyle: 'italic',
+                      color: 'silver', // Customize the color here
+                    },
+                  }}
+                  className="w-full"
+                />
+              </Field>
+              <Field error={errors?.confirmPassword}>
+                <TextField
+                  {...register("confirmPassword", {
+                    required: "Confirm the password",
+                    validate: (value) =>
+                      value === watchPassword || "The passwords do not match",
+                  })}
+                  label="Confirm password"
+                  type="password"
+                  id="password-confirm"
+                  placeholder="********"
+                  focused
+                  color="white"
+                  InputProps={{
+                    style: {
+                      fontStyle: 'italic',
+                      color: 'silver', // Customize the color here
+                    },
+                  }}
+                  className="w-full"
+                />
+              </Field>
+              <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
+            </fieldset>
+          </form>
+        </div>
       </div>
     </>
   );
