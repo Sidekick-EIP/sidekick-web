@@ -12,6 +12,7 @@ jobs:
       - run: |
             git config --global user.name "github-actions[bot]"
             git config --global user.name "sidekick"
+            git config --global user.email "sidekick.eip@gmail.com"
             git config --global credential.helper cache
             git clone https://${{secrets.API_TOKEN_GITHUB}}@github.com/sidekick-team-eip/webv2 web
             rsync -av . web --exclude web --exclude .git --exclude .github
