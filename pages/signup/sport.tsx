@@ -50,10 +50,10 @@ const Infos = () => {
                 <Field className="w-full">
                   <TextField
                     {...register("weight", { required: "Weight is required", min: 30, max: 300 })}
-                    label="Weight (kg)"
+                    label="Poids"
                     type="number"
                     id="weight"
-                    placeholder="Weight"
+                    placeholder="76"
                     focused
                     color="white"
                     InputProps={{
@@ -105,25 +105,25 @@ const Infos = () => {
               <div className="flex flex-col w-full">
                 <Field >
                   <FormControl fullWidth focused>
-                    <InputLabel color="white" id="gender_label">Gender</InputLabel>
+                    <InputLabel color="white" id="gender_label">Genre</InputLabel>
                     <Select
                       {...register("gender", { required: "Gender is required" })}
-                      label="Gender"
+                      label="Genre"
                       type="text"
                       color="white"
                       id="gender"
                       labelId="gender_label"
                       defaultValue={""}
                     >
-                      <MenuItem value="MALE">Male</MenuItem>
-                      <MenuItem value="FEMALE">Female</MenuItem>
-                      <MenuItem value="PREFER_NOT_TO_SAY">Prefer not to say</MenuItem>
+                      <MenuItem value="MALE">Homme</MenuItem>
+                      <MenuItem value="FEMALE">Femme</MenuItem>
+                      <MenuItem value="PREFER_NOT_TO_SAY">Ne se prononce pas</MenuItem>
                     </Select>
                   </FormControl>
                 </Field>
                 <Field>
                   <FormControl fullWidth focused>
-                    <InputLabel id="goal_label">Goal</InputLabel>
+                    <InputLabel id="goal_label">Objectif</InputLabel>
                     <Select
                       {...register("goal", { required: "Goal is required" })}
                       labelId="goal_label"
@@ -132,9 +132,9 @@ const Infos = () => {
                       id="goal"
                       defaultValue={""}
                     >
-                      <MenuItem value="WEIGHT_LOSS">Weight loss</MenuItem>
-                      <MenuItem value="WEIGHT_GAIN">Weight gain</MenuItem>
-                      <MenuItem value="GETTING_BACK_IN_SHAPE">Getting back in shape</MenuItem>
+                      <MenuItem value="WEIGHT_LOSS">Perte de poids</MenuItem>
+                      <MenuItem value="WEIGHT_GAIN"> Gain de poids</MenuItem>
+                      <MenuItem value="GETTING_BACK_IN_SHAPE">Retrouver la forme</MenuItem>
                     </Select>
                   </FormControl>
                 </Field>
@@ -142,16 +142,16 @@ const Infos = () => {
 
             </fieldset>
             <div>
-            {errors.weight ? (
+              {errors.weight ? (
                 <>
                   {errors.weight.type === "required" && (
-                    <p style={{ background: "red", color: "white" }}>
+                    <p style={{ color: "white" }}>
                       Un poids est requis.
                     </p>
                   )}
                   {errors.weight.type === "pattern" && (
-                    <p style={{ background: "orange", color: "white" }}>
-                      pas tip
+                    <p style={{ color: "white" }}>
+                      Poids non correct.
                     </p>
                   )}
                 </>
@@ -160,13 +160,13 @@ const Infos = () => {
               {errors.gender ? (
                 <>
                   {errors.gender.type === "required" && (
-                    <p style={{ background: "red", color: "white" }}>
-                      top
+                    <p style={{ color: "white" }}>
+                      Une reponse est requise.
                     </p>
                   )}
                   {errors.gender.type === "pattern" && (
-                    <p style={{ background: "orange", color: "white" }}>
-                      pas tip
+                    <p style={{ color: "white" }}>
+                      Une reponse est requise.
                     </p>
                   )}
                 </>
@@ -175,13 +175,13 @@ const Infos = () => {
               {errors.goal ? (
                 <>
                   {errors.goal.type === "required" && (
-                    <p style={{ background: "red", color: "white" }}>
-                      top
+                    <p style={{ color: "white" }}>
+                      Un objectif est requis.
                     </p>
                   )}
                   {errors.goal.type === "pattern" && (
-                    <p style={{ background: "orange", color: "white" }}>
-                      pas tip
+                    <p style={{ color: "white" }}>
+                      Un objectif est requis.
                     </p>
                   )}
                 </>
@@ -190,13 +190,13 @@ const Infos = () => {
               {errors.sport_frequence ? (
                 <>
                   {errors.sport_frequence.type === "required" && (
-                    <p style={{ background: "red", color: "white" }}>
-                      top
+                    <p style={{ color: "white" }}>
+                      Une frequence est requise.
                     </p>
                   )}
                   {errors.sport_frequence.type === "pattern" && (
-                    <p style={{ background: "orange", color: "white" }}>
-                      pas tip
+                    <p style={{ color: "white" }}>
+                      Une frequence est requise.
                     </p>
                   )}
                 </>

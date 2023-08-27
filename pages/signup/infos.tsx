@@ -32,13 +32,13 @@ const Infos = () => {
             <fieldset className="flex flex-row space-x-4 w-full">
 
               <div className="flex flex-col w-full">
-                <Field error={errors?.firstname}>
+                <Field>
                   <TextField
                     {...register("firstname", { required: "First name is required" })}
-                    label="First name"
+                    label="Prenom"
                     type="text"
                     id="firstname"
-                    placeholder="Firstname"
+                    placeholder="Paul"
                     focused
                     color="white"
                     InputProps={{
@@ -51,13 +51,13 @@ const Infos = () => {
                   />
                 </Field>
 
-                <Field error={errors?.size}>
+                <Field>
                   <TextField
                     {...register("size", { required: "Size is required", min: 50, max: 300 })}
-                    label="Size (cm)"
+                    label="Taille (cm)"
                     type="number"
                     id="size"
-                    placeholder="Size"
+                    placeholder="160"
                     focused
                     color="white"
                     InputProps={{
@@ -73,10 +73,10 @@ const Infos = () => {
               </div>
 
               <div className="w-full">
-                <Field error={errors?.lastName}>
+                <Field>
                   <TextField
                     {...register("lastname", { required: "Last name is required" })}
-                    label="Last name"
+                    label="Nom"
                     type="text"
                     id="lastname"
                     placeholder="Lastname"
@@ -92,14 +92,14 @@ const Infos = () => {
                   />
                 </Field>
 
-                <Field error={errors?.birth_date}>
+                <Field>
                   <TextField
                     placeholder="YYYY-MM-DD"
                     {...register("birth_date", { required: "Birth date is required", pattern: /\d{4}-\d{2}-\d{2}/ })}
-                    label="Birth date"
+                    label="Date de naissance"
                     type="text"
                     id="birth_date"
-                    placeholder="Birth date"
+                    placeholder=""
                     focused
                     color="white"
                     InputProps={{
@@ -152,6 +152,97 @@ const Infos = () => {
                   className="w-full"
                 />
               </Field>
+            </div>
+            <div>
+              {errors.firstname ? (
+                <>
+                  {errors.firstname.type === "required" && (
+                    <p style={{ color: "white" }}>
+                      Un prenom est requis.
+                    </p>
+                  )}
+                  {errors.firstname.type === "pattern" && (
+                    <p style={{ color: "white" }}>
+                      Poids non correct.
+                    </p>
+                  )}
+                </>
+              ) : null}
+
+              {errors.size ? (
+                <>
+                  {errors.size.type === "required" && (
+                    <p style={{ color: "white" }}>
+                      Une taille est requise.
+                    </p>
+                  )}
+                  {errors.size.type === "pattern" && (
+                    <p style={{ color: "white" }}>
+                      Une taille est requise.
+                    </p>
+                  )}
+                </>
+              ) : null}
+
+              {errors.lastname ? (
+                <>
+                  {errors.lastname.type === "required" && (
+                    <p style={{ color: "white" }}>
+                      Un nom est requis.
+                    </p>
+                  )}
+                  {errors.lastname.type === "pattern" && (
+                    <p style={{ color: "white" }}>
+                      nom non correct.
+                    </p>
+                  )}
+                </>
+              ) : null}
+
+              {errors.birth_date ? (
+                <>
+                  {errors.birth_date.type === "required" && (
+                    <p style={{ color: "white" }}>
+                      Un poids est requis.
+                    </p>
+                  )}
+                  {errors.birth_date.type === "pattern" && (
+                    <p style={{ color: "white" }}>
+                      Poids non correct.
+                    </p>
+                  )}
+                </>
+              ) : null}
+
+              {errors.description ? (
+                <>
+                  {errors.description.type === "required" && (
+                    <p style={{ color: "white" }}>
+                      Une description est requise.
+                    </p>
+                  )}
+                  {errors.description.type === "pattern" && (
+                    <p style={{ color: "white" }}>
+                      Description non correcte.
+                    </p>
+                  )}
+                </>
+              ) : null}
+
+              {errors.username ? (
+                <>
+                  {errors.username.type === "required" && (
+                    <p style={{ color: "white" }}>
+                      Un nom d'utilisateur est requis.
+                    </p>
+                  )}
+                  {errors.username.type === "pattern" && (
+                    <p style={{ color: "white" }}>
+                      Nom d'utilisateur est incorect.
+                    </p>
+                  )}
+                </>
+              ) : null}
             </div>
             <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
           </form>
