@@ -17,7 +17,7 @@ export default function Main() {
             <span className="justify-center">Get for Android</span>
           </a>
           <a
-            className="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium text-black transition duration-500 ease-in-out transform bg-gray border rounded-lg"
+            className="inline-flex items-center px-14 py-3 mt-2 ml-2 font-medium transition duration-500 ease-in-out transform bg-gray border rounded-lg"
             href="/"
           >
             <span className="justify-center disabled">Get for iOS</span>
