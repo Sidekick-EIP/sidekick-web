@@ -9,23 +9,22 @@ export default function Beta() {
     const [email, setEmail] = useState('');
     const router = useRouter();
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/api/beta-users', {
-                firstName,
-                lastName,
-                email,
-            });
+            const response = await axios.post('/api/beta-users', { firstName, lastName, email });
 
-            if (response.data.success) {
+            if (response.status === 200) {
                 router.push('/confirmation');
             } else {
-                // Gère les erreurs venant de la réponse de l'API
+                // Gère les erreurs venant de la réponse de l'API, par exemple :
+                alert("Erreur lors de l'inscription : " + response.data.message);
             }
         } catch (error) {
             console.error('Erreur lors de l’inscription :', error);
+            // Gère d'autres erreurs ici, par exemple :
+            alert("Erreur réseau ou serveur : " + error.message);
         }
     };
 
@@ -42,7 +41,7 @@ export default function Beta() {
                         className="bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 text-transparent">Sidekick</span>
                 </h2>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="mt-8 space-y-4">
 
                         <div>

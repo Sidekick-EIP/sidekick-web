@@ -1,11 +1,10 @@
+import axios from 'axios';
+
 export default async (req, res) => {
-    if (req.method === 'POST') {
-        const { firstName, lastName, email } = req.body;
-
-        // Ici, tu peux ajouter ton code pour enregistrer les données dans ta base de données
-
-        res.status(200).json({ success: true });
-    } else {
-        res.status(405).json({ error: 'Method not allowed' }); // Gère les méthodes autres que POST
+    try {
+        const response = await axios.post('https://api.sidekickapp.live/beta-users/', req.body);
+        res.status(response.status).json(response.data);
+    } catch (error) {
+        res.status(error.response?.status || 500).json(error.response?.data || { error: error.message });
     }
 };
