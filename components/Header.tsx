@@ -12,6 +12,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Button } from "@mui/material";
 import Link from "next/link";
 import Image from 'next/image';
+// @ts-ignore
 import { signOut, useSession } from 'next-auth/react';
 
 const pages = [{
@@ -20,6 +21,9 @@ const pages = [{
 }, {
   label: 'Signup',
   href: '/signup'
+}, {
+    label: 'Beta',
+    href: '/beta',
 }];
 
 const pagesAuth = [{
@@ -129,6 +133,11 @@ function Header() {
               </Box>
             ) : (
               <Box className="space-x-8" sx={{ flexGrow: 0 }} >
+                <Link href="/beta">
+                  <Button variant="text" color="primary">
+                    Beta
+                  </Button>
+                </Link>
                 <Link href="/signin">
                   <Button variant="text" color="primary">
                     Log in

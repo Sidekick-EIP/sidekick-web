@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useFormState } from "@/components/Providers";
 import { Button, Input, TextField } from "@mui/material";
-import { Field } from "../../components/Form/Field";
+import { Field } from "@/components/Form/Field";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -24,7 +24,6 @@ const Infos = () => {
 
   return (
     <>
-
       <div className="flex pt-20 pb-36 items-center justify-center">
         <div className='flex flex-col items-center justify-center space-y-4'>
           <Stepper />
@@ -99,7 +98,6 @@ const Infos = () => {
                     label="Date de naissance"
                     type="text"
                     id="birth_date"
-                    placeholder=""
                     focused
                     color="white"
                     InputProps={{

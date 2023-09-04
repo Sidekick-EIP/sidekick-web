@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from '@mui/material/styles';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import defaultTheme from '@/components/theme';
 import createEmotionCache from '@/components/createEmotionCache';
@@ -9,6 +8,7 @@ import Layout from '@/components/Layout';
 import { CssBaseline } from '@mui/material';
 import { SessionProvider } from 'next-auth/react';
 import Providers from '@/components/Providers';
+import {ThemeProvider} from "@mui/system";
 
 const clientSideEmotionCache = createEmotionCache();
 
