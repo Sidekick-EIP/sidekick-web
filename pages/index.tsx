@@ -23,10 +23,6 @@ export default function Home() {
         <title>Sidekick</title>
       </Head>
 
-      <div>
-        {session.data && <p className="p-16">You are logged in as {session.data?.user.email}</p>}
-      </div>
-
       <Main />
 
     </div>
