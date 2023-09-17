@@ -65,7 +65,6 @@ function Header() {
               <Image src="/logo_transparent.png" alt="Sidekick" width={32} height={32} />
             </Link>
           </Box>
-          <p className="mx-auto text-xl text-left text-white font-normal leading-relaxed fs521 lg:w-2/3">Sidekick</p>
 
           {mobile ? (
             <Box sx={{ flexGrow: 0 }}>
