@@ -1,7 +1,18 @@
-import {useState, FC} from 'react';
-import {useRouter} from 'next/router';
+import {useState} from 'react';
 import Image from 'next/image';
 import axios from "axios";
+import {ref, set} from "firebase/database";
+import database from "@/lib/firebase";
+import {uuidv4} from "@firebase/util";
+
+function writeBetaUser(email: string, firstname: string, lastname: string) {
+    const nid = uuidv4();
+    set(ref(database, 'beta-users/' + nid), {
+        email: email,
+        firstname: firstname,
+        lastname: lastname,
+    });
+}
 
 export default function Beta() {
     const [firstName, setFirstName] = useState('');
@@ -18,6 +29,7 @@ export default function Beta() {
                 firstname: firstName,
                 lastname: lastName,
             });
+            writeBetaUser(email, firstName, lastName);
 
             if (response.status === 201) {
                 setIsSubmitted(true);
