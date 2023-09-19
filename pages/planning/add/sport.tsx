@@ -4,14 +4,14 @@ import {FormControl, InputLabel, MenuItem, Select, Button, TextField } from "@mu
 import { Field } from "@/components/Form/Field";
 import router from 'next/router';
 
-type Meal = {
+type Exercise = {
   name: string;
   id: string;
 };
 
 async function getMeals(access_token: string) {
   const response = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/meals/findAll",
+    process.env.NEXT_PUBLIC_API_URL + "/sports-exercise/",
     {
       method: "GET",
       headers: {
@@ -29,24 +29,25 @@ async function getMeals(access_token: string) {
 
 export default function AddMeal() {
   const session = useSession();
-  const [meals, setMeals] = useState([]);
-  const [mealId, setMealId] = useState("");
+  const [exercises, setExercises] = useState([]);
+  const [exerciseId, setExerciseId] = useState("");
   const [moment, setMoment] = useState("");
+  const [repetitions, setRepetitions] = useState("");
 
   useEffect(() => {
-    const fetch_meals = async () => {
+    const fetch_exercises = async () => {
       if (session.data) {
         try {
           const data = await getMeals(session.data!.user.access_token)
           console.log(data)
-          setMeals(data);
+          setExercises(data);
         } catch (error) {
-          console.error("Error fetching meals:", error);
+          console.error("Error fetching exercises:", error);
         }
       }
     }
 
-    fetch_meals()
+    fetch_exercises()
   }, [session.data]);
 
 
@@ -56,14 +57,14 @@ export default function AddMeal() {
     const day = urlParams.get('day');
 
     const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "/planning/meal",
+      process.env.NEXT_PUBLIC_API_URL + "/planning/exercise",
       {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session.data!.user.access_token}`,
         },
-        body: JSON.stringify({moment: moment, meal_id: mealId, day: day})
+        body: JSON.stringify({moment: moment, exercise_id: exerciseId, day: day, repetitions: repetitions})
       }
     );
  
@@ -77,13 +78,13 @@ export default function AddMeal() {
   return (
     <div className="max-w-5xl pt-20 pb-36 mx-auto">
       <h1 className="text-40 text-center font-4 lh-6 ld-04 font-bold text-white mb-6 pb-10">
-          Add Meal !
+          Add Exercise !
       </h1>
     <div className='flex items-center justify-center'>
       <form className='flex flex-col space-y-4' onSubmit={handleSubmit}>
             <Field color="white" className="w-full" focused>
                   <FormControl fullWidth focused>
-                    <InputLabel color="white" id="sport_frequence_label">Select a Meal</InputLabel>
+                    <InputLabel color="white" id="sport_frequence_label">Select an Exercise</InputLabel>
                     <Select
                       label="Meals"
                       labelId="meals_label"
@@ -95,16 +96,17 @@ export default function AddMeal() {
                       color="white"
                       variant="outlined"
                       className="w-full"
-                      onChange={(selected) => {setMealId(selected.target.value)}}
+                      onChange={(selected) => {setExerciseId(selected.target.value)}}
                     >
-                      {meals.map((meal, index) => {
-                        const typedMeal = meal as Meal
+                      {exercises.map((exercise, index) => {
+                        const typedExercise = exercise as Exercise
                         return (
-                          <MenuItem key={typedMeal.id} value={typedMeal.id}>{typedMeal.name}</MenuItem>
+                          <MenuItem key={typedExercise.id} value={typedExercise.id}>{typedExercise.name}</MenuItem>
                       )})}
                     </Select>
                   </FormControl>
                 </Field>
+		<TextField placeholder="18" focused color="white" InputProps={{  style: { fontStyle:'italic', color: 'grey'},}} className="w-full" name='repetition' label="Repetitions" variant="outlined" value={repetitions} onChange={e => setRepetitions(e.target.value)} />
         <TextField placeholder="18" focused color="white" InputProps={{  style: { fontStyle:'italic', color: 'grey'},}} className="w-full" name='moment' label="Moment" variant="outlined" value={moment} onChange={e => setMoment(e.target.value)} />
         <Button className="bg-orangePrimary" variant="contained" type='submit'>Add</Button>
       </form>
