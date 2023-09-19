@@ -5,6 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Link from "next/link";
 import dayjs from "dayjs";
 
 type SportsExercise = {
@@ -144,7 +145,7 @@ export default function Planning() {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="h5">Planning</Typography>
+      <Typography variant="h5" color="common.white">Planning</Typography>
       </Grid>
       <Grid
         item
@@ -172,8 +173,12 @@ export default function Planning() {
           </LocalizationProvider>
         </ThemeProvider>
 
-		<Button variant="contained" type='submit'>Ajouter un repas</Button>
-		<Button variant="contained" type='submit'>Ajouter un exercice sportif</Button>
+    <Link href={`/planning/add/meal?day=${new Date(new Date(Date.parse(selectedDate),).setUTCHours(0, 0, 0, 0)).getTime().toString()}`}>
+		  <Button className="bg-orangePrimary planning-button" variant="contained" type='submit'>Ajouter un repas</Button>
+    </Link>
+    <Link href={`/planning/add/sport/?day=${new Date(new Date(Date.parse(selectedDate),).setUTCHours(0, 0, 0, 0)).getTime().toString()}`}>
+      <Button className="bg-orangePrimary planning-button" variant="contained" type='submit'>Ajouter un exercice sportif</Button>
+    </Link>
       </Grid>
       {/* Ajoutez d'autres éléments du calendrier ici */}
       <Grid item xs={12} sx={{ mx: "25%", mt: 6 }}>

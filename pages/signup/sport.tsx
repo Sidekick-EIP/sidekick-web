@@ -87,7 +87,6 @@ const Infos = () => {
                           fontStyle: 'italic',
                           color: 'silver', // Customize the color here
                         },
-
                       }}
                     >
                       <MenuItem value="NEVER">Never</MenuItem>
