@@ -42,5 +42,8 @@
     "tss-react": "^4.8.6",
     "typescript": "5.0.4",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "cypress": "^13.2.0"
   }
 }

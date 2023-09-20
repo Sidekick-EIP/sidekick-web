@@ -24,8 +24,12 @@ const Infos = () => {
 
   return (
     <>
-      <div className="flex pt-20 pb-36 items-center justify-center">
-        <div className='flex flex-col items-center justify-center space-y-4'>
+    <div className="max-w-5xl pt-20 pb-36 mx-auto">
+    <h1 className="text-40 text-center font-4 lh-6 ld-04 font-bold text-white mb-6 pb-15">
+          Inscription !
+        </h1>
+        
+                <div className='flex flex-col items-center justify-center space-y-4'>
           <Stepper />
           <form onSubmit={handleSubmit(saveData)} className='flex flex-col items-center space-y-4  max-w-md w-full'>
             <fieldset className="flex flex-row space-x-4 w-full">
@@ -201,12 +205,12 @@ const Infos = () => {
                 <>
                   {errors.birth_date.type === "required" && (
                     <p style={{ color: "white" }}>
-                      Un poids est requis.
+                      Une date de naissance est requise.
                     </p>
                   )}
                   {errors.birth_date.type === "pattern" && (
                     <p style={{ color: "white" }}>
-                      Poids non correct.
+                      Date de naissance non correcte.
                     </p>
                   )}
                 </>
