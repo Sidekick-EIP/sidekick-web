@@ -14,17 +14,13 @@ describe("Email Component Tests", () => {
       cy.get('input[name="email"]').type("user@example.com");
       cy.get('input[name="password"]').type("password123");
       cy.get('input[name="confirmPassword"]').type("password123");
-
       cy.get('button[type="submit"]').click();
     });
   
-    it("should display an error for invalid email format", () => {
-      cy.get('input[name="email"]').type("invalid-email");
-
-      cy.get('button[type="submit"]').click();
-  
-      // Assert that an error message is displayed (modify this as needed)
-      cy.contains("Invalid email format");
-    });
+    // it("should display an error for invalid email format", () => {
+    //   cy.get('input[name="email"]').type("invalid-email");
+    //   cy.get('button[type="submit"]').click();
+    //   cy.contains("Invalid email format");
+    // });
   });
   

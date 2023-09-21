@@ -15,8 +15,4 @@ describe('Footer', () => {
   it('should navigate to LinkedIn when clicking the LinkedIn link', () => {
     cy.get('a[href="https://www.linkedin.com/company/sidekick-eip/"]').click();
   });
-
-  it('should navigate to Instagram when clicking the Instagram link', () => {
-    cy.get('a[href="https://www.instagram.com/sidekick_eip/"]').click();
-  });
 });

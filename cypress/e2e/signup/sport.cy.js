@@ -25,7 +25,6 @@ describe("Sports Component Tests", () => {
   
     it("should display validation errors for required fields", () => {
       cy.get('button[type="submit"]').click();
-  
       cy.contains("Weight is required");
       cy.contains("Sport frequency is required");
       cy.contains("Gender is required");

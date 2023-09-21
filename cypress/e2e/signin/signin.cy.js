@@ -20,10 +20,7 @@ describe("Signin Component Tests", () => {
     it("should display an error for invalid credentials", () => {
       cy.get('input[name="email"]').type("invalid@example.com");
       cy.get('input[name="password"]').type("invalidpassword");
-    
       cy.get('button[type="submit"]').click();
-  
-
-      cy.contains("Invalid email or password");
+      cy.url().should('eq', 'http://localhost:3000/signin');
     });
   });

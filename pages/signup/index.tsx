@@ -34,6 +34,7 @@ const Email = () => {
           <Stepper />
           <form onSubmit={handleSubmit(saveData)} className='flex flex-col items-center space-y-4 max-w-xs w-full'>
             <fieldset className="w-full">
+
               <Field error={errors?.email}>
                 <TextField
                   {...register("email", { required: "Email is required" })}
@@ -94,6 +95,7 @@ const Email = () => {
                 />
               </Field>
               <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
+              
             </fieldset>
           </form>
         </div>
