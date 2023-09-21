@@ -27,12 +27,12 @@ describe("Infos Component Tests", () => {
     it("should display validation errors for required fields", () => {
       cy.get('button[type="submit"]').click();
   
-      cy.contains("First name is required");
-      cy.contains("Size is required");
-      cy.contains("Last name is required");
-      cy.contains("Date de naissance is required");
-      cy.contains("Description is required");
-      cy.contains("Username is required");
+      cy.contains("Un prenom est requis.");
+      cy.contains("Une taille est requise.");
+      cy.contains("Un nom est requis");
+      cy.contains("Une date de naissance est requise.");
+      cy.contains("Une description est requise.");
+      cy.contains("Un nom d'utilisateur est requis.");
     });
   });
   

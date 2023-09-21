@@ -12,10 +12,10 @@ export function Footer() {
       </div>
       <div className='flex space-x-4 justify-center'>
         <Link href="https://www.linkedin.com/company/sidekick-eip/">
-          <Linkedin />
+          <Linkedin color='white'/>
         </Link>
         <Link href="https://www.instagram.com/sidekick_eip/">
-          <Instagram />
+          <Instagram color='white'/>
         </Link>
       </div>
     </div>

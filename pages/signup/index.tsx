@@ -95,7 +95,7 @@ const Email = () => {
                 />
               </Field>
               <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Next {">"}</Button>
-              
+
             </fieldset>
           </form>
         </div>
