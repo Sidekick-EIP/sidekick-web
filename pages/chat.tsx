@@ -4,10 +4,13 @@ import {useSnackBar} from "@/components/SnackBar";
 import io from 'socket.io-client';
 import {Session} from "next-auth";
 import {useSession} from "next-auth/react";
+import dayjs from "dayjs";
 
 export default function Chat(): JSX.Element {
     const {data}: { data: Session | null } = useSession();
     const [messages, setMessages] = useState<any>(null);
+    const [userIsWriting, setUserIsWriting] = useState<boolean>(false);
+    const [socket, setSocket] = useState<any>(null);
     const useAlert: any = useSnackBar();
 
     useEffect(() => {
@@ -31,37 +34,40 @@ export default function Chat(): JSX.Element {
             }
         })();
 
-        const socket = io("https://api.sidekickapp.live", {
-            // socket = io("http://localhost:8080", {
+        setSocket(io("https://api.sidekickapp.live", {
             auth: {
                 token: data?.user.access_token
             }
-        });
+        }))
 
         try {
-            socket.on('message', (data) => {
+            socket.on('message', (data: any) => {
+                messages.push(data);
                 console.log('Message received: ' + data);
             });
 
-            socket.on('writing', (data) => {
+            socket.on('writing', (data: any) => {
+                setUserIsWriting(data);
                 console.log('Writing received: ' + data);
             });
 
-            socket.on('seen', (data) => {
+            socket.on('seen', (data: any) => {
+                messages.find((message: any) => message.id === data.id).seen = true;
                 console.log('Seen received: ' + data);
             });
 
-            socket.on('match', (data) => {
+            socket.on('match', (data: any) => {
                 console.log('Match received: ' + data);
             });
 
-            socket.on('reconnect', (data) => {
+            socket.on('reconnect', (data: any) => {
                 console.log('Match received: ' + data);
             });
 
 
             socket.on('connect', () => {
-                console.log('Connecté au serveur Socket.IO');
+                console.log('Connecté au serveur Sidekick');
+                socket.emit('seen', 'seen');
             });
         } catch (err) {
             useAlert("Socket error", "error");
@@ -71,6 +77,55 @@ export default function Chat(): JSX.Element {
             socket.disconnect();
         };
     }, []);
+
+    async function sendMessage(message: string): Promise<void> {
+        try {
+            messages.push({
+                content: "Bonjour Sidekick, comment vas tu ?",
+                date: dayjs(),
+                receverId: 1, // ???
+                seen: true,
+                senderId: 2, // ???
+            });
+            socket.emit('message', message);
+        } catch (err: any) {
+            if (err.response) {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useAlert(err.response.data.message, "error");
+            } else {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useAlert(err.message, "error");
+            }
+        }
+    }
+
+    async function sendUserIsWriting(): Promise<void> {
+        try {
+            socket.emit('writing', true);
+        } catch (err: any) {
+            if (err.response) {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useAlert(err.response.data.message, "error");
+            } else {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useAlert(err.message, "error");
+            }
+        }
+    }
+
+    async function sendUserIsNotWriting(): Promise<void> {
+        try {
+            socket.emit('writing', false);
+        } catch (err: any) {
+            if (err.response) {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useAlert(err.response.data.message, "error");
+            } else {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useAlert(err.message, "error");
+            }
+        }
+    }
 
     return <div>
         {JSON.stringify(messages)}
