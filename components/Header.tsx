@@ -33,12 +33,15 @@ const pagesAuth = [{
   label: 'Planning',
   href: '/planning',
 }, {
-  label: 'Logout',
-  href: '#',
-  onClick: async () => signOut()
+  label: 'Tips',
+  href: '/tips',
 }, {
   label: 'Chat',
   href: '/chat',
+}, {
+  label: 'Logout',
+  href: '#',
+  onClick: async () => signOut()
 }];
 
 function Header() {
