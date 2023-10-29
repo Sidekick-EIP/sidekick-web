@@ -8,26 +8,60 @@ import axios from "axios";
 import dayjs from "dayjs";
 import DialogEditUser from "@/components/Profile/DialogEditUser";
 
-const getTokenFromCookie = () => {
-    // Récupère tous les cookies
-    const cookies = document.cookie.split('; ');
+enum Goal {
+    LOSE_WEIGHT = "LOSE_WEIGHT",
+    STAY_IN_SHAPE = "STAY_IN_SHAPE",
+    GAIN_MUSCLE_MASS = "GAIN_MUSCLE_MASS",
+    BUILD_MUSCLE = "BUILD_MUSCLE",
+}
 
-    // Cherche le cookie qui contient le token
-    const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));
+enum Training_level {
+    BEGINNER = "BEGINNER",
+    IRREGULAR_TRAINING = "IRREGULAR_TRAINING",
+    INTERMEDIATE = "INTERMEDIATE",
+    ADVANCED = "ADVANCED",
+}
 
-    // Extrait le token s'il existe
-    if (tokenCookie) {
-        return tokenCookie.split('=')[1];
-    }
+enum Activities {
+    RUNNING = "RUNNING",
+    CYCLING = "CYCLING",
+    SWIMMING = "SWIMMING",
+    WEIGHTLIFTING = "WEIGHTLIFTING",
+    YOGA = "YOGA",
+    PILATES = "PILATES",
+    MARTIAL_ARTS = "MARTIAL_ARTS",
+    DANCING = "DANCING",
+    HIKING = "HIKING",
+    ROCK_CLIMBING = "ROCK_CLIMBING",
+    TENNIS = "TENNIS",
+    BASKETBALL = "BASKETBALL",
+    SOCCER = "SOCCER",
+    VOLLEYBALL = "VOLLEYBALL",
+    BASEBALL = "BASEBALL",
+    SKIING = "SKIING",
+    SNOWBOARDING = "SNOWBOARDING",
+    SURFING = "SURFING",
+    GOLF = "GOLF",
+    ROWING = "ROWING",
+    CROSSFIT = "CROSSFIT",
+    GYMNASTICS = "GYMNASTICS",
+    TRIATHLON = "TRIATHLON",
+    RUGBY = "RUGBY",
+    BOXING = "BOXING",
+    SKATING = "SKATING",
+    SQUASH = "SQUASH",
+    BADMINTON = "BADMINTON",
+    HORSE_RIDING = "HORSE_RIDING",
+    TABLE_TENNIS = "TABLE_TENNIS",
+}
 
-    return null; // Retourne null si le cookie n'est pas trouvé
-};
 
 export default function Home(): JSX.Element {
     const {data}: { data: Session | null } = useSession();
     const [open, setOpen] = useState<boolean>(false);
     const [user, setUser] = useState<any>(null);
     const [isToReload, setIsToReload] = useState<boolean>(true);
+    const [typeEdit, setTypeEdit] = useState<'PROFILE' | 'SPORT'>('PROFILE');
     const useAlert: any = useSnackBar();
 
     useEffect(() => {
@@ -40,6 +74,7 @@ export default function Home(): JSX.Element {
                         Authorization: `Bearer ${data?.user.access_token}`
                     }
                 });
+                console.log(response.data)
                 setUser(response.data);
             } catch (err: any) {
                 if (err.response) {
@@ -57,6 +92,36 @@ export default function Home(): JSX.Element {
         return <div className="container mx-auto">
             chargement....
         </div>
+
+    function getGoal(goal: string): string {
+        switch (goal) {
+            case Goal.LOSE_WEIGHT:
+                return "Perdre du poids";
+            case Goal.STAY_IN_SHAPE:
+                return "Rester en forme";
+            case Goal.GAIN_MUSCLE_MASS:
+                return "Prendre de la masse musculaire";
+            case Goal.BUILD_MUSCLE:
+                return "Se muscler";
+            default:
+                return "Aucun";
+        }
+    }
+
+    function getLevel(level: string): string {
+        switch (level) {
+            case Training_level.BEGINNER:
+                return "Débutant";
+            case Training_level.IRREGULAR_TRAINING:
+                return "Entrainement irrégulier";
+            case Training_level.INTERMEDIATE:
+                return "Intermédiaire";
+            case Training_level.ADVANCED:
+                return "Avancé";
+            default:
+                return "Aucun";
+        }
+    }
 
     return <div className="container mx-auto w-full flex justify-center flex-col items-center">
         <img className="w-full h-auto rounded-lg"
@@ -84,7 +149,10 @@ export default function Home(): JSX.Element {
                     <span className="text-sm text-gray-400">{user.email}</span>
                 </div>
                 <div className="col-span-1 flex justify-end items-center pr-9 pt-16">
-                    <button type="button" onClick={() => setOpen(true)}
+                    <button type="button" onClick={() => {
+                        setTypeEdit('PROFILE')
+                        setOpen(true)
+                    }}
                             className="px-3 py-2 text-sm font-medium text-center inline-flex items-center text-black rounded-lg  focus:ring-4 focus:outline-none  bg-gray-200 hover:bg-blue-700 focus:ring-blue-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                              stroke="currentColor" className="w-4 h-4 text-black mr-2">
@@ -114,12 +182,41 @@ export default function Home(): JSX.Element {
                 </div>
             </div>
 
+            <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+                <div>
+                    <p className="text-white">{user.activities.map((activity: string) => activity + "/")}</p>
+                </div>
+                <div>
+                    <p className="text-white">Mon objectif est de {getGoal(user.goal)}</p>
+                </div>
+                <div>
+                    <p className="text-white">Mon poids ideal est {user.goal_weight} kg</p>
+                </div>
+                <div>
+                    <p className="text-white">Je suis un sportif {getLevel(user.level)}</p>
+                </div>
+                <div>
+                    <button type="button" onClick={() => {
+                        setTypeEdit('SPORT')
+                        setOpen(true)
+                    }}
+                            className="px-3 py-2 text-sm font-medium text-center inline-flex items-center text-black rounded-lg  focus:ring-4 focus:outline-none  bg-gray-200 hover:bg-blue-700 focus:ring-blue-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                             stroke="currentColor" className="w-4 h-4 text-black mr-2">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
+                        </svg>
+                        Edit activité
+                    </button>
+                </div>
+            </div>
+
         </div>
 
         <DialogEditUser open={open} onClose={(isToReload: boolean) => {
             setIsToReload(isToReload)
             setOpen(false)
-        }} user={user}/>
+        }} user={user} type={typeEdit}/>
     </div>
 }
 
