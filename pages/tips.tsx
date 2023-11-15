@@ -158,9 +158,6 @@ export default function Tips() {
       });
   }, []);
 
-
-
-
   return (
     <section className="text-gray-600 body-font">
       
