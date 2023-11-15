@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import { copyFile } from 'fs';
 import { refFromURL } from 'firebase/database';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faThumbsDown, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 
 type Article = {
@@ -13,6 +15,7 @@ type Article = {
     category: number;
     article_content: string;
     link: string;
+    liked: boolean;
   };
 };
 
@@ -24,6 +27,7 @@ export default function Tips() {
   const [randomArticles, setRandomArticles] = useState<Article[]>([]);
   const [articlesData, setArticlesData] = useState<Article[]>([]);
   const [showRandom, setShowRandom] = useState(true);
+  const [refreshed, setRefreshed] = useState(false);
 
   const getRandomArticles = (allArticles: Article[]) => {
     var allArticlesTmp = allArticles;
@@ -103,6 +107,44 @@ export default function Tips() {
     setShowRandom(!showRandom);
   };
 
+  const handlePostRequest = async (number: number, like: boolean) => {
+    var jsondata = ({
+      articleNumber: number,
+      addLike: like,
+    })
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/articles/like", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${data.user.access_token}`,
+        },
+        body: JSON.stringify(jsondata),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Response is ok and value is:', responseData);
+      } else {
+        console.error('Error the route is not created yet:', response.statusText);
+        console.log("the body of the failing request : ", JSON.stringify(jsondata))
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
+  const toggleArticlesLike = (item: Article, value: boolean) => {
+    if (value == true) {
+      handlePostRequest(item.number, true)
+    }
+    else {
+      handlePostRequest(item.number, false)
+    }
+    item.liked = value;
+    setRefreshed(!refreshed);
+  };
+
   useEffect(() => {
     
     fetch('/articles.json')
@@ -115,6 +157,8 @@ export default function Tips() {
         setRecoArticles(recommandedArticlesVar);
       });
   }, []);
+
+
 
 
   return (
@@ -131,15 +175,19 @@ export default function Tips() {
       </div>
 
       <div className="pt-4 max-w-5xl mx-auto fsac4 md:px-1 px-3">
-      <button onClick={toggleArticles} className="w-64 text-white text-sm mt-4 bg-blue-500 px-3 py-2 rounded-md">
-          Recommended
-        </button>
+        <button 
+        onClick={toggleArticles} 
+        className="w-64 text-white text-sm mt-4 bg-blue-500 px-3 py-2 rounded-md"
+        >{showRandom ? "Recommended" : "Random"}</button>
+        
+        
         <input
           type="text"
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
           className="mt-4 w-64 py-3 ps-4 pe-4 bg-white/[.03] text-white placeholder:text-grey rounded-md text-sm"
           placeholder="search"
+          disabled={showRandom}
         />
       </div>
 
@@ -150,17 +198,51 @@ export default function Tips() {
               <div className="ktq5" key={index}>
                 <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
                 <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
-                <a href={article.link} className="text-blue-500 text-sm">Read More</a>
+                <div>
+                  <a href={article.link} className="text-blue-500 text-sm">Read More</a>
+                {article.liked ?
+                  <button className="text-blue-500 text-sm mt-4 ml-40" onClick={() => {
+                    toggleArticlesLike(article, false)
+                  }} >
+                     <FontAwesomeIcon icon={faHeart} /> Liked !
+                  </button>
+                     : 
+                  <button className="text-white text-sm mt-4 ml-40" onClick={() => {
+                    toggleArticlesLike(article, true)
+                  }} >
+                     <FontAwesomeIcon icon={faHeart} /> add like
+                  </button>
+                  }
+                </div>
               </div>
             ))
           : filteredArticles.map((article, index) => (
               <div className="ktq5" key={index}>
                 <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
                 <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
-                <a href={article.link} className="text-blue-500 text-sm">Read More</a>
+                <div>
+                  <a href={article.link} className="text-blue-500 text-sm mt-4">Read More</a>
+                  
+                  {article.liked ?
+                  <button className="text-blue-500 text-sm mt-4 ml-40" onClick={() => {
+                    toggleArticlesLike(article, false)
+                  }} >
+                     <FontAwesomeIcon icon={faHeart} /> Liked !
+                  </button>
+                     : 
+                  <button className="text-white text-sm mt-4 ml-40" onClick={() => {
+                    toggleArticlesLike(article, true)
+                  }} >
+                     <FontAwesomeIcon icon={faHeart} /> add like
+                  </button>
+                  }
+                </div>
               </div>
             ))}
       </div>
     </section>
   );
 }
+
+
+// modification du bouton, fix de la recherche, limité la recherche sur la page random, limité le nombre d'article affiché en random, envoie d'une requete post et ajout du bouton like
