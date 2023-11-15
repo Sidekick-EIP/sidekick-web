@@ -1,4 +1,15 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputAdornment, InputLabel, Select} from "@mui/material";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    FormControl,
+    Grid,
+    InputAdornment,
+    InputLabel,
+    Select
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -6,6 +17,7 @@ import {useSnackBar} from "@/components/SnackBar";
 import {Session} from "next-auth";
 import {useSession} from "next-auth/react";
 import MenuItem from "@mui/material/MenuItem";
+import {Activities} from "@/pages/profile";
 
 interface DialogEditUserProps {
     open: boolean
@@ -21,6 +33,7 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
     const [firstname, setFirstname] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [goalWeight, setGoalWeight] = useState<number>(0);
+    const [activities, setActivities] = useState<string[]>([]);
 
     const [goals, setGoals] = useState<string>('LOSE_WEIGHT');
     const [size, setSize] = useState<number>(0);
@@ -43,6 +56,7 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
         setDescription(user.description);
         setGender(user.gender);
         setLevel(user.level);
+        setActivities(user.activities);
     }, [user]);
 
     function handleClose(isToReload: boolean): void {
@@ -62,8 +76,8 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
                 gender: gender,
                 description: description,
                 goal: goals,
-                level: "ADVANCED",
-                activities: ["SOCCER", "TENNIS"]
+                level: level,
+                activities: activities
             }, {
                 headers: {
                     Authorization: `Bearer ${data?.user.access_token}`
@@ -83,7 +97,8 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
         }
     }
 
-    return <Dialog component={'form'} open={open} onClose={() => handleClose(false)} onSubmit={handleSubmit} maxWidth={"sm"}
+    return <Dialog component={'form'} open={open} onClose={() => handleClose(false)} onSubmit={handleSubmit}
+                   maxWidth={"sm"}
                    fullWidth>
         <DialogTitle>
             Modifier mon profile
@@ -163,7 +178,7 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
                         <Select
                             value={level}
                             onChange={(event: any) => setLevel(event.target.value)}
-                            label="Age"
+                            label="Level"
                         >
                             <MenuItem value={'BEGINNER'}>Débutant</MenuItem>
                             <MenuItem value={'IRREGULAR_TRAINING'}>Entrainement irrégulier</MenuItem>
@@ -172,6 +187,49 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
                         </Select>
                     </FormControl>
                 </Grid>
+                <Grid item xs={12}>
+                    <FormControl variant="outlined" fullWidth>
+                        <InputLabel>Sports</InputLabel>
+                        <Select
+                            multiple
+                            value={activities}
+                            onChange={(event: any) => setActivities(event.target.value)}
+                            label="Sports"
+                        >
+                            <MenuItem value={Activities.RUNNING}>{Activities.RUNNING}</MenuItem>
+                            <MenuItem value={Activities.CYCLING}>{Activities.CYCLING}</MenuItem>
+                            <MenuItem value={Activities.WEIGHTLIFTING}>{Activities.WEIGHTLIFTING}</MenuItem>
+                            <MenuItem value={Activities.SWIMMING}>{Activities.SWIMMING}</MenuItem>
+                            <MenuItem value={Activities.MARTIAL_ARTS}>{Activities.MARTIAL_ARTS}</MenuItem>
+                            <MenuItem value={Activities.YOGA}>{Activities.YOGA}</MenuItem>
+                            <MenuItem value={Activities.PILATES}>{Activities.PILATES}</MenuItem>
+                            <MenuItem value={Activities.DANCING}>{Activities.DANCING}</MenuItem>
+                            <MenuItem value={Activities.BOXING}>{Activities.BOXING}</MenuItem>
+                            <MenuItem value={Activities.HIKING}>{Activities.HIKING}</MenuItem>
+                            <MenuItem value={Activities.ROCK_CLIMBING}>{Activities.ROCK_CLIMBING}</MenuItem>
+                            <MenuItem value={Activities.TENNIS}>{Activities.TENNIS}</MenuItem>
+                            <MenuItem value={Activities.GOLF}>{Activities.GOLF}</MenuItem>
+                            <MenuItem value={Activities.BASKETBALL}>{Activities.BASKETBALL}</MenuItem>
+                            <MenuItem value={Activities.SOCCER}>{Activities.SOCCER}</MenuItem>
+                            <MenuItem value={Activities.BASEBALL}>{Activities.BASEBALL}</MenuItem>
+                            <MenuItem value={Activities.RUGBY}>{Activities.RUGBY}</MenuItem>
+                            <MenuItem value={Activities.VOLLEYBALL}>{Activities.VOLLEYBALL}</MenuItem>
+                            <MenuItem value={Activities.SQUASH}>{Activities.SQUASH}</MenuItem>
+                            <MenuItem value={Activities.BADMINTON}>{Activities.BADMINTON}</MenuItem>
+                            <MenuItem value={Activities.TABLE_TENNIS}>{Activities.TABLE_TENNIS}</MenuItem>
+                            <MenuItem value={Activities.SKIING}>{Activities.SKIING}</MenuItem>
+                            <MenuItem value={Activities.SNOWBOARDING}>{Activities.SNOWBOARDING}</MenuItem>
+                            <MenuItem value={Activities.ROWING}>{Activities.ROWING}</MenuItem>
+                            <MenuItem value={Activities.TRIATHLON}>{Activities.TRIATHLON}</MenuItem>
+                            <MenuItem value={Activities.SKATING}>{Activities.SKATING}</MenuItem>
+                            <MenuItem value={Activities.HORSE_RIDING}>{Activities.HORSE_RIDING}</MenuItem>
+                            <MenuItem value={Activities.CROSSFIT}>{Activities.CROSSFIT}</MenuItem>
+                            <MenuItem value={Activities.GYMNASTICS}>{Activities.GYMNASTICS}</MenuItem>
+                            <MenuItem value={Activities.SURFING}>{Activities.SURFING}</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+
             </Grid>}
 
 

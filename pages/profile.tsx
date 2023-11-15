@@ -22,7 +22,7 @@ enum Training_level {
     ADVANCED = "ADVANCED",
 }
 
-enum Activities {
+export enum Activities {
     RUNNING = "RUNNING",
     CYCLING = "CYCLING",
     SWIMMING = "SWIMMING",
