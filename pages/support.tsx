@@ -3,7 +3,7 @@ import {useSession} from "next-auth/react";
 import {useSnackBar} from "@/components/SnackBar";
 import {useState} from "react";
 
-export default function Beta() {
+export default function Support() {
     const {data}: { data: Session | null } = useSession();
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
