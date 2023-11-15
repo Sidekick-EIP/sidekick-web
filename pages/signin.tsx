@@ -72,6 +72,8 @@ function Signin() {
             
             {/* <TextField placeholder="******" focused color="white" InputProps={{ style: { fontStyle: 'italic', color: 'grey' }, }} className="w-full" name='password' type='password' label="Password" variant="outlined" value={password} onChange={e => setPassword(e.target.value)} /> */}
             <Button className="bg-orangePrimary" variant="contained" type='submit'>Login</Button>
+
+            <a href="/signup" className="text-white hover:underline">Missing password ?</a>
           </form>
         </div>
       </div>
