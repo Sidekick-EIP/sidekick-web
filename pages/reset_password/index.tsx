@@ -107,8 +107,7 @@ export default function Planning() {
                 <div className="pt-5">
                     <label className="sr-only">Confirm password</label>
                     <div className="relative">
-                        <input type="email"
-                               onChange={e => setConfirmPassword(e.target.value)}
+                        <input type='password' onChange={e => setConfirmPassword(e.target.value)}
                                value={confirmPassword}
                                className="py-3 ps-11 pe-4 block w-full bg-white/[.03] border-white/20 text-white placeholder:text-white rounded-md text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11"
                                placeholder="*****"

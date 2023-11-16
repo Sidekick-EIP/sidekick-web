@@ -63,7 +63,7 @@ function Header() {
     };
 
     return (
-        <AppBar position="relative" color="transparent" elevation={0} className='p-4'>
+        <AppBar position="sticky" color="transparent" elevation={0} className='p-4'>
             <Container maxWidth="lg">
                 <Toolbar disableGutters className='flex justify-between'>
                     <Box>
