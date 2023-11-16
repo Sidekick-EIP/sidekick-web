@@ -130,7 +130,7 @@ function Header() {
                             <Box className="space-x-8" sx={{flexGrow: 0}}>
                                 {pagesAuth.map((page) => (
                                     <Link href={page.href} key={page.label} onClick={page.onClick ?? undefined}>
-                                        <Button variant="outlined">
+                                        <Button variant="text" color="primary">
                                             {page.label}
                                         </Button>
                                     </Link>

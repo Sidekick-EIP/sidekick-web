@@ -50,8 +50,15 @@ export default function Planning() {
     }
 
     return (
-        <div className='flex flex-row items-center justify-center w-full'>
-            <form className='flex flex-col items-center justify-center space-y-4 w-[400px]' onSubmit={handleSubmit}>
+        <div className='flex flex-col items-center justify-center w-full'>
+            <h1 className="text-2xl text-white sm:text-4xl">
+                Fill your new password
+            </h1>
+            <h2 className="mt-1 sm:mt-3 text-4xl font-bold text-white sm:text-6xl">
+          <span
+              className="bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 text-transparent">Reset password</span>
+            </h2>
+            <form className='flex flex-col items-center justify-center space-y-4 w-[400px] mt-2' onSubmit={handleSubmit}>
                 <div className="pt-5">
                     <label className="sr-only">Code</label>
                     <div className="relative">
