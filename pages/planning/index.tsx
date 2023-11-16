@@ -182,7 +182,7 @@ export default function Planning() {
 
         <div>
           <div className="mt-4 ktq4">
-            <h2 className="text-lg text-white font-bold mb-2">Vos seances sportives prevues:</h2>
+            <h2 className="text-lg text-white font-bold mb-2"><strong className="text-orange-500">Vos</strong> seances sportives prevues:</h2>
             <ul className="text-left">
           {sortedEvents.map((event, index) => {
             const eventDate = new Date(event.date);
@@ -212,7 +212,7 @@ export default function Planning() {
 
         <div>
           <div className="mt-4 ktq4">
-            <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
+            <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre <strong className="text-orange-500">Sidekick</strong>:</h2>
             <ul className="text-left">
             {sortedEventsSidekick.map((event, index) => {
             const eventDate = new Date(event.date);
