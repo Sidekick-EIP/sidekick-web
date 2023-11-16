@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import {useRouter} from 'next/router';
 import React, {useState} from "react";
 import axios from "axios";
+import {Key} from "react-feather";
 
 async function resetPassword(email: string, password: string, confirmPassword: string, code: string) {
     if (password !== confirmPassword) {
@@ -49,22 +50,69 @@ export default function Planning() {
     }
 
     return (
-        <div className='flex flex-row items-center justify-center w-[400px]'>
-            <form className='flex flex-col space-y-4 w-full' onSubmit={handleSubmit}>
-                <TextField fullWidth placeholder="123456" focused required
-                           InputProps={{style: {fontStyle: 'italic', color: 'grey'},}} className="w-full" name='code'
-                           label="Code" variant="outlined" value={code} onChange={e => setCode(e.target.value)}/>
-                <TextField fullWidth placeholder="exemple@gmail.com" required
-                           InputProps={{style: {fontStyle: 'italic', color: 'grey'},}} className="w-full" name='email'
-                           label="Email" variant="outlined" value={email} onChange={e => setEmail(e.target.value)}/>
-                <TextField fullWidth placeholder="*******" required
-                           InputProps={{style: {fontStyle: 'italic', color: 'grey'},}} className="w-full"
-                           name='password' type='password' label="Password" variant="outlined" value={password}
-                           onChange={e => setPassword(e.target.value)}/>
-                <TextField fullWidth placeholder="*******" required
-                           InputProps={{style: {fontStyle: 'italic', color: 'grey'},}} className="w-full"
-                           name='confirmPassword' type='password' label="confirmPassword" variant="outlined"
-                           value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
+        <div className='flex flex-row items-center justify-center w-full'>
+            <form className='flex flex-col items-center justify-center space-y-4 w-[400px]' onSubmit={handleSubmit}>
+                <div className="pt-5">
+                    <label className="sr-only">Code</label>
+                    <div className="relative">
+                        <input
+                            onChange={e => setCode(e.target.value)}
+                            value={code}
+                            className="py-3 ps-11 pe-4 block w-full bg-white/[.03] border-white/20 text-white placeholder:text-white rounded-md text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11"
+                            placeholder="123456"
+                            required/>
+                    </div>
+                </div>
+                <div className="pt-5">
+                    <label className="sr-only">Email address</label>
+                    <div className="relative">
+                        <input type="email"
+                               onChange={e => setEmail(e.target.value)}
+                               value={email}
+                               className="py-3 ps-11 pe-4 block w-full bg-white/[.03] border-white/20 text-white placeholder:text-white rounded-md text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11"
+                               placeholder="exemple@gmail.com"
+                               required/>
+                        <div
+                            className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-4">
+                            <svg className="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                 width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div className="pt-5">
+                    <label className="sr-only">Password</label>
+                    <div className="relative">
+                        <input type="password"
+                               onChange={e => setPassword(e.target.value)}
+                               value={password}
+                               className="py-3 ps-11 pe-4 block w-full bg-white/[.03] border-white/20 text-white placeholder:text-white rounded-md text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11"
+                               placeholder="******"
+                               required/>
+                        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-4">
+                            <Key size={16} color="white"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="pt-5">
+                    <label className="sr-only">Confirm password</label>
+                    <div className="relative">
+                        <input type="email"
+                               onChange={e => setConfirmPassword(e.target.value)}
+                               value={confirmPassword}
+                               className="py-3 ps-11 pe-4 block w-full bg-white/[.03] border-white/20 text-white placeholder:text-white rounded-md text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11"
+                               placeholder="*****"
+                               required/>
+                        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-4">
+                            <Key size={16} color="white"/>
+                        </div>
+                    </div>
+                </div>
+
+
                 <Button className="bg-orangePrimary" variant="contained" type='submit'>Reset Password</Button>
             </form>
         </div>
