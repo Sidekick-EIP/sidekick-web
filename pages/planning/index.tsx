@@ -81,7 +81,7 @@ export default function Planning() {
 
   const calendarEventsSidekick = [
     {
-      date: '2023-11-16',
+      date: '2023-11-21',
       description: 'séance abdos / épaule a villeneuve',
       sportName: 'Salle de sport',
     },
@@ -134,7 +134,7 @@ export default function Planning() {
         <div className="ktq4 text-center">
           <h3 className="pt-3 font-semibold text-lg text-white">La page Planning</h3>
           <p className="pt-2 value-text text-md text-gray-200 fkrr1">
-            Planifier vos exercices et regarder ceux de votre sidekick pour rester motivé vers votre objectif !
+            Planifier vos exercices et regarder ceux de votre sidekick pour rester motivé vers vos objectifs !
           </p>
         </div>
       </div>
@@ -182,8 +182,8 @@ export default function Planning() {
 
         <div>
           <div className="mt-4 ktq4">
-            <h2 className="text-lg font-bold mb-2">Vos seances sportives prevues:</h2>
-            <ul>
+            <h2 className="text-lg text-white font-bold mb-2">Vos seances sportives prevues:</h2>
+            <ul className="text-left">
           {sortedEvents.map((event, index) => {
             const eventDate = new Date(event.date);
             const today = new Date();
@@ -212,8 +212,8 @@ export default function Planning() {
 
         <div>
           <div className="mt-4 ktq4">
-            <h2 className="text-lg font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
-            <ul>
+            <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
+            <ul className="text-left">
             {sortedEventsSidekick.map((event, index) => {
             const eventDate = new Date(event.date);
             const today = new Date();
