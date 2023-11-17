@@ -193,7 +193,7 @@ export default function Main() {
 
 
                 <div
-                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <img className="w-10" src="../Gregoire.png"></img>
                     <h3 className="pt-3 font-semibold text-lg">
                         Gregoire D
@@ -205,7 +205,7 @@ export default function Main() {
 
 
                 <div
-                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <img className="w-10" src="../Alex.png"></img>
                     <h3 className="pt-3 font-semibold text-lg">
                         Alex A
@@ -217,7 +217,7 @@ export default function Main() {
 
 
                 <div
-                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <img className="w-10" src="../Theo.png"></img>
                     <h3 className="pt-3 font-semibold text-lg">
                         Theo P
@@ -228,7 +228,7 @@ export default function Main() {
                 </div>
 
                 <div
-                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <img className="w-10" src="../damien.png"></img>
                     <h3 className="pt-3 font-semibold text-lg">
                         Damien M
@@ -239,7 +239,7 @@ export default function Main() {
                 </div>
 
                 <div
-                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <img className="w-10" src="../ilian.png"></img>
                     <h3 className="pt-3 font-semibold text-lg">
                         Ilian B
@@ -250,7 +250,7 @@ export default function Main() {
                 </div>
 
                 <div
-                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <img className="w-10" src="../Theo.png"></img>
                     <h3 className="pt-3 font-semibold text-lg">
                         Jules C
@@ -261,7 +261,7 @@ export default function Main() {
                 </div>
 
                 <div
-                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    className="grid p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <img className="w-10" src="../pierre.png"></img>
                     <h3 className="pt-3 font-semibold text-lg">
                         Pierre B
@@ -307,13 +307,15 @@ export default function Main() {
                         <div className="flex">
                             <div className="flex">
                                 <a href="/app-release.apk"
-                                   className="lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                   className="flex flex-row justify-between items-center lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                    <img alt="android-icon" className="w-8 h-8 mr-2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACVklEQVR4nO2YP2sUQRjGfyqI+AdLJXd2UWttUyj5AkZUbIRgYWlpoY0gnvkAFuIHCFHCIXKnIFpoF0HEj2ARQdBILhrRamTgCQzLbtjZnZk9ZH4wcOzN+zzz3ry3+85COy4D28ClFhpXpLFAh1wFDLABzDSIn1GsUUKd8lILeQXs8YwdK/Z1g9jg9IFNLeimSuQhsAZ8Vtls6/OavlvQXKNYqzEV3NKimgwb2zn7gDvAb2dhH4G7wDngFHBI4zRwHrgHfHLm2926DeztKomjwBtnQe+AMx7xZ4G3Trz9jx0hMdbwgxbwB1hsobUoDav1HjhMIuzdZSTjCTCv60vAL2BQQ+NBYe68tAzwjETccMrhgnP9p65t1dAom3vR0W2zw7U4CHyV2aOSX9ku8H4NnUHF3MfSXgcOEJHrMvoLHIugf1za1uMaEXkhk+WIHsvyeB7Rgx8tHny+41vMREziEQTb/6zqzmI71JXQBrtgNJ7I265hCJxsksRG7F9qF0zFsGvq+QitKnCkwJ7TcqdMZFTi/9RHaEtBbvYnOkikV+K/2USo7vXQmFD+OZFAmLwjBXJpBcLk0iqQSysQJpdWgVxagTChSmvn1Uy/46ax37ZpHCpoLLG+c15Pmci4xN8eMWpj39l+n9KD1ayvWE+HmEmHR90VeU+0E7OhDWJjYvv8N4l8kcFcRI8557VpNJYSvtMaxExkv5LZ2ZkYY11JWK9k+D6Bu259KsmJFMg7EopcWtNWWhPPdtt3fjKGnu227/xkVLX7Ve2273xS4rb7ddpt3/m1+AfgNeqnZPkxoAAAAABJRU5ErkJggg=="/>
                                     Get for Android
                                 </a>
                             </div>
                             <div className="flex ml-5">
                                 <a href="/"
-                                   className="lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                   className="flex flex-row justify-between items-center lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                    <img alt="apple-icon" className="w-8 h-8 mr-2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADy0lEQVR4nO2ae6hNaRjGf+fgyD0ZQ8nlyFHkNsMUSe5C4pAYoaaIUpqIxOSS64xLKMpxKSFyVxIhzT9OlFszzZA7f7g77vdz0FvPrq/Vttt7rX32t3d5av2x17u+dz3fXu/3rvd9vgV+kA8MArYD/wFPge7kGGwCV4EvgWMuOYICYLND/JWeyGX9XkiOTOKQCH8ClgMNZLuk85PJAcSexGOgq3O+NvBBtp/IchSL6FugY8A2UraHQFWyGJadrojsjIAtDzidK+ujWEQfATUDtt9kewY0IkfWRkng/ADgnWwTyAFcEdlx+l1TYfTJmaCFmPf4bwZ0BtoB9eNcE/vXFwBrgCfOe2SDfDTUePPTEqiSKfLDgYPA8zhv5+si3Aeo/o1rXgNbgS3AvTj2N8ARYExlZbJewL+BmxqRc8BN4GPA9s4JoUSHLfZ/9GJ8HLBZKdMjnU/hT+CznN8BpgNN41z3C7DEKTu+dVwE5gBt49yvGTBb97FrK4DVqg5Cw+J1lxzaPz5fIZMM2gOzgJ3ACWC3CMYjHw+1gGXOUz0G1Ag7kQ1yUgb0xg+GaN0YjwNhstx4Z3G69VGmkQ/scMLSQi9p1FOz474DfKAqsFc8XgCTUnWwwInLbKgMLgOFqQ4uUEo0B93wh1HicBdoHMZBXzmw3O4L1YHb4mF8QmGFHKzEH34VB0vboXFKTobhD3vFYWwUJ1ezoPW8Kw7NwzrIU0tqTn7EX8qtAMqjVMJ5Tk1lJYIPVHPUlkiIPRHrE3zhpTjEJKNQKIsan2nAGXHoF8VJrAT3qcUuEod1UZzsl5OJ+EORFryF2A9hnSzWRFbhFzvFY1tYByPk4Cx+0cRpfaeFcVBX3WCF58yFFvt7TeavMO3uSQ225so3BqsXMT7/qz+yZisp/K6BR8kOtAb+drrEqckObKA++bMySDagjjaHbCL9Uxm4SYNMiskGzBSf86kKEB008GXYDi2NqA3cFx9T+FPGPg02edMnlonHmbCid6GkT0vFP+MHRUrBxqFLFEdLnRekldiZ7k1KHfU+cnzekDMr5jKJebrvLWltkdFNjY51bQPJnFRariNtirzhD2ej31T3ykQXSbVfJHynHRvl3Haeeia4roW2DY5r86dMgkKpZKZOCcb2duTa4N5j2lDFkWrKdaPOEtRMrBgtOSnW9yc6LqjnKdJ2gU2uRNnJ7Hsqe+89X9pw7IuFeMcbfWcyFGil/cUminUTAB8kGPtRizzpwjAdhdxa7dx+UDhYYTcliQxTTdruYX31YOOvAeuBNhni/x1UJr4CHrVGKoI5TYoAAAAASUVORK5CYII="/>
                                     Get for iOS
                                 </a>
                             </div>

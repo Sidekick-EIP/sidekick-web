@@ -144,9 +144,14 @@ function displayTimeline(workout: Workout, index: number, id: string) {
     console.log(workout)
     console.log(id)
   }
-  return (
-    <div>
-      {workout.userId == id ?
+
+  return <li className="mb-10 ms-4">
+    {workout.userId == id ? <div className="absolute w-3 h-3 bg-red-500 rounded-full mt-1.5 -start-1.5 border border-white"></div> : <div className="absolute w-3 h-3 bg-blue-500 rounded-full mt-1.5 -start-1.5 border border-white"></div>}
+    <time className="mb-1 text-sm font-normal leading-none text-gray-400"> {workout.date.split("T")[0]}</time>
+    <h3 className="text-lg font-semibold text-gray-900">{workout.exercise.name}</h3>
+  </li>;
+
+  /* return (workout.userId == id ?
         <TimelineItem>
           <TimelineOppositeContent
             sx={{ m: 'auto 0' }}
@@ -187,9 +192,8 @@ function displayTimeline(workout: Workout, index: number, id: string) {
             </Typography>
             <Typography>seance du sidekick</Typography>
           </TimelineContent>
-        </TimelineItem>}
-    </div>
-  );
+        </TimelineItem>
+  ); */
 }
 
 
@@ -250,7 +254,7 @@ export default function Planning() {
         </div>
       </div>
 
-      <div className="mt-6 max-w-5xl mx-auto md:px-1 px-3 text-center">
+      <div className="mt-6 max-w-6xl mx-auto md:px-1 px-3 text-center">
         <div className="mt-6 ktq4">
           <h3 className="pt-3 font-semibold text-lg text-white">Ajouter un exercice</h3>
           <form onSubmit={handleSubmit} className='flex flex-col space-y-4 max-w-md w-full'>
@@ -318,8 +322,8 @@ export default function Planning() {
           </form>
         </div>
 
-        <div className="flex">
-          <div className="mt-4 mr-4 ktq4 w-1/2">
+        <div className="flex w-full">
+          <div className="mt-4 ktq4 w-1/3">
             <h2 className="text-lg text-white font-bold mb-2">Vos seances sportives prevues:</h2>
             <ul className="text-left">
               {sortedWorkouts.map((workout: Workout, index: number) => {
@@ -328,15 +332,23 @@ export default function Planning() {
             </ul>
           </div>
 
-          <div className="flex">
-            <Timeline>
+          <div className="w-1/3 p-5">
+
+            <ol className="relative border-s border-gray-200 text-start">
               {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
                 return displayTimeline(workout, index, myId);
               })}
-            </Timeline>
+            </ol>
+
+
+            {/* <Timeline>
+              {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
+                return displayTimeline(workout, index, myId);
+              })}
+            </Timeline> */}
           </div>
 
-          <div className="mt-4 ktq4 w-1/2">
+          <div className="mt-4 ktq4 w-1/3">
             <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
             <ul className="text-left">
               {sortedWorkoutsSidekick.map((workout: Workout, index) => {
