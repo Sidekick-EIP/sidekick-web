@@ -42,12 +42,16 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Lulo Clean W01 One";
-  background-color: #000000;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.gradient {
+  background: rgb(225,102,59);
+  background: linear-gradient(164deg, #F25D29 50%, rgba(236,139,83,1) 75%);
 }
 
 .planning-button {
@@ -156,4 +160,9 @@ a {
 
 .fkrr1 {
   font-family: "Gill Sans", sans-serif;
+}
+
+.fkrr2 {
+  font-family: "Gill Sans", sans-serif;
+  font-size: larger;
 }

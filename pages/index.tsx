@@ -19,10 +19,9 @@ export default function Home() {
   const session = useSession();
   return (
     <div >
-      <Head>
-        <title>Sidekick</title>
-      </Head>
-
+        {/* <Head>
+            <title>Sidekick</title>
+        </Head> */}
       <Main />
 
     </div>
