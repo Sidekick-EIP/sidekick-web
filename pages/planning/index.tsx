@@ -134,7 +134,7 @@ function displayWorkouts(workout: Workout, index: number) {
 
   return (
     <li key={index} className={colorClass}>
-      <strong>{workout.date}:</strong> ({workout.exercise.name})
+      <strong>{workout.date.split("T")[0]}:</strong> ({workout.exercise.name})
     </li>
   );
 }
@@ -145,9 +145,14 @@ function displayTimeline(workout: Workout, index: number, id: string) {
     console.log(workout)
     console.log(id)
   }
-  return (
-    <div>
-      {workout.userId == id ?
+
+  return <li className="mb-10 ms-4">
+    {workout.userId == id ? <div className="absolute w-3 h-3 bg-red-500 rounded-full mt-1.5 -start-1.5 border border-white"></div> : <div className="absolute w-3 h-3 bg-blue-500 rounded-full mt-1.5 -start-1.5 border border-white"></div>}
+    <time className="mb-1 text-sm font-normal leading-none text-gray-400"> {workout.date.split("T")[0]}</time>
+    <h3 className="text-lg font-semibold text-gray-900">{workout.exercise.name}</h3>
+  </li>;
+
+  /* return (workout.userId == id ?
         <TimelineItem>
           <TimelineOppositeContent
             sx={{ m: 'auto 0' }}
@@ -188,9 +193,8 @@ function displayTimeline(workout: Workout, index: number, id: string) {
             </Typography>
             <Typography>seance du sidekick</Typography>
           </TimelineContent>
-        </TimelineItem>}
-    </div>
-  );
+        </TimelineItem>
+  ); */
 }
 
 
@@ -282,6 +286,39 @@ export default function Planning() {
                       className="py-3 border border-orange-300 w-64 text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
                       required />
                   </div>
+      </div>
+
+      <div className="mt-6 max-w-6xl mx-auto md:px-1 px-3 text-center">
+        <div className="mt-6 ktq4">
+          <h3 className="pt-3 font-semibold text-lg text-white">Ajouter un exercice</h3>
+          <form onSubmit={handleSubmit} className='flex flex-col space-y-4 max-w-md w-full'>
+            <fieldset className="flex flex-row space-x-4">
+              <div className="flex flex-col w-full" text-color="white">
+                <Field color="white" className="w-full" >
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label="Select a Date"
+                      value={dayjs(selectedDate)}
+                      onChange={(newDate) => {
+                        if (newDate) {
+                          console.log(newDate.toString())
+                          let datenewDate = newDate.toDate()
+                          datenewDate.setTime(datenewDate.getTime() + datenewDate.getTimezoneOffset() * 60 * 1000);
+                          console.log(datenewDate)
+                          const adjustedDate = datenewDate.toISOString();
+                          setFormData({ ...formData, date: adjustedDate });
+                        }
+                      }}
+                      sx={{
+                        svg: { color },
+                        input: { color },
+                        label: { color },
+                        '& input': { borderColor: color },
+                        '& fieldset': { borderColor: color },
+                        '&:hover fieldset': { borderColor: color },
+                      }}
+                    />
+                  </LocalizationProvider>
                 </Field>
               </div>
               <div className="flex flex-row justify-center">
@@ -313,12 +350,20 @@ export default function Planning() {
               </ul>
             </div> */}
 
-          <div className="flex">
-            <Timeline>
+          <div className="w-1/3 p-5">
+
+            <ol className="relative border-s border-gray-200 text-start">
               {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
                 return displayTimeline(workout, index, myId);
               })}
-            </Timeline>
+            </ol>
+
+
+            {/* <Timeline>
+              {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
+                return displayTimeline(workout, index, myId);
+              })}
+            </Timeline> */}
           </div>
 
           {/* <div className="mt-4 ktq4 w-1/2">
