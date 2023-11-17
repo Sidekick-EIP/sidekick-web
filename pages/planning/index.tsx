@@ -12,6 +12,7 @@ import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineOppositeContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import Typography from '@mui/material/Typography';
 import { useForm, useFormState } from "react-hook-form";
@@ -21,6 +22,7 @@ type Workout = {
   duration: number;
   exercise: Exercise;
   burned_calories: number;
+  userId: string;
 }
 
 type Exercise = {
@@ -137,33 +139,57 @@ function displayWorkouts(workout: Workout, index: number) {
   );
 }
 
-function displayTimeline(workout: Workout, index: number) {
+function displayTimeline(workout: Workout, index: number, id: string) {
   const differenceInDays: number = computeDifferenceInDays(workout.date);
-
-  let colorClass;
-  if (differenceInDays === 0) {
-    colorClass = 'text-red-500';
-  } else if (differenceInDays === 1) {
-    colorClass = 'text-red-500';
-  } else if (differenceInDays <= 5) {
-    colorClass = 'text-yellow-500';
-  } else {
-    colorClass = 'text-green-500';
+  if (id) {
+    console.log(workout)
+    console.log(id)
   }
-
   return (
-    <TimelineItem>
-      <TimelineSeparator>
-        <TimelineDot />
-        <TimelineConnector />
-      </TimelineSeparator>
-      <TimelineContent sx={{ py: '12px', px: 2 }}>
-        <Typography variant="h6" component="span">
-          Eat
-        </Typography>
-        <Typography>Because you need strength</Typography>
-      </TimelineContent>
-    </TimelineItem>
+    <div>
+      {workout.userId == id ?
+        <TimelineItem>
+          <TimelineOppositeContent
+            sx={{ m: 'auto 0' }}
+            align="right"
+            variant="body2"
+            color="text.secondary"
+          >
+            {workout.date.split("T")[0]}
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot color="error" />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent sx={{ py: '12px', px: 2 }}>
+            <Typography variant="h6" component="span">
+              {workout.exercise.name}
+            </Typography>
+            <Typography>votre seance</Typography>
+          </TimelineContent>
+        </TimelineItem>
+        :
+        <TimelineItem>
+          <TimelineOppositeContent
+            sx={{ m: 'auto 0' }}
+            align="right"
+            variant="body2"
+            color="text.secondary"
+          >
+            {workout.date.split("T")[0]}
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot color="info" />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent sx={{ py: '12px', px: 2 }}>
+            <Typography variant="h6" component="span">
+              {workout.exercise.name}
+            </Typography>
+            <Typography>seance du sidekick</Typography>
+          </TimelineContent>
+        </TimelineItem>}
+    </div>
   );
 }
 
@@ -171,6 +197,7 @@ function displayTimeline(workout: Workout, index: number) {
 export default function Planning() {
   const session = useSession();
   const [workouts, setWorkouts] = useState([]);
+  const [myId, setMyId] = useState("");
   const [exercices, setExercices] = useState([]);
   const [sidekickWorkouts, setSidekickWorkouts] = useState([]);
   const [refreshWorkouts, setRefreshWorkouts] = useState(false);
@@ -184,6 +211,7 @@ export default function Planning() {
           setSidekickWorkouts(await fetchSidekickWorkouts(session.data.user.access_token));
           setExercices(await fetchExercices(session.data.user.access_token));
           setRefreshWorkouts(false);
+          setMyId(session.data.user.sidekick);
         } catch (error) {
           console.error("Error fetching workouts:", error);
         }
@@ -210,6 +238,8 @@ export default function Planning() {
 
   const sortedWorkouts: Workout[] = [...workouts].sort((a: Workout, b: Workout) => new Date(a.date).getTime() - new Date(b.date).getTime());
   const sortedWorkoutsSidekick: Workout[] = [...sidekickWorkouts].sort((a: Workout, b: Workout) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const fullWorkouts: Workout[] = sortedWorkouts.concat(sortedWorkoutsSidekick)
+  const sortedFullWorkouts: Workout[] = [...fullWorkouts].sort((a: Workout, b: Workout) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
     <section className="text-gray-600 body-font mt-16 mx-auto">
@@ -283,48 +313,13 @@ export default function Planning() {
               </ul>
             </div> */}
 
-          <Timeline>
-
-            {sortedWorkouts.map((workout: Workout, index: number) => {
-              return displayTimeline(workout, index);
-            })}
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-                <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent sx={{ py: '12px', px: 2 }}>
-                <Typography variant="h6" component="span">
-                  Eat
-                </Typography>
-                <Typography>Because you need strength</Typography>
-              </TimelineContent>
-            </TimelineItem>
-
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot color="primary" />
-                <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Code</TimelineContent>
-            </TimelineItem>
-
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot color="secondary" />
-                <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Sleep</TimelineContent>
-            </TimelineItem>
-
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-              </TimelineSeparator>
-              <TimelineContent>Repeat</TimelineContent>
-            </TimelineItem>
-
-          </Timeline>
+          <div className="flex">
+            <Timeline>
+              {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
+                return displayTimeline(workout, index, myId);
+              })}
+            </Timeline>
+          </div>
 
           {/* <div className="mt-4 ktq4 w-1/2">
               <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
