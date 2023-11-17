@@ -1,5 +1,5 @@
 import { Field } from "@/components/Form/Field";
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, Stepper, TextField } from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import Typography from '@mui/material/Typography';
+import { useForm, useFormState } from "react-hook-form";
 
 type Workout = {
   date: string;
@@ -169,16 +170,11 @@ function displayTimeline(workout: Workout, index: number) {
 
 export default function Planning() {
   const session = useSession();
-  const [selectedDate, setSelectedDate] = useState(Date());
   const [workouts, setWorkouts] = useState([]);
   const [exercices, setExercices] = useState([]);
   const [sidekickWorkouts, setSidekickWorkouts] = useState([]);
   const [refreshWorkouts, setRefreshWorkouts] = useState(false);
-  const [formData, setFormData] = useState({
-    date: '',
-    exercise_id: '',
-    duration: 60
-  });
+
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -196,107 +192,96 @@ export default function Planning() {
     fetchEventData();
   }, [session.data, refreshWorkouts]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const { handleSubmit, register, formState: { errors } } = useForm();
+
+  const onFormSubmit = async (data: any) => {
+    console.log(data);
+    const formattedDate: string = new Date(data.date).toISOString();
+    const body = {
+      date: formattedDate,
+      duration: parseInt(data.duration),
+      exerciseId: parseInt(data.exercise_id),
+    }
     if (session.data) {
-      await addWorkout(session.data.user.access_token, formData);
+      await addWorkout(session.data.user.access_token, body);
       setRefreshWorkouts(true);
     }
   }
 
-  const color = "#FFFFFF";
   const sortedWorkouts: Workout[] = [...workouts].sort((a: Workout, b: Workout) => new Date(a.date).getTime() - new Date(b.date).getTime());
   const sortedWorkoutsSidekick: Workout[] = [...sidekickWorkouts].sort((a: Workout, b: Workout) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
-    <section className="text-gray-600 body-font">
-
+    <section className="text-gray-600 body-font mt-16 mx-auto">
       <div className="pt-12 max-w-5xl mx-auto md:px-1 px-3">
-        <div className="ktq4 text-center">
-          <h3 className="pt-3 font-semibold text-lg text-white">La page Planning</h3>
-          <p className="pt-2 value-text text-md text-gray-200 fkrr1">
+        <div className="pt-3 text-center">
+          <h3 className="pt-3 font-semibold text-lg">La page Planning</h3>
+          <p className="pt-2 value-text text-md fkrr1">
             Planifier vos exercices et regarder ceux de votre sidekick pour rester motivé vers vos objectifs !
           </p>
         </div>
-      </div>
 
-      <div className="mt-6 max-w-5xl mx-auto md:px-1 px-3 text-center">
-        <div className="mt-6 ktq4">
-          <h3 className="pt-3 font-semibold text-lg text-white">Ajouter un exercice</h3>
-          <form onSubmit={handleSubmit} className='flex flex-col space-y-4 max-w-md w-full'>
-            <fieldset className="flex flex-row space-x-4">
-              <div className="flex flex-col w-full" text-color="white">
-                <Field color="white" className="w-full" >
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      label="Select a Date"
-                      value={dayjs(selectedDate)}
-                      onChange={(newDate) => {
-                        if (newDate) {
-                          console.log(newDate.toString())
-                          let datenewDate = newDate.toDate()
-                          datenewDate.setTime(datenewDate.getTime() + datenewDate.getTimezoneOffset() * 60 * 1000);
-                          console.log(datenewDate)
-                          const adjustedDate = datenewDate.toISOString();
-                          setFormData({ ...formData, date: adjustedDate });
-                        }
-                      }}
-                      sx={{
-                        svg: { color },
-                        input: { color },
-                        label: { color },
-                        '& input': { borderColor: color },
-                        '& fieldset': { borderColor: color },
-                        '&:hover fieldset': { borderColor: color },
-                      }}
-                    />
-                  </LocalizationProvider>
-                </Field>
+        <div className="ktq4 flex flex-col items-center justify-center text-center space-y-4">
+          <Stepper />
 
-                <Field color="white" className="w-full" >
-                  <FormControl fullWidth>
-                    <InputLabel color="white" id="sport_frequence_label">Workouts</InputLabel>
-                    <Select
-                      label="Workouts"
-                      labelId="workout_label"
-                      type="text"
-                      id="workout"
-                      defaultValue={""}
-                      placeholder="fe"
-                      color="white"
-                      variant="outlined"
-                      className="w-full"
-                      InputProps={{
-                        style: {
-                          fontStyle: 'italic',
-                          color: 'silver', // Customize the color here
-                        },
-                      }}
-                      onChange={(e) => {
-                        setFormData({ ...formData, exercise_id: e.target.value });
-                      }}
-                    >
-                      {exercices.map((exercise: Exercise) => {
-                        return <MenuItem key={exercise.id} value={exercise.id}>{exercise.name}</MenuItem>
+          <form onSubmit={handleSubmit(onFormSubmit)} className='flex flex-col max-w-3xl w-full'>
+            <h4 className="pt-3 font-semibold text-lg pb-3">Ajouter un exercice</h4>
+            <fieldset className="flex-row">
+              <div className="flex flex-row justify-center">
+                <Field className="w-64" >
+                  <div className="pt-2 text-start flex flex-col">
+                    <label className="text-sm text-orange-950">Date</label>
+                    <input
+                      {...register("date", {
+                        required: "Date is required",
+                        pattern: /\d{4}-\d{2}-\d{2}/
                       })}
-                    </Select>
-                  </FormControl>
+                      type="date"
+                      placeholder="YYYY-MM-DD"
+                      className="py-3 border border-orange-300 w-64 text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
+                      required />
+                  </div>
+                </Field>
+                <div className="w-20" />
+                <Field>
+                  <div className="pt-2 text-start flex flex-col">
+                    <label className="text-sm text-orange-950">Durée</label>
+                    <input
+                      {...register("duration", { required: "Duration is required" })}
+                      placeholder="60"
+                      className="py-3 border border-orange-300 w-64 text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
+                      required />
+                  </div>
                 </Field>
               </div>
+              <div className="flex flex-row justify-center">
+                <Field color="white" className=" w-64 flex justify-center">
+                  <div className="pt-2 text-start flex flex-col">
+                    <label className="text-sm text-orange-950">Exercice</label>
+                    <select id="countries" required placeholder="fe" {...register("exercise_id", { required: "Workout is required" })}
+                      className="py-3 border border-orange-300 w-64 text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2">
+                      {exercices.map((exercise: Exercise) => {
+                        return <option value={exercise.id}>{exercise.name}</option>
+                      })}
+                    </select>
+                  </div>
+                </Field>
+                <div className="  w-20" />
+                <Button type="submit" variant="contained" className=" mt-7 w-64 h-14 flex bg-orangePrimary">Submit</Button>
+              </div>
             </fieldset>
-            <Button type="submit" variant="contained" className="w-full bg-orangePrimary">Submit</Button>
           </form>
-        </div>
+        </div >
 
         <div className="flex">
-          <div className="mt-4 mr-4 ktq4 w-1/2">
-            <h2 className="text-lg text-white font-bold mb-2">Vos seances sportives prevues:</h2>
-            <ul className="text-left">
-              {sortedWorkouts.map((workout: Workout, index: number) => {
-                return displayWorkouts(workout, index);
-              })}
-            </ul>
-          </div>
+          {/* <div className="mt-4 mr-4 ktq4 w-1/2">
+              <h2 className="text-lg text-white font-bold mb-2">Vos seances sportives prevues:</h2>
+              <ul className="text-left">
+                {sortedWorkouts.map((workout: Workout, index: number) => {
+                  return displayWorkouts(workout, index);
+                })}
+              </ul>
+            </div> */}
 
           <Timeline>
 
@@ -341,17 +326,17 @@ export default function Planning() {
 
           </Timeline>
 
-          <div className="mt-4 ktq4 w-1/2">
-            <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
-            <ul className="text-left">
-              {sortedWorkoutsSidekick.map((workout: Workout, index) => {
-                return displayWorkouts(workout, index);
-              })}
-            </ul>
-          </div>
+          {/* <div className="mt-4 ktq4 w-1/2">
+              <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
+              <ul className="text-left">
+                {sortedWorkoutsSidekick.map((workout: Workout, index) => {
+                  return displayWorkouts(workout, index);
+                })}
+              </ul>
+            </div> */}
         </div>
 
-      </div>
-    </section>
+      </div >
+    </section >
   );
 }
