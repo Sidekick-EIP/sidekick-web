@@ -38,10 +38,10 @@ export default function Tips() {
     }
     console.log(randomSelection[0])
     return randomSelection;
-  };  
+  };
 
   async function fetchCategory(access_token: string) {
-    
+
     const response = await fetch(
       process.env.NEXT_PUBLIC_API_URL + "/user_infos/",
       {
@@ -51,13 +51,13 @@ export default function Tips() {
         },
       }
     );
-  
+
     if (!response.ok) {
       return 1;
     }
 
     const user_infos = await response.json();
-    
+
     if (user_infos.goal == "STAY_IN_SHAPE") {
       return 1;
     }
@@ -68,7 +68,7 @@ export default function Tips() {
       return 3;
     }
     return 1;
- }
+  }
 
   const getRecomendedArticles = async (allArticles: Article[], randomArticlesVar: Article[]) => {
     const recoSelection = [];
@@ -76,15 +76,15 @@ export default function Tips() {
     var user_category = 0;
     // trouver la category du user
     if (data) {
-        try {
-          user_category = await fetchCategory(
-            data.user.access_token
-          );
-        } catch (error) {
-          console.error("Error fetching category:", error);
-          return randomArticles;
-        }
+      try {
+        user_category = await fetchCategory(
+          data.user.access_token
+        );
+      } catch (error) {
+        console.error("Error fetching category:", error);
+        return randomArticles;
       }
+    }
 
     // faire un tableau d'article qui corespond au user 1=stay, 2=lose, 3= muscle
     allArticlesTmp = allArticlesTmp.filter((article) => article.category === user_category);
@@ -146,7 +146,7 @@ export default function Tips() {
   };
 
   useEffect(() => {
-    
+
     fetch('/articles.json')
       .then((response) => response.json())
       .then(async (data) => {
@@ -160,7 +160,7 @@ export default function Tips() {
 
   return (
     <section className="text-gray-600 body-font">
-      
+
       <div className="pt-12 max-w-5xl mx-auto md:px-1 px-3">
         <div className="ktq4 text-center">
           <h3 className="pt-3 font-semibold text-lg text-white">La page conseils</h3>
@@ -172,12 +172,12 @@ export default function Tips() {
       </div>
 
       <div className="pt-4 max-w-5xl mx-auto fsac4 md:px-1 px-3">
-        <button 
-        onClick={toggleArticles} 
-        className="w-64 text-white text-sm mt-4 bg-blue-500 px-3 py-2 rounded-md"
+        <button
+          onClick={toggleArticles}
+          className="w-64 text-white text-sm mt-4 bg-blue-500 px-3 py-2 rounded-md"
         >{showRandom ? "Recommended" : "Random"}</button>
-        
-        
+
+
         <input
           type="text"
           onChange={(e) => setSearchText(e.target.value)}
@@ -192,50 +192,50 @@ export default function Tips() {
 
         {showRandom
           ? RecoArticles.map((article, index) => (
-              <div className="ktq5" key={index}>
-                <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
-                <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
-                <div>
-                  <a href={article.link} className="text-blue-500 text-sm">Read More</a>
+            <div className="ktq5" key={index}>
+              <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
+              <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
+              <div>
+                <a href={article.link} className="text-blue-500 text-sm">Read More</a>
                 {article.liked ?
                   <button className="text-blue-500 text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, false)
                   }} >
-                     <FontAwesomeIcon icon={faHeart} /> Liked !
+                    <FontAwesomeIcon icon={faHeart} /> Liked !
                   </button>
-                     : 
+                  :
                   <button className="text-white text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, true)
                   }} >
-                     <FontAwesomeIcon icon={faHeart} /> add like
+                    <FontAwesomeIcon icon={faHeart} /> add like
                   </button>
-                  }
-                </div>
+                }
               </div>
-            ))
+            </div>
+          ))
           : filteredArticles.map((article, index) => (
-              <div className="ktq5" key={index}>
-                <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
-                <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
-                <div>
-                  <a href={article.link} className="text-blue-500 text-sm mt-4">Read More</a>
-                  
-                  {article.liked ?
+            <div className="ktq5" key={index}>
+              <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
+              <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
+              <div>
+                <a href={article.link} className="text-blue-500 text-sm mt-4">Read More</a>
+
+                {article.liked ?
                   <button className="text-blue-500 text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, false)
                   }} >
-                     <FontAwesomeIcon icon={faHeart} /> Liked !
+                    <FontAwesomeIcon icon={faHeart} /> Liked !
                   </button>
-                     : 
+                  :
                   <button className="text-white text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, true)
                   }} >
-                     <FontAwesomeIcon icon={faHeart} /> add like
+                    <FontAwesomeIcon icon={faHeart} /> add like
                   </button>
-                  }
-                </div>
+                }
               </div>
-            ))}
+            </div>
+          ))}
       </div>
     </section>
   );
