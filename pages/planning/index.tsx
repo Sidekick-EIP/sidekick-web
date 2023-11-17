@@ -286,39 +286,6 @@ export default function Planning() {
                       className="py-3 border border-orange-300 w-64 text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
                       required />
                   </div>
-      </div>
-
-      <div className="mt-6 max-w-6xl mx-auto md:px-1 px-3 text-center">
-        <div className="mt-6 ktq4">
-          <h3 className="pt-3 font-semibold text-lg text-white">Ajouter un exercice</h3>
-          <form onSubmit={handleSubmit} className='flex flex-col space-y-4 max-w-md w-full'>
-            <fieldset className="flex flex-row space-x-4">
-              <div className="flex flex-col w-full" text-color="white">
-                <Field color="white" className="w-full" >
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      label="Select a Date"
-                      value={dayjs(selectedDate)}
-                      onChange={(newDate) => {
-                        if (newDate) {
-                          console.log(newDate.toString())
-                          let datenewDate = newDate.toDate()
-                          datenewDate.setTime(datenewDate.getTime() + datenewDate.getTimezoneOffset() * 60 * 1000);
-                          console.log(datenewDate)
-                          const adjustedDate = datenewDate.toISOString();
-                          setFormData({ ...formData, date: adjustedDate });
-                        }
-                      }}
-                      sx={{
-                        svg: { color },
-                        input: { color },
-                        label: { color },
-                        '& input': { borderColor: color },
-                        '& fieldset': { borderColor: color },
-                        '&:hover fieldset': { borderColor: color },
-                      }}
-                    />
-                  </LocalizationProvider>
                 </Field>
               </div>
               <div className="flex flex-row justify-center">
@@ -340,7 +307,7 @@ export default function Planning() {
           </form>
         </div >
 
-        <div className="flex">
+        <div className="flex justify-center align p-5">
           {/* <div className="mt-4 mr-4 ktq4 w-1/2">
               <h2 className="text-lg text-white font-bold mb-2">Vos seances sportives prevues:</h2>
               <ul className="text-left">
@@ -350,7 +317,6 @@ export default function Planning() {
               </ul>
             </div> */}
 
-          <div className="w-1/3 p-5">
 
             <ol className="relative border-s border-gray-200 text-start">
               {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
@@ -364,7 +330,6 @@ export default function Planning() {
                 return displayTimeline(workout, index, myId);
               })}
             </Timeline> */}
-          </div>
 
           {/* <div className="mt-4 ktq4 w-1/2">
               <h2 className="text-lg text-white font-bold mb-2">Les seances sportives prevues par votre Sidekick:</h2>
