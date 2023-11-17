@@ -133,7 +133,7 @@ function displayWorkouts(workout: Workout, index: number) {
 
   return (
     <li key={index} className={colorClass}>
-      <strong>{workout.date}:</strong> ({workout.exercise.name})
+      <strong>{workout.date.split("T")[0]}:</strong> ({workout.exercise.name})
     </li>
   );
 }
