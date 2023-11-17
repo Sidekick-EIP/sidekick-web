@@ -7,14 +7,14 @@ const Stepper = () => {
   const getLinkClass = (path: string) => {
     console.log(path === pathname);
     return (
-      "text-md text-25 font-semibold " + (path === pathname ? "text-orange-400" : "text-white")
+      "text-md text-25 font-semibold " + (path === pathname ? "text-orange-400" : "text-gray-300")
     );
   };
 
   return (
-    <div className="flex items-center justify-center space-x-2">
-      <Link href={"/signup"} className={getLinkClass("/signup")}>Email</Link>
-      <Link href={"/signup/infos"} className={getLinkClass("/signup/infos")}>Infos</Link>
+    <div className="flex items-center justify-center space-x-10">
+      <Link href={"/signup"} className={getLinkClass("/signup")}>Compte</Link>
+      <Link href={"/signup/infos"} className={getLinkClass("/signup/infos")}>Infos personnel</Link>
       <Link href={"/signup/sport"} className={getLinkClass("/signup/sport")}>Sport</Link>
     </div>
   );

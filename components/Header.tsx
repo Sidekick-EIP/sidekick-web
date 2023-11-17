@@ -62,8 +62,24 @@ function Header() {
         setAnchorElNav(null);
     };
 
+    const [scrolling, setScrolling] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            setScrolling(scrollTop > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <AppBar position="sticky" color="transparent" elevation={0} className='p-4'>
+        <AppBar position="fixed" elevation={0} color={'primary'}
+                className={`p-4 ${scrolling ? 'shadow' : ''}`}>
             <Container maxWidth="lg">
                 <Toolbar disableGutters className='flex justify-between'>
                     <Box>
@@ -106,7 +122,7 @@ function Header() {
                                     <>
                                         {pagesAuth.map((page) => (
                                             <Link href={page.href} key={page.href} onClick={page.onClick ?? undefined}>
-                                                <MenuItem onClick={handleCloseNavMenu}>
+                                                <MenuItem onClick={handleCloseNavMenu} sx={{textColor: 'white'}}>
                                                     <Typography textAlign="center">{page.label}</Typography>
                                                 </MenuItem>
                                             </Link>
@@ -116,7 +132,7 @@ function Header() {
                                     <>
                                         {pages.map((page) => (
                                             <Link href={page.href} key={page.href}>
-                                                <MenuItem onClick={handleCloseNavMenu}>
+                                                <MenuItem onClick={handleCloseNavMenu} sx={{textColor: 'white'}}>
                                                     <Typography textAlign="center">{page.label}</Typography>
                                                 </MenuItem>
                                             </Link>
@@ -130,7 +146,7 @@ function Header() {
                             <Box className="space-x-8" sx={{flexGrow: 0}}>
                                 {pagesAuth.map((page) => (
                                     <Link href={page.href} key={page.label} onClick={page.onClick ?? undefined}>
-                                        <Button variant="text" color="primary">
+                                        <Button variant="text" color="primary" className="hover:underline">
                                             {page.label}
                                         </Button>
                                     </Link>
@@ -139,24 +155,24 @@ function Header() {
                         ) : (
                             <Box className="space-x-8" sx={{flexGrow: 0}}>
                                 <Link href="/reset_password">
-                                    <Button variant="text" color="primary">
-                                        Reset password
+                                    <Button variant="text">
+                                        <p style={{color: 'white'}}>Reset password</p>
                                     </Button>
                                 </Link>
                                 <Link href="/beta">
                                     <Button variant="text" color="primary">
-                                        Beta
+                                        <p style={{color: 'white'}}>Beta</p>
                                     </Button>
                                 </Link>
                                 <Link href="/signin">
                                     <Button variant="text" color="primary">
-                                        Log in
+                                        <p style={{color: 'white'}}>Log in</p>
                                     </Button>
                                 </Link>
                                 <Link href="/signup">
-                                    <Button variant="contained" className="bg-orangePrimary">
-                                        Sign up
-                                    </Button>
+                                    <button className="bg-orangePrimary hover:underline text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                        <p style={{color: 'white'}}>Sign up</p>
+                                    </button>
                                 </Link>
                             </Box>
                         )
