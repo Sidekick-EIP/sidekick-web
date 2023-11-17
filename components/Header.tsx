@@ -146,9 +146,15 @@ function Header() {
                             <Box className="space-x-8" sx={{flexGrow: 0}}>
                                 {pagesAuth.map((page) => (
                                     <Link href={page.href} key={page.label} onClick={page.onClick ?? undefined}>
-                                        <Button variant="text" color="primary" className="hover:underline">
-                                            {page.label}
-                                        </Button>
+                                        {page.label === 'Logout' ? (
+                                            <button className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                                <p style={{ color: 'black' }}>logout</p>
+                                            </button>
+                                        ) : (
+                                            <Button variant="text" color="primary" className="hover:underline">
+                                                <p style={{ color: 'white' }}>{page.label}</p>
+                                            </Button>
+                                        )}
                                     </Link>
                                 ))}
                             </Box>

@@ -18,6 +18,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials as { email: string, password: string };
 
         console.log(email, password);
+        console.log(process.env.NEXT_PUBLIC_API_URL + "/auth/login");
         try {
           const login = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/login", {
             method: "POST",
