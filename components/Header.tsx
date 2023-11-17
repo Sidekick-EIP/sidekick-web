@@ -170,8 +170,8 @@ function Header() {
                                     </Button>
                                 </Link>
                                 <Link href="/signup">
-                                    <button className="bg-orangePrimary hover:underline text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                        <p style={{color: 'white'}}>Sign up</p>
+                                    <button className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                        <p style={{color: 'black'}}>Sign up</p>
                                     </button>
                                 </Link>
                             </Box>
