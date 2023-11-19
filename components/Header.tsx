@@ -30,6 +30,9 @@ const pages = [{
 }];
 
 const pagesAuth = [{
+    label: 'Support',
+    href: '/support',
+}, {
     label: 'Profile',
     href: '/profile',
 }, {

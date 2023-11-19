@@ -18,6 +18,7 @@ import {Session} from "next-auth";
 import {useSession} from "next-auth/react";
 import MenuItem from "@mui/material/MenuItem";
 import {Activities} from "@/pages/profile";
+import Typography from "@mui/material/Typography";
 
 interface DialogEditUserProps {
     open: boolean
@@ -25,6 +26,39 @@ interface DialogEditUserProps {
     user: any
     type: 'PROFILE' | 'SPORT'
 }
+
+const sports = [
+    Activities.RUNNING,
+    Activities.CYCLING,
+    Activities.WEIGHTLIFTING,
+    Activities.SWIMMING,
+    Activities.MARTIAL_ARTS,
+    Activities.YOGA,
+    Activities.PILATES,
+    Activities.DANCING,
+    Activities.BOXING,
+    Activities.HIKING,
+    Activities.ROCK_CLIMBING,
+    Activities.TENNIS,
+    Activities.GOLF,
+    Activities.BASKETBALL,
+    Activities.SOCCER,
+    Activities.BASEBALL,
+    Activities.RUGBY,
+    Activities.VOLLEYBALL,
+    Activities.SQUASH,
+    Activities.BADMINTON,
+    Activities.TABLE_TENNIS,
+    Activities.SKIING,
+    Activities.SNOWBOARDING,
+    Activities.ROWING,
+    Activities.TRIATHLON,
+    Activities.SKATING,
+    Activities.HORSE_RIDING,
+    Activities.CROSSFIT,
+    Activities.GYMNASTICS,
+    Activities.SURFING,
+]
 
 export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: DialogEditUserProps) {
     const {data}: { data: Session | null } = useSession();
@@ -188,46 +222,18 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
                     </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                    <FormControl variant="outlined" fullWidth>
-                        <InputLabel>Sports</InputLabel>
-                        <Select
-                            multiple
-                            value={activities}
-                            onChange={(event: any) => setActivities(event.target.value)}
-                            label="Sports"
-                        >
-                            <MenuItem value={Activities.RUNNING}>{Activities.RUNNING}</MenuItem>
-                            <MenuItem value={Activities.CYCLING}>{Activities.CYCLING}</MenuItem>
-                            <MenuItem value={Activities.WEIGHTLIFTING}>{Activities.WEIGHTLIFTING}</MenuItem>
-                            <MenuItem value={Activities.SWIMMING}>{Activities.SWIMMING}</MenuItem>
-                            <MenuItem value={Activities.MARTIAL_ARTS}>{Activities.MARTIAL_ARTS}</MenuItem>
-                            <MenuItem value={Activities.YOGA}>{Activities.YOGA}</MenuItem>
-                            <MenuItem value={Activities.PILATES}>{Activities.PILATES}</MenuItem>
-                            <MenuItem value={Activities.DANCING}>{Activities.DANCING}</MenuItem>
-                            <MenuItem value={Activities.BOXING}>{Activities.BOXING}</MenuItem>
-                            <MenuItem value={Activities.HIKING}>{Activities.HIKING}</MenuItem>
-                            <MenuItem value={Activities.ROCK_CLIMBING}>{Activities.ROCK_CLIMBING}</MenuItem>
-                            <MenuItem value={Activities.TENNIS}>{Activities.TENNIS}</MenuItem>
-                            <MenuItem value={Activities.GOLF}>{Activities.GOLF}</MenuItem>
-                            <MenuItem value={Activities.BASKETBALL}>{Activities.BASKETBALL}</MenuItem>
-                            <MenuItem value={Activities.SOCCER}>{Activities.SOCCER}</MenuItem>
-                            <MenuItem value={Activities.BASEBALL}>{Activities.BASEBALL}</MenuItem>
-                            <MenuItem value={Activities.RUGBY}>{Activities.RUGBY}</MenuItem>
-                            <MenuItem value={Activities.VOLLEYBALL}>{Activities.VOLLEYBALL}</MenuItem>
-                            <MenuItem value={Activities.SQUASH}>{Activities.SQUASH}</MenuItem>
-                            <MenuItem value={Activities.BADMINTON}>{Activities.BADMINTON}</MenuItem>
-                            <MenuItem value={Activities.TABLE_TENNIS}>{Activities.TABLE_TENNIS}</MenuItem>
-                            <MenuItem value={Activities.SKIING}>{Activities.SKIING}</MenuItem>
-                            <MenuItem value={Activities.SNOWBOARDING}>{Activities.SNOWBOARDING}</MenuItem>
-                            <MenuItem value={Activities.ROWING}>{Activities.ROWING}</MenuItem>
-                            <MenuItem value={Activities.TRIATHLON}>{Activities.TRIATHLON}</MenuItem>
-                            <MenuItem value={Activities.SKATING}>{Activities.SKATING}</MenuItem>
-                            <MenuItem value={Activities.HORSE_RIDING}>{Activities.HORSE_RIDING}</MenuItem>
-                            <MenuItem value={Activities.CROSSFIT}>{Activities.CROSSFIT}</MenuItem>
-                            <MenuItem value={Activities.GYMNASTICS}>{Activities.GYMNASTICS}</MenuItem>
-                            <MenuItem value={Activities.SURFING}>{Activities.SURFING}</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <Typography variant={"body1"}>Activités:</Typography>
+                </Grid>
+                <Grid container item xs={12} spacing={2}>
+                    {sports.map((item: any) => <Grid item xs={4}>
+                        <Button onClick={() => {
+                            if (activities.includes(item)) {
+                                setActivities(activities.filter((activity: string) => activity !== item))
+                            } else {
+                                setActivities([...activities, item])
+                            }
+                        }} variant={"outlined"} fullWidth color={activities.includes(item) ? 'primary' : 'secondary'} sx={{p: 2}}>{item}</Button>
+                    </Grid>)}
                 </Grid>
 
             </Grid>}
