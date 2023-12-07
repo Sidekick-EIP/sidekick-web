@@ -58,8 +58,7 @@ export default function Planning() {
 
                 <div className="mt-2 text-start w-full">
                     <label className="text-sm text-orange-950">Code</label>
-                    <input type="email"
-                           onChange={e => setCode(e.target.value)}
+                    <input onChange={e => setCode(e.target.value)}
                            value={code}
                            className="py-3 ps-11 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
                            placeholder="123456"
