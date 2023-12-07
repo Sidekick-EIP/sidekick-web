@@ -18,33 +18,35 @@ export default function Support() {
     const router = useRouter();
 
     useEffect(() => {
-        if (!isToReload)
-            return;
-        (async () => {
-            try {
-                setIsLoading(true)
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/tickets?cursor=0`, {
-                    headers: {
-                        Authorization: `Bearer ${data?.user.access_token}`
+        if (data) {
+            if (!isToReload)
+                return;
+            (async () => {
+                try {
+                    setIsLoading(true)
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/tickets?cursor=0`, {
+                        headers: {
+                            Authorization: `Bearer ${data?.user.access_token}`
+                        }
+                    });
+                    console.log(response.data);
+                    setDataSupports(response.data);
+                    setIsLoading(false)
+                    setIsToReload(false)
+                } catch (err: any) {
+                    setIsLoading(false)
+                    setIsToReload(false)
+                    if (err.response) {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        useAlert(err.response.data.message, "error");
+                    } else {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        useAlert(err.message, "error");
                     }
-                });
-                console.log(response.data);
-                setDataSupports(response.data);
-                setIsLoading(false)
-                setIsToReload(false)
-            } catch (err: any) {
-                setIsLoading(false)
-                setIsToReload(false)
-                if (err.response) {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    useAlert(err.response.data.message, "error");
-                } else {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    useAlert(err.message, "error");
                 }
-            }
-        })();
-    }, [isToReload]);
+            })();
+        }
+    }, [data, isToReload]);
 
     function handleCloseDialog(isToReload: boolean) {
         setOpenDialog(false);
