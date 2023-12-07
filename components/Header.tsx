@@ -30,6 +30,9 @@ const pages = [{
 }];
 
 const pagesAuth = [{
+    label: 'BackOffice',
+    href: '/backoffice/support',
+}, {
     label: 'Support',
     href: '/support',
 }, {

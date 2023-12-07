@@ -131,6 +131,7 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
         }
     }
 
+    // @ts-ignore
     return <Dialog component={'form'} open={open} onClose={() => handleClose(false)} onSubmit={handleSubmit}
                    maxWidth={"sm"}
                    fullWidth>
