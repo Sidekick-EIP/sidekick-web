@@ -23,30 +23,32 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
     const useAlert: any = useSnackBar();
 
     useEffect(() => {
-        if (idSupport === 0) return;
-        (async () => {
-            try {
-                setIsLoading(true)
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/tickets/${idSupport}`, {
-                    headers: {
-                        Authorization: `Bearer ${data?.user.access_token}`
+        if (data) {
+            if (idSupport === 0) return;
+            (async () => {
+                try {
+                    setIsLoading(true)
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/tickets/${idSupport}`, {
+                        headers: {
+                            Authorization: `Bearer ${data?.user.access_token}`
+                        }
+                    });
+                    console.log(response.data);
+                    setDataSupports(response.data);
+                    setIsLoading(false)
+                } catch (err: any) {
+                    setIsLoading(false)
+                    if (err.response) {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        useAlert(err.response.data.message, "error");
+                    } else {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        useAlert(err.message, "error");
                     }
-                });
-                console.log(response.data);
-                setDataSupports(response.data);
-                setIsLoading(false)
-            } catch (err: any) {
-                setIsLoading(false)
-                if (err.response) {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    useAlert(err.response.data.message, "error");
-                } else {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    useAlert(err.message, "error");
                 }
-            }
-        })();
-    }, [idSupport]);
+            })();
+        }
+    }, [data, idSupport]);
 
     async function handleCloseTickets() {
         try {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,11 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 import Link from "next/link";
 import Image from 'next/image';
 // @ts-ignore
-import {signOut, useSession} from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const pages = [{
     label: 'Reset password',
@@ -54,7 +54,7 @@ const pagesAuth = [{
 }];
 
 function Header() {
-    const {data: session} = useSession();
+    const { data: session } = useSession();
     //console.log("header", session);
     const mobile = useMediaQuery('(max-width:639px)');
 
@@ -85,17 +85,17 @@ function Header() {
 
     return (
         <AppBar position="fixed" elevation={0} color={'primary'}
-                className={`p-4 ${scrolling ? 'shadow' : ''}`}>
+            className={`p-4 ${scrolling ? 'shadow' : ''}`}>
             <Container maxWidth="lg">
                 <Toolbar disableGutters className='flex justify-between'>
                     <Box>
                         <Link href="/">
-                            <Image src="/logo_transparent.png" alt="Sidekick" width={32} height={32}/>
+                            <Image src="/logo_transparent.png" alt="Sidekick" width={32} height={32} />
                         </Link>
                     </Box>
 
                     {mobile ? (
-                        <Box sx={{flexGrow: 0}}>
+                        <Box sx={{ flexGrow: 0 }}>
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -104,7 +104,7 @@ function Header() {
                                 onClick={handleOpenNavMenu}
                                 color="inherit"
                             >
-                                <MenuIcon/>
+                                <MenuIcon />
                             </IconButton>
                             <Menu
                                 id="menu-appbar"
@@ -121,14 +121,14 @@ function Header() {
                                 open={Boolean(anchorElNav)}
                                 onClose={handleCloseNavMenu}
                                 sx={{
-                                    display: {xs: 'block', md: 'none'},
+                                    display: { xs: 'block', md: 'none' },
                                 }}
                             >
                                 {session ?
                                     <>
                                         {pagesAuth.map((page) => (
                                             <Link href={page.href} key={page.href} onClick={page.onClick ?? undefined}>
-                                                <MenuItem onClick={handleCloseNavMenu} sx={{textColor: 'white'}}>
+                                                <MenuItem onClick={handleCloseNavMenu} sx={{ textColor: 'white' }}>
                                                     <Typography textAlign="center">{page.label}</Typography>
                                                 </MenuItem>
                                             </Link>
@@ -138,7 +138,7 @@ function Header() {
                                     <>
                                         {pages.map((page) => (
                                             <Link href={page.href} key={page.href}>
-                                                <MenuItem onClick={handleCloseNavMenu} sx={{textColor: 'white'}}>
+                                                <MenuItem onClick={handleCloseNavMenu} sx={{ textColor: 'white' }}>
                                                     <Typography textAlign="center">{page.label}</Typography>
                                                 </MenuItem>
                                             </Link>
@@ -149,7 +149,7 @@ function Header() {
                         </Box>
                     ) : (
                         session ? (
-                            <Box className="space-x-8" sx={{flexGrow: 0}}>
+                            <Box className="space-x-8" sx={{ flexGrow: 0 }}>
                                 {pagesAuth.map((page) => (
                                     <Link href={page.href} key={page.label} onClick={page.onClick ?? undefined}>
                                         {page.label === 'Logout' ? (
@@ -165,25 +165,25 @@ function Header() {
                                 ))}
                             </Box>
                         ) : (
-                            <Box className="space-x-8" sx={{flexGrow: 0}}>
+                            <Box className="space-x-8" sx={{ flexGrow: 0 }}>
                                 <Link href="/reset_password">
                                     <Button variant="text">
-                                        <p style={{color: 'white'}}>Reset password</p>
+                                        <p style={{ color: 'white' }}>Reset password</p>
                                     </Button>
                                 </Link>
                                 <Link href="/beta">
                                     <Button variant="text" color="primary">
-                                        <p style={{color: 'white'}}>Beta</p>
+                                        <p style={{ color: 'white' }}>Beta</p>
                                     </Button>
                                 </Link>
                                 <Link href="/signin">
                                     <Button variant="text" color="primary">
-                                        <p style={{color: 'white'}}>Log in</p>
+                                        <p style={{ color: 'white' }}>Log in</p>
                                     </Button>
                                 </Link>
                                 <Link href="/signup">
                                     <button className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                        <p style={{color: 'black'}}>Sign up</p>
+                                        <p style={{ color: 'black' }}>Sign up</p>
                                     </button>
                                 </Link>
                             </Box>
