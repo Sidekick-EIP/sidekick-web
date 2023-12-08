@@ -1,17 +1,28 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import {useSnackBar} from "@/components/SnackBar";
+import { useSnackBar } from "@/components/SnackBar";
 import io from 'socket.io-client';
-import {Session} from "next-auth";
-import {useSession} from "next-auth/react";
+import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
+import { Field } from "@/components/Form/Field";
+import { Button, FormControl, InputLabel, MenuItem, Select, Stepper, TextField } from "@mui/material";
 
-export default function Chat(): JSX.Element {
-    const {data}: { data: Session | null } = useSession();
-    const [messages, setMessages] = useState<any>(null);
+
+
+import 'react-chat-elements/dist/main.css';
+import { MessageBox, ChatList } from 'react-chat-elements';
+
+
+export default function Chat() {
+    const { data }: { data: Session | null } = useSession();
+    //const [messages, setMessages] = useState<any>(null);
+    const [messages, setMessages] = useState<any[]>([]);
     const [userIsWriting, setUserIsWriting] = useState<boolean>(false);
     const [socket, setSocket] = useState<any>(null);
     const useAlert: any = useSnackBar();
+    const [messageElementsfull, setmessageElementsfull] = useState([]);
+    var messageElements = [];
 
     useEffect(() => {
         (async () => {
@@ -23,6 +34,20 @@ export default function Chat(): JSX.Element {
                 });
                 console.log(response.data);
                 setMessages(response.data);
+                for (let i = 0; i < response.data.messages.length; i++) {
+                    const message = response.data.messages[i];
+                    console.log(message)
+                    messageElements.push(
+                        <MessageBox
+                            position={message.senderId === 1 ? "left" : "right"}
+                            type={"text"}
+                            title={message.senderId === 1 ? "Jules" : "Moi"}
+                            text={message.content}
+                        />
+                    );
+                }
+                setmessageElementsfull(messageElements);
+
             } catch (err: any) {
                 if (err.response) {
                     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -74,7 +99,8 @@ export default function Chat(): JSX.Element {
         }
 
         return () => {
-            socket.disconnect();
+            console.log("try to disconect, but deactivated rn");
+            //socket.disconnect();
         };
     }, []);
 
@@ -127,8 +153,74 @@ export default function Chat(): JSX.Element {
         }
     }
 
-    return <div>
-        {JSON.stringify(messages)}
-    </div>
+
+    function ChatForm() {
+        const [messageInput, setMessageInput] = useState('');
+
+        const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            setMessageInput(e.target.value);
+        };
+
+        const handleSubmit = (e: React.FormEvent) => {
+            e.preventDefault();
+            sendMessage(messageInput);
+            setMessageInput('');
+        };
+
+        return (
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    value={messageInput}
+                    onChange={handleMessageChange}
+                    placeholder='Type your message...'
+                />
+                <button type='submit'>Send</button>
+            </form>
+        );
+    }
+
+
+    return (
+        <div>
+            <section className="text-gray-600 body-font">
+                <div className="pt-12 max-w-5xl mx-auto md:px-1 px-3">
+                    <div className="ktqChat text-center" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div>
+                            <img src="../Theo.png" alt="Photo de profil" style={{ width: '30px', height: '30px', borderRadius: '50%' }} />
+                        </div>
+                        <div>Jules</div>
+                        <div style={{ color: 'red' }}>Offline</div>
+                    </div>
+
+                    <div className="ktq4 text-center ">
+
+                        {messageElementsfull}
+
+                    </div>
+
+
+                    <div className="ktq4 text-center flex items-center">
+
+                        <Field >
+                            <div className="pt-2 text-start flex flex-col max-w-5x">
+                                <input
+                                    placeholder="Enter your message..."
+                                    className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
+                                    required
+                                />
+                            </div>
+                        </Field>
+                        <div>
+                            <Button type="submit" variant="contained" className="ml-4 h-14 flex bg-orangePrimary">
+                                Send
+                            </Button>
+                        </div>
+                    </div>
+
+                </div>
+            </section >
+        </div >
+    );
 
 }

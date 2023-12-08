@@ -65,7 +65,6 @@ async function fetchSidekickWorkouts(access_token: string) {
   if (!response.ok) {
     throw new Error("Unable to retrieve events");
   }
-
   return await response.json();
 }
 
@@ -318,14 +317,14 @@ export default function Planning() {
             </div> */}
 
 
-            <ol className="relative border-s border-gray-200 text-start">
-              {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
-                return displayTimeline(workout, index, myId);
-              })}
-            </ol>
+          <ol className="relative border-s border-gray-200 text-start">
+            {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
+              return displayTimeline(workout, index, myId);
+            })}
+          </ol>
 
 
-            {/* <Timeline>
+          {/* <Timeline>
               {sortedFullWorkouts.map((workout: Workout, index: number, session) => {
                 return displayTimeline(workout, index, myId);
               })}

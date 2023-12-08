@@ -5,7 +5,8 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; /* Fond blanc en mode clair *//*
+  --background-end-rgb: 255, 255, 255; /* Fond blanc en mode clair */
+/*
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,8 +51,8 @@ a {
 }
 
 .gradient {
-  background: rgb(225,102,59);
-  background: linear-gradient(164deg, #F25D29 50%, rgba(236,139,83,1) 75%);
+  background: rgb(225, 102, 59);
+  background: linear-gradient(164deg, #F25D29 50%, rgba(236, 139, 83, 1) 75%);
 }
 
 .planning-button {
@@ -70,10 +71,10 @@ a {
   font-family: "Lulo Clean W01 One";
   src: url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.eot");
   src: url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.eot?#iefix")format("embedded-opentype"),
-  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.woff2")format("woff2"),
-  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.woff")format("woff"),
-  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.ttf")format("truetype"),
-  url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.svg#Lulo Clean W01 One")format("svg");
+    url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/116d187134420de5733c7c45bbc80c46.svg#Lulo Clean W01 One")format("svg");
 }
 
 .Avenir {
@@ -149,6 +150,12 @@ a {
 .ktq4 {
   padding: 2rem;
   border-radius: 10px;
+}
+
+.ktqChat {
+  padding: 2rem;
+  border-radius: 10px;
+  margin-top: 50px;
 }
 
 .ktq5 {
