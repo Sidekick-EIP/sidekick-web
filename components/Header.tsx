@@ -49,7 +49,7 @@ const pagesAuth = [{
     href: '/chat',
 }, {
     label: 'Logout',
-    href: '#',
+    href: '/',
     onClick: async () => signOut()
 }];
 
@@ -126,13 +126,26 @@ function Header() {
                             >
                                 {session ?
                                     <>
-                                        {pagesAuth.map((page) => (
-                                            <Link href={page.href} key={page.href} onClick={page.onClick ?? undefined}>
+                                        {pagesAuth.map((page) => {
+                                            if (page.label === 'BackOffice') {
+                                                if (session.user.admin)
+                                                    return <Link href={page.href} key={page.href}
+                                                                 onClick={page.onClick ?? undefined}>
+                                                        <MenuItem onClick={handleCloseNavMenu}
+                                                                  sx={{textColor: 'white'}}>
+                                                            <Typography textAlign="center">{page.label}</Typography>
+                                                        </MenuItem>
+                                                    </Link>
+                                                else
+                                                    return null
+                                            }
+                                            return <Link href={page.href} key={page.href}
+                                                         onClick={page.onClick ?? undefined}>
                                                 <MenuItem onClick={handleCloseNavMenu} sx={{textColor: 'white'}}>
                                                     <Typography textAlign="center">{page.label}</Typography>
                                                 </MenuItem>
                                             </Link>
-                                        ))}
+                                        })}
                                     </>
                                     :
                                     <>
@@ -150,19 +163,32 @@ function Header() {
                     ) : (
                         session ? (
                             <Box className="space-x-8" sx={{flexGrow: 0}}>
-                                {pagesAuth.map((page) => (
-                                    <Link href={page.href} key={page.label} onClick={page.onClick ?? undefined}>
+                                {pagesAuth.map((page) => {
+                                    if (page.label === 'BackOffice') {
+                                        if (session.user.admin)
+                                            return <Link href={page.href} key={page.href}
+                                                         onClick={page.onClick ?? undefined}>
+                                                <Button variant="text" color="primary" className="hover:underline">
+                                                    <p style={{color: 'white'}}>{page.label}</p>
+                                                </Button>
+                                            </Link>
+                                        else
+                                            return null
+                                    }
+                                    return <Link href={page.href} key={page.label} onClick={page.onClick ?? undefined}>
                                         {page.label === 'Logout' ? (
-                                            <button className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                                <p style={{ color: 'black' }}>logout</p>
+                                            <button
+                                                className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                                <p style={{color: 'black'}}>logout</p>
                                             </button>
                                         ) : (
                                             <Button variant="text" color="primary" className="hover:underline">
-                                                <p style={{ color: 'white' }}>{page.label}</p>
+                                                <p style={{color: 'white'}}>{page.label}</p>
                                             </Button>
                                         )}
                                     </Link>
-                                ))}
+
+                                })}
                             </Box>
                         ) : (
                             <Box className="space-x-8" sx={{flexGrow: 0}}>
@@ -182,7 +208,8 @@ function Header() {
                                     </Button>
                                 </Link>
                                 <Link href="/signup">
-                                    <button className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                    <button
+                                        className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                                         <p style={{color: 'black'}}>Sign up</p>
                                     </button>
                                 </Link>

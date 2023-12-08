@@ -51,7 +51,7 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
     async function handleCloseTickets() {
         try {
             setIsLoading(true)
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/tickets/close`, {
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/tickets/${idSupport}/close`, {
                 id: idSupport
             }, {
                 headers: {
