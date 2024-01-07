@@ -53,10 +53,10 @@ export default function Main() {
             </div>
 
             <div
-                className="pt-10 px-16  max-w-7xl container text-center flex flex-row items-center justify-center mb-20">
-                <div className="w-full md:w-1/2 py-6 text-center flex flex-row justify-center">
-                    {typePrez === 'nutrition' && <img className="w-full md:w-4/5 z-50" src="./nutrition.png"/>}
-                    {typePrez !== 'nutrition' && <img className="w-full md:w-4/5 z-50" src="./main-picture.png"/>}
+                className="pt-10 px-16 max-w-7xl container text-center flex flex-row items-center justify-center mb-20">
+                <div className="w-full md:w-1/2 text-center flex flex-row justify-center">
+                    {typePrez === 'nutrition' && <img alt={"nut"} className="w-full" src="./nutrition.png"/>}
+                    {typePrez !== 'nutrition' && <img alt={"nutno"} className="w-full" src="./main-picture.png"/>}
                 </div>
                 <div className="md:w-1/2 md:text-left">
                     <button type="button" onClick={() => setTypePrez('nutrition')}
@@ -66,8 +66,7 @@ export default function Main() {
                         Nutrition
                     </button>
                     <p className={"text-xl px-2.5 text-orange-950 fkrr1 mb-4"}>
-                        Tempus fugit, carpe diem. In omni via, in omnibus locis, in omni tempore, ama et vive. Fortuna
-                        audaces iuvat. Nil desperandum, omnia vincit amor. Veritas vos liberabit. Per aspera ad astra.
+                        Le module de nutrition de cette application web sportive est comme un chef personnel virtuel pour ton bien-être physique. Il te permet de suivre ton alimentation de près, en enregistrant ce que tu manges et en fournissant des analyses nutritionnelles. Que tu cherches à perdre du poids, à gagner en muscle ou simplement à adopter une alimentation plus équilibrée, ce module t'accompagne avec des conseils personnalisés et des recommandations adaptées à tes objectifs. Avec une interface conviviale, tu peux planifier tes repas, explorer des recettes saines, et rester motivé pour atteindre tes meilleurs résultats. C'est comme avoir un nutritionniste dans ta poche !
                     </p>
                     <button type="button" onClick={() => setTypePrez('communication')}
                             className={`flex flex-row justify-start items-center py-1 px-2.5 text-xl font-bold p-1 ${typePrez === 'communication' ? "bg-[#F25D29] text-white" : "text-[#F25D29] bg-white"} rounded-full hover:bg-[#F25D29] hover:text-white`}>
@@ -77,8 +76,7 @@ export default function Main() {
                         Communication
                     </button>
                     <p className={"text-xl px-2.5 text-orange-950 fkrr1 mb-4"}>
-                        Tempus fugit, carpe diem. In omni via, in omnibus locis, in omni tempore, ama et vive. Fortuna
-                        audaces iuvat. Nil desperandum, omnia vincit amor. Veritas vos liberabit. Per aspera ad astra.
+                        Le module de communication (chat) de cette appli sportive est là pour te connecter et t'inspirer. Imagine un espace où tu peux échanger des conseils, des succès et même quelques défis amicaux avec d'autres passionnés de sport. Que tu cherches un partenaire d'entraînement, des astuces de motivation ou simplement à partager tes exploits, ce chat te permet de tisser des liens au sein d'une communauté qui partage ta passion. C'est comme avoir une salle de sport virtuelle pleine d'amis pour te soutenir à chaque étape de ton parcours sportif.
                     </p>
                     <button type="button" onClick={() => setTypePrez('training')}
                             className={`flex flex-row justify-start items-center py-1 px-2.5 text-xl font-bold p-1 ${typePrez === 'training' ? "bg-[#F25D29] text-white" : "text-[#F25D29] bg-white"} rounded-full hover:bg-[#F25D29] hover:text-white`}>
@@ -87,8 +85,8 @@ export default function Main() {
                         Training
                     </button>
                     <p className={"text-xl px-2.5 text-orange-950 fkrr1 mb-4"}>
-                        Tempus fugit, carpe diem. In omni via, in omnibus locis, in omni tempore, ama et vive. Fortuna
-                        audaces iuvat. Nil desperandum, omnia vincit amor. Veritas vos liberabit. Per aspera ad astra.
+
+                        Le module d'entraînement de cette appli web sportive est ton coach virtuel dédié. Il te propose des programmes personnalisés en fonction de tes objectifs, que ce soit pour perdre du poids, gagner en force ou améliorer ta condition physique générale. Avec des vidéos d'exercices, des séances interactives et des rappels amicaux, ce module te guide à travers chaque étape de ton entraînement. De plus, il t'offre un espace de suivi pour enregistrer tes progrès et ajuster tes routines. C'est comme avoir un expert en fitness à portée de clic, prêt à te motiver et à te pousser vers tes meilleures performances.
                     </p>
                     <button type="button" onClick={() => setTypePrez('planning')}
                             className={`flex flex-row justify-start items-center py-1 px-2.5 text-xl font-bold p-1 ${typePrez === 'planning' ? "bg-[#F25D29] text-white" : "text-[#F25D29] bg-white"} rounded-full hover:bg-[#F25D29] hover:text-white`}>
@@ -97,8 +95,7 @@ export default function Main() {
                         Planning
                     </button>
                     <p className={"text-xl px-2.5 text-orange-950 fkrr1"}>
-                        Tempus fugit, carpe diem. In omni via, in omnibus locis, in omni tempore, ama et vive. Fortuna
-                        audaces iuvat. Nil desperandum, omnia vincit amor. Veritas vos liberabit. Per aspera ad astra.
+                        Le module de planning de cette appli sportive est ton organisateur ultime pour une vie active et équilibrée. Il te permet de créer des plannings d'entraînement personnalisés en fonction de tes disponibilités, de définir des objectifs hebdomadaires et de suivre tes sessions sportives. Que tu préfères des entraînements matinaux revigorants ou des sessions après le travail, ce module s'adapte à ton emploi du temps. De plus, il peut intégrer des rappels pour t'aider à rester discipliné. C'est comme avoir un agenda virtuel dédié à ton bien-être, te permettant de maximiser ton temps et d'atteindre tes objectifs sans compromis.
                     </p>
                 </div>
             </div>

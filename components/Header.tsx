@@ -9,11 +9,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {Button} from "@mui/material";
+import {Avatar, Button, Divider, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Popover} from "@mui/material";
 import Link from "next/link";
 import Image from 'next/image';
 // @ts-ignore
 import {signOut, useSession} from 'next-auth/react';
+import {Logout, People, SupportAgent} from "@mui/icons-material";
+import {useRouter} from "next/router";
 
 const pages = [{
     label: 'Reset password',
@@ -33,12 +35,6 @@ const pagesAuth = [{
     label: 'BackOffice',
     href: '/backoffice/support',
 }, {
-    label: 'Support',
-    href: '/support',
-}, {
-    label: 'Profile',
-    href: '/profile',
-}, {
     label: 'Planning',
     href: '/planning',
 }, {
@@ -47,10 +43,6 @@ const pagesAuth = [{
 }, {
     label: 'Chat',
     href: '/chat',
-}, {
-    label: 'Logout',
-    href: '/',
-    onClick: async () => signOut()
 }];
 
 function Header() {
@@ -59,6 +51,17 @@ function Header() {
     const mobile = useMediaQuery('(max-width:639px)');
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+    const router = useRouter();
+
+    function handleOpenUserMenu(event: React.MouseEvent<HTMLElement>) {
+        setAnchorElUser(event.currentTarget);
+    }
+
+    function handleCloseUserMenu() {
+        setAnchorElUser(null);
+    }
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -129,8 +132,7 @@ function Header() {
                                         {pagesAuth.map((page) => {
                                             if (page.label === 'BackOffice') {
                                                 if (session.user.admin)
-                                                    return <Link href={page.href} key={page.href}
-                                                                 onClick={page.onClick ?? undefined}>
+                                                    return <Link href={page.href} key={page.href}>
                                                         <MenuItem onClick={handleCloseNavMenu}
                                                                   sx={{textColor: 'white'}}>
                                                             <Typography textAlign="center">{page.label}</Typography>
@@ -139,8 +141,7 @@ function Header() {
                                                 else
                                                     return null
                                             }
-                                            return <Link href={page.href} key={page.href}
-                                                         onClick={page.onClick ?? undefined}>
+                                            return <Link href={page.href} key={page.href}>
                                                 <MenuItem onClick={handleCloseNavMenu} sx={{textColor: 'white'}}>
                                                     <Typography textAlign="center">{page.label}</Typography>
                                                 </MenuItem>
@@ -162,12 +163,11 @@ function Header() {
                         </Box>
                     ) : (
                         session ? (
-                            <Box className="space-x-8" sx={{flexGrow: 0}}>
+                            <Box className={"space-x-8"} sx={{flexGrow: 0, display: 'flex', alignItems: 'center'}}>
                                 {pagesAuth.map((page) => {
                                     if (page.label === 'BackOffice') {
                                         if (session.user.admin)
-                                            return <Link href={page.href} key={page.href}
-                                                         onClick={page.onClick ?? undefined}>
+                                            return <Link href={page.href} key={page.href}>
                                                 <Button variant="text" color="primary" className="hover:underline">
                                                     <p style={{color: 'white'}}>{page.label}</p>
                                                 </Button>
@@ -175,20 +175,62 @@ function Header() {
                                         else
                                             return null
                                     }
-                                    return <Link href={page.href} key={page.label} onClick={page.onClick ?? undefined}>
-                                        {page.label === 'Logout' ? (
-                                            <button
-                                                className="bg-white hover:underline text-black font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                                <p style={{color: 'black'}}>logout</p>
-                                            </button>
-                                        ) : (
-                                            <Button variant="text" color="primary" className="hover:underline">
-                                                <p style={{color: 'white'}}>{page.label}</p>
-                                            </Button>
-                                        )}
+                                    return <Link href={page.href} key={page.label}>
+                                        <Button variant="text" color="primary" className="hover:underline">
+                                            <p style={{color: 'white'}}>{page.label}</p>
+                                        </Button>
                                     </Link>
 
                                 })}
+                                <Box>
+                                    <ListItem sx={{p: 0.5, borderRadius: 10, px: 2}} button
+                                              onClick={handleOpenUserMenu}>
+                                        <ListItemAvatar>
+                                            <Avatar/>
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={session.user.email}
+                                            secondary={session.user.admin ? "Administracteur" : "Utilisateurs"}/>
+                                    </ListItem>
+                                </Box>
+                                <Popover open={Boolean(anchorElUser)} anchorEl={anchorElUser}
+                                         onClose={handleCloseUserMenu}
+                                         anchorOrigin={{
+                                             vertical: 'bottom',
+                                             horizontal: 'center',
+                                         }}
+                                         transformOrigin={{
+                                             vertical: 'top',
+                                             horizontal: 'center',
+                                         }}>
+                                    <List>
+                                        <ListItem button onClick={() => router.push('/profile')}>
+                                            <ListItemIcon>
+                                                <People/>
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Mon profile"}/>
+                                        </ListItem>
+                                        <ListItem button onClick={() => router.push('/support')}>
+                                            <ListItemIcon>
+                                                <SupportAgent/>
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Support"}/>
+                                        </ListItem>
+                                        <Divider/>
+                                        <ListItem button onClick={async () => {
+                                            await signOut();
+                                            await router.push('/')
+                                        }}>
+                                            <ListItemIcon>
+                                                <Logout/>
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Logout"}/>
+                                        </ListItem>
+                                    </List>
+                                </Popover>
                             </Box>
                         ) : (
                             <Box className="space-x-8" sx={{flexGrow: 0}}>
