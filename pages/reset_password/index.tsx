@@ -44,23 +44,22 @@ export default function Planning() {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center w-full mt-32'>
+        <div className='flex flex-col items-center justify-center w-full mt-32 px-4 py-2'>
             <h1 className="text-2xl text-orange-950 sm:text-4xl">
                 Fill your new password
             </h1>
             <h2 className="mt-1 sm:mt-3 text-4xl font-bold text-white sm:text-6xl">
-          <span
-              className="bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 text-transparent">Reset password</span>
+                <span className="bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 text-transparent">Reset password</span>
             </h2>
 
-            <form className='flex flex-col items-center justify-center space-y-4 w-[400px] mt-2'
+            <form className='flex flex-col items-center justify-center space-y-4 w-full sm:w-[400px] mt-2'
                   onSubmit={handleSubmit}>
 
                 <div className="mt-2 text-start w-full">
                     <label className="text-sm text-orange-950">Code</label>
                     <input onChange={e => setCode(e.target.value)}
                            value={code}
-                           className="py-3 ps-11 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
+                           className="py-3 ps-2 sm:ps-11 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4"
                            placeholder="123456"
                            required/>
                 </div>
@@ -75,7 +74,7 @@ export default function Planning() {
                                placeholder="exemple@gmail.com"
                                required/>
                         <div
-                            className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-4">
+                            className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-2 sm:ps-4">
                             <svg className="h-4 w-4 text-orange-950" xmlns="http://www.w3.org/2000/svg"
                                  width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                 <path
@@ -94,7 +93,8 @@ export default function Planning() {
                                className="py-3 ps-11 pe-4 border border-orange-300 w-full bg-white text-orange-950 placeholder:text-orange-950 rounded-md text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11"
                                placeholder="******"
                                required/>
-                        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-4">
+                        <div
+                            className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-2 sm:ps-4">
                             <Key size={16} className="text-orange-950"/>
                         </div>
                     </div>
@@ -109,7 +109,8 @@ export default function Planning() {
                                className="py-3 ps-11 pe-4 border border-orange-300 w-full bg-white text-orange-950 placeholder:text-orange-950 rounded-md text-sm focus:border-white/30 focus:ring-white/30 sm:p-4 sm:ps-11"
                                placeholder="******"
                                required/>
-                        <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-4">
+                        <div
+                            className="absolute inset-y-0 left-0 flex items-center pointer-events-none z-20 ps-2 sm:ps-4">
                             <Key size={16} className="text-orange-950"/>
                         </div>
                     </div>
@@ -128,7 +129,7 @@ export default function Planning() {
                                 d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
                                 fill="currentColor"/>
                         </svg>}
-                    <p style={{color: 'white'}}>Reset password</p>
+                    <p style={{ color: 'white' }}>Reset password</p>
                 </button>
             </form>
         </div>
