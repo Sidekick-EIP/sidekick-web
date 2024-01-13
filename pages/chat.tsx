@@ -7,16 +7,12 @@ import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
 import { Field } from "@/components/Form/Field";
 import { Button, FormControl, InputLabel, MenuItem, Select, Stepper, TextField } from "@mui/material";
-
-
-
 import 'react-chat-elements/dist/main.css';
 import { MessageBox, ChatList } from 'react-chat-elements';
 
 
 export default function Chat() {
     const { data }: { data: Session | null } = useSession();
-    //const [messages, setMessages] = useState<any>(null);
     const [messages, setMessages] = useState<any[]>([]);
     const [userIsWriting, setUserIsWriting] = useState<boolean>(false);
     const [socket, setSocket] = useState<any>(null);
