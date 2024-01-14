@@ -74,42 +74,45 @@ export default function Chat() {
             }
         })();
 
-        setSocket(io("https://api.sidekickapp.live", {
+        const sockets = io("https://api.sidekickapp.live", {
             auth: {
                 token: data?.user.access_token
             }
-        }))
+        })
+
+        setSocket(sockets)
 
         try {
-            socket.on('message', (data: any) => {
+            sockets.on('message', (data: any) => {
                 messages.push(data);
                 console.log('Message received: ' + data);
             });
 
-            socket.on('writing', (data: any) => {
+            sockets.on('writing', (data: any) => {
                 setUserIsWriting(data);
                 console.log('Writing received: ' + data);
             });
 
-            socket.on('seen', (data: any) => {
+            sockets.on('seen', (data: any) => {
                 messages.find((message: any) => message.id === data.id).seen = true;
                 console.log('Seen received: ' + data);
             });
 
-            socket.on('match', (data: any) => {
+            sockets.on('match', (data: any) => {
                 console.log('Match received: ' + data);
             });
 
-            socket.on('reconnect', (data: any) => {
+            sockets.on('reconnect', (data: any) => {
                 console.log('Match received: ' + data);
             });
 
 
-            socket.on('connect', () => {
+            sockets.on('connect', () => {
                 console.log('Connecté au serveur Sidekick');
-                socket.emit('seen', 'seen');
+                sockets.emit('seen', 'seen');
             });
         } catch (err) {
+            console.log(err)
             useAlert("Socket error", "error");
         }
 
