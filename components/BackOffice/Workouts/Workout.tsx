@@ -50,7 +50,6 @@ export default function Workout({ open, onClose, idWorkout }: WorkoutProps) {
 
 	async function handleUpdate(body: any) {
 		try {
-			console.log(workout);
 			setIsLoading(true)
 			await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/workouts/update/${idWorkout}`, {
 				"duration": workout.duration,
