@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import Layout from '../../../components/BackOffice/Layout'
 import axios from "axios";
 import { useSnackBar } from "@/components/SnackBar";
-import { Session } from "next-auth";
+import { Session, getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import Workout from '@/components/BackOffice/Workouts/Workout';
+import { GetServerSidePropsContext } from 'next';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 export default function Workouts() {
     const { data }: { data: Session | null } = useSession();
@@ -112,4 +114,21 @@ export default function Workouts() {
             <Workout open={openDialog} onClose={handleCloseDialog} idWorkout={idWorkout} />
         </div>
     </Layout>
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const session = await getServerSession(context.req, context.res, authOptions);
+
+    if (!session?.user?.admin) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: {}
+    }
 }
