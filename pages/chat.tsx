@@ -19,25 +19,44 @@ export default function Chat() {
     const useAlert: any = useSnackBar();
     const [messageElementsfull, setmessageElementsfull] = useState([]);
     var messageElements = [];
+    const [sidekick_name, setsidekickName] = useState("Julesaoz");
+    const [avatar, setAvatar] = useState("../Theo.png");
+    const [myID, setMyId] = useState("1");
+    const [sidekickId, setsidekickId] = useState("1");
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/messages/getMessages`, {
+                const response_name = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_infos/sidekick`, {
                     headers: {
                         Authorization: `Bearer ${data?.user.access_token}`
                     }
                 });
-                console.log(response.data);
+                setsidekickName(response_name.data.firstname)
+                setAvatar(response_name.data.avatar)
+
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/all`, {
+                    headers: {
+                        Authorization: `Bearer ${data?.user.access_token}`
+                    }
+                });
+                var number_of_messages = response.data.length
                 setMessages(response.data);
-                for (let i = 0; i < response.data.messages.length; i++) {
-                    const message = response.data.messages[i];
+                if (number_of_messages > 0) {
+                    setMyId(response.data[0].to)
+                    setsidekickId(response.data[0].from)
+                }
+
+
+                for (let i = 0; i < number_of_messages; i++) {
+                    const message = response.data[i];
                     console.log(message)
+                    message.to === myID ? console.log("LEFT") : console.log("RIGHT")
                     messageElements.push(
                         <MessageBox
-                            position={message.senderId === 1 ? "left" : "right"}
+                            position={message.to === myID ? "left" : "right"}
                             type={"text"}
-                            title={message.senderId === 1 ? "Jules" : "Moi"}
+                            title={message.to === myID ? sidekick_name : "Moi"}
                             text={message.content}
                         />
                     );
@@ -149,33 +168,53 @@ export default function Chat() {
         }
     }
 
-
-    function ChatForm() {
+    const ChatForm = ({ sendMessage }) => {
         const [messageInput, setMessageInput] = useState('');
 
-        const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const handleMessageChange = (e) => {
             setMessageInput(e.target.value);
         };
 
-        const handleSubmit = (e: React.FormEvent) => {
+        const handleSubmit = (e) => {
             e.preventDefault();
             sendMessage(messageInput);
+
+            const newMessageElement = (
+                <MessageBox
+                    position="right"
+                    type="text"
+                    title="Moi"
+                    text={messageInput}
+                />
+            );
+
+            setmessageElementsfull((prevElements) => [...prevElements, newMessageElement]);
+
             setMessageInput('');
         };
 
         return (
-            <form onSubmit={handleSubmit}>
-                <input
-                    type='text'
-                    value={messageInput}
-                    onChange={handleMessageChange}
-                    placeholder='Type your message...'
-                />
-                <button type='submit'>Send</button>
+            <div className="ktq4 text-center flex items-center justify-center">
+                <form onSubmit={handleSubmit} className="flex items-center">
+                <Field >
+                    <div className="pt-2 text-start flex flex-col max-w-5x">
+                        <input
+                            type='text'
+                            value={messageInput}
+                            onChange={handleMessageChange}
+                            placeholder="Enter your message..."
+                            className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
+                            required
+                        />
+                    </div>
+                </Field>
+                <Button type='submit' variant="contained" className="ml-4 h-14 flex bg-orangePrimary">
+                    Send
+                </Button>
             </form>
+            </div>
         );
-    }
-
+    };
 
     return (
         <div>
@@ -183,9 +222,9 @@ export default function Chat() {
                 <div className="pt-12 max-w-5xl mx-auto md:px-1 px-3">
                     <div className="ktqChat text-center" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
-                            <img src="../Theo.png" alt="Photo de profil" style={{ width: '30px', height: '30px', borderRadius: '50%' }} />
+                            <img src={avatar} alt="Avatar de profil" style={{ width: '30px', height: '30px', borderRadius: '50%' }} />
                         </div>
-                        <div>Jules</div>
+                        <div>{sidekick_name}</div>
                         <div style={{ color: 'red' }}>Offline</div>
                     </div>
 
@@ -194,25 +233,7 @@ export default function Chat() {
                         {messageElementsfull}
 
                     </div>
-
-
-                    <div className="ktq4 text-center flex items-center">
-
-                        <Field >
-                            <div className="pt-2 text-start flex flex-col max-w-5x">
-                                <input
-                                    placeholder="Enter your message..."
-                                    className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                    required
-                                />
-                            </div>
-                        </Field>
-                        <div>
-                            <Button type="submit" variant="contained" className="ml-4 h-14 flex bg-orangePrimary">
-                                Send
-                            </Button>
-                        </div>
-                    </div>
+                    <ChatForm sendMessage={sendMessage} />
 
                 </div>
             </section >
