@@ -15,7 +15,6 @@ export default function Chat() {
     const { data }: { data: Session | null } = useSession();
     const [messages, setMessages] = useState<any[]>([]);
     const [userIsWriting, setUserIsWriting] = useState<boolean>(false);
-    const [socket, setSocket] = useState<any>(null);
     const useAlert: any = useSnackBar();
     const [messageElementsfull, setmessageElementsfull] = useState([]);
     var messageElements = [];
@@ -23,6 +22,56 @@ export default function Chat() {
     const [avatar, setAvatar] = useState("../Theo.png");
     const [myID, setMyId] = useState("1");
     const [sidekickId, setsidekickId] = useState("1");
+
+    const [socket, setSocket] = useState<any>(null);
+
+    useEffect(() => {
+        const sockets = io("https://api.sidekickapp.live", {
+            transports: ["websocket"],
+            auth: {
+                token: data?.user.access_token
+            }
+        });
+
+        setSocket(sockets);
+
+        try {
+            sockets.on('connection', () => {
+                sockets.on('message', (data: any) => {
+                    messages.push(data);
+                    console.log('Message received: ' + data);
+                });
+
+                sockets.on('writing', (data: any) => {
+                    setUserIsWriting(data);
+                    console.log('Writing received: ' + data);
+                });
+
+                sockets.on('seen', (data: any) => {
+                    messages.find((message: any) => message.id === data.id).seen = true;
+                    console.log('Seen received: ' + data);
+                });
+
+                sockets.on('match', (data: any) => {
+                    console.log('Match received: ' + data);
+                });
+
+                sockets.on('reconnect', (data: any) => {
+                    console.log('Match received: ' + data);
+                });
+                console.log('Connecté au serveur Sidekick');
+                sockets.emit('seen', 'seen');
+            });
+        } catch (err) {
+            console.log(err)
+            useAlert("Socket error", "error");
+        }
+
+        return () => {
+            console.log("try to disconnect, but deactivated rn");
+            //socket.disconnect();
+        };
+    }, []);
 
     useEffect(() => {
         (async () => {
@@ -73,53 +122,6 @@ export default function Chat() {
                 }
             }
         })();
-
-        const sockets = io("https://api.sidekickapp.live", {
-            auth: {
-                token: data?.user.access_token
-            }
-        })
-
-        setSocket(sockets)
-
-        try {
-            sockets.on('message', (data: any) => {
-                messages.push(data);
-                console.log('Message received: ' + data);
-            });
-
-            sockets.on('writing', (data: any) => {
-                setUserIsWriting(data);
-                console.log('Writing received: ' + data);
-            });
-
-            sockets.on('seen', (data: any) => {
-                messages.find((message: any) => message.id === data.id).seen = true;
-                console.log('Seen received: ' + data);
-            });
-
-            sockets.on('match', (data: any) => {
-                console.log('Match received: ' + data);
-            });
-
-            sockets.on('reconnect', (data: any) => {
-                console.log('Match received: ' + data);
-            });
-
-
-            sockets.on('connect', () => {
-                console.log('Connecté au serveur Sidekick');
-                sockets.emit('seen', 'seen');
-            });
-        } catch (err) {
-            console.log(err)
-            useAlert("Socket error", "error");
-        }
-
-        return () => {
-            console.log("try to disconect, but deactivated rn");
-            //socket.disconnect();
-        };
     }, []);
 
     async function sendMessage(message: string): Promise<void> {
