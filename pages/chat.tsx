@@ -18,7 +18,7 @@ export default function Chat() {
     const useAlert: any = useSnackBar();
     const [messageElementsfull, setmessageElementsfull] = useState([]);
     var messageElements = [];
-    const [sidekick_name, setsidekickName] = useState("Julesaoz");
+    const [sidekick_name, setsidekickName] = useState("Julot");
     const [avatar, setAvatar] = useState("../Theo.png");
     const [myID, setMyId] = useState("1");
     const [sidekickId, setsidekickId] = useState("1");
@@ -89,6 +89,7 @@ export default function Chat() {
                         Authorization: `Bearer ${data?.user.access_token}`
                     }
                 });
+                
                 var number_of_messages = response.data.length
                 setMessages(response.data);
                 if (number_of_messages > 0) {
@@ -99,7 +100,6 @@ export default function Chat() {
 
                 for (let i = 0; i < number_of_messages; i++) {
                     const message = response.data[i];
-                    console.log(message)
                     message.to === myID ? console.log("LEFT") : console.log("RIGHT")
                     messageElements.push(
                         <MessageBox
@@ -126,52 +126,44 @@ export default function Chat() {
 
     async function sendMessage(message: string): Promise<void> {
         try {
-            messages.push({
-                content: "Bonjour Sidekick, comment vas tu ?",
-                date: dayjs(),
-                receverId: 1, // ???
-                seen: true,
-                senderId: 2, // ???
-            });
-            socket.emit('message', message);
+            console.log(message)
+            console.log(socket.emit('message', message));
         } catch (err: any) {
             if (err.response) {
-                // eslint-disable-next-line react-hooks/rules-of-hooks
                 useAlert(err.response.data.message, "error");
             } else {
-                // eslint-disable-next-line react-hooks/rules-of-hooks
                 useAlert(err.message, "error");
             }
         }
     }
 
-    async function sendUserIsWriting(): Promise<void> {
-        try {
-            socket.emit('writing', true);
-        } catch (err: any) {
-            if (err.response) {
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                useAlert(err.response.data.message, "error");
-            } else {
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                useAlert(err.message, "error");
-            }
-        }
-    }
+    // async function sendUserIsWriting(): Promise<void> {
+    //     try {
+    //         socket.emit('writing', true);
+    //     } catch (err: any) {
+    //         if (err.response) {
+    //             // eslint-disable-next-line react-hooks/rules-of-hooks
+    //             useAlert(err.response.data.message, "error");
+    //         } else {
+    //             // eslint-disable-next-line react-hooks/rules-of-hooks
+    //             useAlert(err.message, "error");
+    //         }
+    //     }
+    // }
 
-    async function sendUserIsNotWriting(): Promise<void> {
-        try {
-            socket.emit('writing', false);
-        } catch (err: any) {
-            if (err.response) {
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                useAlert(err.response.data.message, "error");
-            } else {
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                useAlert(err.message, "error");
-            }
-        }
-    }
+    // async function sendUserIsNotWriting(): Promise<void> {
+    //     try {
+    //         socket.emit('writing', false);
+    //     } catch (err: any) {
+    //         if (err.response) {
+    //             // eslint-disable-next-line react-hooks/rules-of-hooks
+    //             useAlert(err.response.data.message, "error");
+    //         } else {
+    //             // eslint-disable-next-line react-hooks/rules-of-hooks
+    //             useAlert(err.message, "error");
+    //         }
+    //     }
+    // }
 
     const ChatForm = ({ sendMessage }) => {
         const [messageInput, setMessageInput] = useState('');
