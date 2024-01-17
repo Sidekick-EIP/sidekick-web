@@ -38,7 +38,7 @@ export default function Planning() {
 
         setIsLoading(true)
         if (await resetPassword(email, password, confirmPassword, code)) {
-            await router.push("/signin")
+            router.push("/")
         }
         setIsLoading(false)
     }
