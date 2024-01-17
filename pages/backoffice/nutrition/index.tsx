@@ -5,16 +5,16 @@ import axios from "axios";
 import { useSnackBar } from "@/components/SnackBar";
 import { Session, getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
-import Workout from '@/components/BackOffice/Workouts/Workout';
-import { GetServerSidePropsContext } from 'next';
+import Nutrition from '@/components/BackOffice/Nutrition/Nutrition';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { GetServerSidePropsContext } from 'next';
 
-export default function Workouts() {
+export default function Nutritions() {
     const { data }: { data: Session | null } = useSession();
-    const [workouts, setWorkouts] = useState([]);
+    const [nutrition, setNutritions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
-    const [idWorkout, setIdWorkout] = useState(0);
+    const [idNutrition, setIdNutrition] = useState(0);
     const [isToReload, setIsToReload] = useState<boolean>(true);
     const useAlert: any = useSnackBar();
     const router = useRouter();
@@ -26,13 +26,13 @@ export default function Workouts() {
             (async () => {
                 try {
                     setIsLoading(true)
-                    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/workouts/all`, {
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/nutrition/all/admin`, {
                         headers: {
                             Authorization: `Bearer ${data?.user.access_token}`
                         }
                     });
                     console.log(response.data);
-                    setWorkouts(response.data);
+                    setNutritions(response.data);
                     setIsLoading(false)
                     setIsToReload(false)
                 } catch (err: any) {
@@ -54,55 +54,82 @@ export default function Workouts() {
     function handleCloseDialog(isToReload: boolean) {
         setOpenDialog(false);
         setIsToReload(isToReload)
-        setIdWorkout(0)
+        setIdNutrition(0)
     }
 
     return <Layout>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg m-6">
+        <div className="relative overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg m-6">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0">
                     <tr>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="px-6 py-3 ">
                             Name
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Burned Calories
+                            Protein
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Fat
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Carbs
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Weight
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Calories
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Period
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Date
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Last update Date
+                            User Id
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Exercise id
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Action
+                            Id
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {workouts.map((workout: any) => (
+                    {nutrition.map((nutrition: any) => (
                         <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {workout.exercise.name}
+                                {nutrition.name}
                             </td>
                             <td className="px-6 py-4">
-                                {workout.burnedCalories}
+                                {nutrition.protein}
                             </td>
                             <td className="px-6 py-4">
-                                {new Date(workout.date).getFullYear() + '/' + (new Date(workout.date).getMonth() + 1) + '/' + new Date(workout.date).getDate() + ' ' + new Date(workout.date).getHours() + ':' + new Date(workout.date).getMinutes() + ':' + new Date(workout.date).getSeconds()}
+                                {nutrition.fat}
                             </td>
                             <td className="px-6 py-4">
-                                {new Date(workout.date).getFullYear() + '/' + (new Date(workout.date).getMonth() + 1) + '/' + new Date(workout.date).getDate() + ' ' + new Date(workout.date).getHours() + ':' + new Date(workout.date).getMinutes() + ':' + new Date(workout.date).getSeconds()}
+                                {nutrition.carbs}
                             </td>
                             <td className="px-6 py-4">
-                                {workout.exerciseId}
+                                {nutrition.weight}
+                            </td>
+                            <td className="px-6 py-4">
+                                {nutrition.calories}
+                            </td>
+                            <td className="px-6 py-4">
+                                {nutrition.period}
+                            </td>
+                            <td className="px-6 py-4">
+                                {new Date(nutrition.date).getFullYear() + '/' + (new Date(nutrition.date).getMonth() + 1) + '/' + new Date(nutrition.date).getDate() + ' ' + new Date(nutrition.date).getHours() + ':' + new Date(nutrition.date).getMinutes() + ':' + new Date(nutrition.date).getSeconds()}
+                            </td>
+                            <td className="px-6 py-4">
+                                {nutrition.userId}
+                            </td>
+                            <td className="px-6 py-4">
+                                {nutrition.id}
                             </td>
                             <td className="px-6 py-4">
                                 <a onClick={() => {
-                                    setIdWorkout(workout.id)
+                                    setIdNutrition(nutrition.id)
                                     setOpenDialog(true);
                                 }} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Voir</a>
                             </td>
@@ -111,7 +138,7 @@ export default function Workouts() {
                 </tbody>
             </table>
 
-            <Workout open={openDialog} onClose={handleCloseDialog} idWorkout={idWorkout} />
+            <Nutrition open={openDialog} onClose={handleCloseDialog} idNutrition={idNutrition} />
         </div>
     </Layout>
 }
