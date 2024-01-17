@@ -27,45 +27,39 @@ export default function Chat() {
 
     useEffect(() => {
         const sockets = io("https://api.sidekickapp.live", {
-            transports: ["websocket"],
             auth: {
                 token: data?.user.access_token
             }
         });
 
-        setSocket(sockets);
-
-        try {
-            sockets.on('connection', () => {
-                sockets.on('message', (data: any) => {
-                    messages.push(data);
-                    console.log('Message received: ' + data);
-                });
-
-                sockets.on('writing', (data: any) => {
-                    setUserIsWriting(data);
-                    console.log('Writing received: ' + data);
-                });
-
-                sockets.on('seen', (data: any) => {
-                    messages.find((message: any) => message.id === data.id).seen = true;
-                    console.log('Seen received: ' + data);
-                });
-
-                sockets.on('match', (data: any) => {
-                    console.log('Match received: ' + data);
-                });
-
-                sockets.on('reconnect', (data: any) => {
-                    console.log('Match received: ' + data);
-                });
-                console.log('Connecté au serveur Sidekick');
-                sockets.emit('seen', 'seen');
+        sockets.on('connect', () => {
+            console.log('Connecté au serveur Sidekick');
+            console.log(sockets.emit('seen', 'seen'));
+            setSocket(sockets);
+            console.log('Emit done');
+            sockets.on('message', (data: any) => {
+                messages.push(data);
+                console.log('Message received: ' + data);
             });
-        } catch (err) {
-            console.log(err)
-            useAlert("Socket error", "error");
-        }
+
+            sockets.on('writing', (data: any) => {
+                setUserIsWriting(data);
+                console.log('Writing received: ' + data);
+            });
+
+            sockets.on('seen', (data: any) => {
+                messages.find((message: any) => message.id === data.id).seen = true;
+                console.log('Seen received: ' + data);
+            });
+
+            sockets.on('match', (data: any) => {
+                console.log('Match received: ' + data);
+            });
+
+            sockets.on('reconnect', (data: any) => {
+                console.log('Match received: ' + data);
+            });
+        });
 
         return () => {
             console.log("try to disconnect, but deactivated rn");
