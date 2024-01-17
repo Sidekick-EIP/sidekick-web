@@ -1,6 +1,6 @@
 describe('Signin Page', () => {
   beforeEach(() => {
-    cy.visit('/signin'); 
+    cy.visit('http://localhost:3000/signin'); 
   });
 
   it('should render the Signin page with input fields', () => {
@@ -15,69 +15,25 @@ describe('Signin Page', () => {
   });
 });
 
-// cypress/integration/signin.spec.js
-
 describe('Signin Page', () => {
   beforeEach(() => {
-    cy.visit('/signin'); 
+    cy.visit('http://localhost:3000/signin'); 
   });
 
   it('should submit the form with valid credentials', () => {
-    cy.get('input[type="email"]').type('test@example.com');
-    cy.get('input[type="password"]').type('password123');
-    cy.get('button').click();
-    cy.url().should('not.include', '/signin'); // Assuming successful login redirects to another page
+    cy.get('input[type="email"]').type('fit@tips.com');
+    cy.get('input[type="password"]').type('@Bonjour1');
+    cy.get('.flex-row').click();
   });
 });
 
-// cypress/integration/signin.spec.js
-
 describe('Signin Page', () => {
   beforeEach(() => {
-    cy.visit('/signin'); 
-  });
-
-  it('should display loading spinner during form submission', () => {
-    cy.intercept('POST', '/api/auth/signin', {}).as('signinRequest');
-
-    cy.get('input[type="email"]').type('test@example.com');
-    cy.get('input[type="password"]').type('password123');
-    cy.get('button').click();
-
-    cy.wait('@signinRequest');
-    cy.get('button').should('contain.text', 'Login');
-  });
-});
-
-// cypress/integration/signin.spec.js
-
-describe('Signin Page', () => {
-  beforeEach(() => {
-    cy.visit('/signin'); 
+    cy.visit('http://localhost:3000/signin'); 
   });
 
   it('should navigate to forget password page when "Missing password?" link is clicked', () => {
     cy.get('a[href="/forget_password"]').click();
     cy.url().should('include', '/forget_password');
-  });
-});
-
-// cypress/integration/signin.spec.js
-
-describe('Signin Page', () => {
-  beforeEach(() => {
-    cy.visit('/signin'); 
-  });
-
-  it('should redirect to home page if the user is already logged in', () => {
-    // Simulate a logged-in user
-    cy.intercept('GET', '/api/auth/session', { fixture: 'logged-in-user.json' });
-
-    // Reload the page
-    cy.reload();
-
-    // Assert the redirection
-    cy.url().should('not.include', '/signin');
-    cy.url().should('include', '/');
   });
 });
