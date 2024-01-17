@@ -17,12 +17,26 @@ export default function Chat() {
     const [userIsWriting, setUserIsWriting] = useState<boolean>(false);
     const useAlert: any = useSnackBar();
     const [messageElementsfull, setmessageElementsfull] = useState([]);
-    var messageElements = [];
-    const [sidekick_name, setsidekickName] = useState("Julot");
+
+    const [sidekick_name, setsidekickName] = useState("...");
     const [avatar, setAvatar] = useState("../Theo.png");
-    const [myID, setMyId] = useState("1");
-    const [sidekickId, setsidekickId] = useState("1");
     const [socket, setSocket] = useState<any>(null);
+
+    async function Message_array(number_of_messages: number, response: { data: any[]; }) {
+        var messageElements = [];
+        for (let i = 0; i < number_of_messages; i++) {
+            const message = response.data[i];
+            messageElements.push(
+                <MessageBox
+                    position={message.to === data?.user.id ? "left" : "right"}
+                    type={"text"}
+                    title={message.to === data?.user.id ? sidekick_name : "Moi"}
+                    text={message.content}
+                />
+            );
+        }
+        setmessageElementsfull(messageElements);
+    }
 
     useEffect(() => {
         (async () => {
@@ -33,7 +47,6 @@ export default function Chat() {
             Authorization: `Bearer ${data?.user.access_token}`
         }
     });
-    console.log(response_name)
     setsidekickName(response_name.data.firstname)
     setAvatar(response_name.data.avatar)
 
@@ -45,24 +58,7 @@ export default function Chat() {
 
     var number_of_messages = response.data.length
     setMessages(response.data);
-    if (number_of_messages > 0) {
-        setMyId(response.data[0].to)
-        setsidekickId(response.data[0].from)
-    }
-
-    for (let i = 0; i < number_of_messages; i++) {
-        const message = response.data[i];
-        message.to === myID ? console.log("LEFT") : console.log("RIGHT")
-        messageElements.push(
-            <MessageBox
-                position={message.to === data?.user.id ? "left" : "right"}
-                type={"text"}
-                title={message.to === data?.user.id ? sidekick_name : "Moi"}
-                text={message.content}
-            />
-        );
-    }
-    setmessageElementsfull(messageElements);
+    Message_array(number_of_messages, response);
 
     const newSocket = io("https://api.sidekickapp.live", {
         auth: {
@@ -75,6 +71,16 @@ export default function Chat() {
         socket.on('message', (data: any) => {
             messages.push(data);
             console.log('Message received: ' + data);
+            console.log(messages)
+            const newMessageElement = (
+                <MessageBox
+                    position="left"
+                    type="text"
+                    title={sidekick_name}
+                    text={data}
+                />
+            );
+            setmessageElementsfull((prevElements) => [...prevElements, newMessageElement]);
         });
 
         socket.on('writing', (data: any) => {
@@ -183,7 +189,7 @@ export default function Chat() {
                             <img src={avatar} alt="Avatar de profil" style={{ width: '30px', height: '30px', borderRadius: '50%' }} />
                         </div>
                         <div>{sidekick_name}</div>
-                        <div style={{ color: 'red' }}>Offline</div>
+                        <div style={{ color: 'red' }}>Sidekick</div>
                     </div>
                     <div className="ktq4 text-center ">
                         {messageElementsfull}
