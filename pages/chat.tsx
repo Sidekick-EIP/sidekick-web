@@ -22,69 +22,96 @@ export default function Chat() {
     const [avatar, setAvatar] = useState("../Theo.png");
     const [myID, setMyId] = useState("1");
     const [sidekickId, setsidekickId] = useState("1");
-
     const [socket, setSocket] = useState<any>(null);
 
     useEffect(() => {
-        if (!data?.user.access_token) return;
+        (async () => {
+            if (!data?.user.access_token) return;
 
-        const fetchMessages = async () => {
-            console.log(data?.user.access_token)
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/all`, {
-                headers: {
-                    Authorization: `Bearer ${data?.user.access_token}`
-                }
-            });
+    const response_name = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_infos/sidekick`, {
+        headers: {
+            Authorization: `Bearer ${data?.user.access_token}`
         }
-        fetchMessages();
+    });
+    console.log(response_name)
+    setsidekickName(response_name.data.firstname)
+    setAvatar(response_name.data.avatar)
 
-        const newSocket = io("https://api.sidekickapp.live", {
-            auth: {
-                token: data?.user.id
-            }
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/chat/all`, {
+        headers: {
+            Authorization: `Bearer ${data?.user.access_token}`
+        }
+    });
+
+    var number_of_messages = response.data.length
+    setMessages(response.data);
+    if (number_of_messages > 0) {
+        setMyId(response.data[0].to)
+        setsidekickId(response.data[0].from)
+    }
+
+    for (let i = 0; i < number_of_messages; i++) {
+        const message = response.data[i];
+        message.to === myID ? console.log("LEFT") : console.log("RIGHT")
+        messageElements.push(
+            <MessageBox
+                position={message.to === data?.user.id ? "left" : "right"}
+                type={"text"}
+                title={message.to === data?.user.id ? sidekick_name : "Moi"}
+                text={message.content}
+            />
+        );
+    }
+    setmessageElementsfull(messageElements);
+
+    const newSocket = io("https://api.sidekickapp.live", {
+        auth: {
+            token: data?.user.id
+        }
+    });
+    setSocket(newSocket);
+
+    const setupSocketListeners = (socket: any) => {
+        socket.on('message', (data: any) => {
+            messages.push(data);
+            console.log('Message received: ' + data);
         });
-        setSocket(newSocket);
 
-        const setupSocketListeners = (socket: any) => {
-            socket.on('message', (data: any) => {
-                messages.push(data);
-                console.log('Message received: ' + data);
-            });
+        socket.on('writing', (data: any) => {
+            setUserIsWriting(data);
+            console.log('Writing received: ' + data);
+        });
 
-            socket.on('writing', (data: any) => {
-                setUserIsWriting(data);
-                console.log('Writing received: ' + data);
-            });
+        socket.on('seen', (data: any) => {
+            messages.find((message: any) => message.id === data.id).seen = true;
+            console.log('Seen received: ' + data);
+        });
 
-            socket.on('seen', (data: any) => {
-                messages.find((message: any) => message.id === data.id).seen = true;
-                console.log('Seen received: ' + data);
-            });
+        socket.on('match', (data: any) => {
+            console.log('Match received: ' + data);
+        });
 
-            socket.on('match', (data: any) => {
-                console.log('Match received: ' + data);
-            });
+        socket.on('reconnect', (data: any) => {
+            console.log('Match received: ' + data);
+        });
 
-            socket.on('reconnect', (data: any) => {
-                console.log('Match received: ' + data);
-            });
+        socket.on('connect', () => {
+            console.log('Connecté au serveur Sidekick');
+        });
+    }
 
+    if (data?.user.access_token) {
+        setupSocketListeners(newSocket);
+    }
 
-            socket.on('connect', () => {
-                console.log('Connecté au serveur Sidekick');
-            });
-        }
-
-        if (data?.user.access_token) {
-            setupSocketListeners(newSocket);
-        }
-
-        return () => {
-            newSocket.off();
-            newSocket.disconnect();
-            console.log("Disconnected from server");
-        };
+    return () => {
+        newSocket.off();
+        newSocket.disconnect();
+        console.log("Disconnected from server");
+    }
+        })();
     }, [data?.user.access_token]);
+
 
     async function sendMessage(message: string): Promise<void> {
         try {
@@ -98,34 +125,6 @@ export default function Chat() {
             }
         }
     }
-
-    // async function sendUserIsWriting(): Promise<void> {
-    //     try {
-    //         socket.emit('writing', true);
-    //     } catch (err: any) {
-    //         if (err.response) {
-    //             // eslint-disable-next-line react-hooks/rules-of-hooks
-    //             useAlert(err.response.data.message, "error");
-    //         } else {
-    //             // eslint-disable-next-line react-hooks/rules-of-hooks
-    //             useAlert(err.message, "error");
-    //         }
-    //     }
-    // }
-
-    // async function sendUserIsNotWriting(): Promise<void> {
-    //     try {
-    //         socket.emit('writing', false);
-    //     } catch (err: any) {
-    //         if (err.response) {
-    //             // eslint-disable-next-line react-hooks/rules-of-hooks
-    //             useAlert(err.response.data.message, "error");
-    //         } else {
-    //             // eslint-disable-next-line react-hooks/rules-of-hooks
-    //             useAlert(err.message, "error");
-    //         }
-    //     }
-    // }
 
     const ChatForm = ({ sendMessage }) => {
         const [messageInput, setMessageInput] = useState('');
@@ -186,35 +185,13 @@ export default function Chat() {
                         <div>{sidekick_name}</div>
                         <div style={{ color: 'red' }}>Offline</div>
                     </div>
-
                     <div className="ktq4 text-center ">
-
                         {messageElementsfull}
 
                     </div>
-
-
-                    <div className="ktq4 text-center flex items-center">
-
-                        <Field >
-                            <div className="pt-2 text-start flex flex-col max-w-5x">
-                                <input
-                                    placeholder="Enter your message..."
-                                    className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                    required
-                                />
-                            </div>
-                        </Field>
-                        <div>
-                            <Button type="submit" variant="contained" className="ml-4 h-14 flex bg-orangePrimary" onClick={() => sendMessage("test")}>
-                                Send
-                            </Button>
-                        </div>
-                    </div>
+                    <ChatForm sendMessage={sendMessage} />
 
                 </div>
             </section >
         </div >
-    );
-
-}
+);}
