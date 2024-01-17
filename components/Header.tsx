@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -14,7 +14,7 @@ import Link from "next/link";
 import Image from 'next/image';
 // @ts-ignore
 import {signOut, useSession} from 'next-auth/react';
-import {Logout, People, SupportAgent} from "@mui/icons-material";
+// import {Logout, People, SupportAgent} from "@mui/icons-material";
 import {useRouter} from "next/router";
 
 const pages = [{
@@ -107,7 +107,7 @@ function Header() {
                                 onClick={handleOpenNavMenu}
                                 color="inherit"
                             >
-                                <MenuIcon/>
+                                {/* <MenuIcon/> */}
                             </IconButton>
                             <Menu
                                 id="menu-appbar"
@@ -206,14 +206,14 @@ function Header() {
                                     <List>
                                         <ListItem button onClick={() => router.push('/profile')}>
                                             <ListItemIcon>
-                                                <People/>
+                                                {/* <People/> */}
                                             </ListItemIcon>
                                             <ListItemText
                                                 primary={"Mon profile"}/>
                                         </ListItem>
                                         <ListItem button onClick={() => router.push('/support')}>
                                             <ListItemIcon>
-                                                <SupportAgent/>
+                                                {/* <SupportAgent/> */}
                                             </ListItemIcon>
                                             <ListItemText
                                                 primary={"Support"}/>
@@ -224,7 +224,7 @@ function Header() {
                                             await router.push('/')
                                         }}>
                                             <ListItemIcon>
-                                                <Logout/>
+                                                {/* <Logout/> */}
                                             </ListItemIcon>
                                             <ListItemText
                                                 primary={"Logout"}/>

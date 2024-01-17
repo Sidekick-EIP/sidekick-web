@@ -9,7 +9,6 @@ import User from '@/components/BackOffice/Users/Users';
 import { GetServerSidePropsContext } from 'next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { Button, Checkbox, FormControlLabel, Input, TextField } from '@mui/material';
-import { CheckBox, Label } from '@mui/icons-material';
 
 export default function Users() {
     const { data }: { data: Session | null } = useSession();
