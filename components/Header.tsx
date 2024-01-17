@@ -239,11 +239,11 @@ function Header() {
                                         <p style={{color: 'white'}}>Reset password</p>
                                     </Button>
                                 </Link>
-                                <Link href="/beta">
+                                {/* <Link href="/beta">
                                     <Button variant="text" color="primary">
                                         <p style={{color: 'white'}}>Beta</p>
                                     </Button>
-                                </Link>
+                                </Link> */}
                                 <Link href="/signin">
                                     <Button variant="text" color="primary">
                                         <p style={{color: 'white'}}>Log in</p>

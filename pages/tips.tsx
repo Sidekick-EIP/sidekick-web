@@ -164,7 +164,7 @@ export default function Tips() {
       <div className="pt-12 max-w-5xl mx-auto md:px-1 px-3">
         <div className="ktq4 text-center">
           <h3 className="pt-3 font-semibold text-lg text-white">La page conseils</h3>
-          <p className="pt-2 value-text text-md text-gray-200 fkrr1">
+          <p className="pt-2 value-text text-md text-black fkrr1">
             Lisez ces articles recommandés ou cherchez un autre article avec la barre de recherche!
           </p>
         </div>
@@ -174,7 +174,7 @@ export default function Tips() {
       <div className="pt-4 max-w-5xl mx-auto fsac4 md:px-1 px-3">
         <button
           onClick={toggleArticles}
-          className="w-64 text-white text-sm mt-4 bg-blue-500 px-3 py-2 rounded-md"
+          className="w-64 text-black text-sm mt-4 bg-blue-500 px-3 py-2 rounded-md"
         >{showRandom ? "Recommended" : "Random"}</button>
 
 
@@ -182,7 +182,7 @@ export default function Tips() {
           type="text"
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
-          className="mt-4 w-64 py-3 ps-4 pe-4 bg-white/[.03] text-white placeholder:text-grey rounded-md text-sm"
+          className="mt-4 w-64 py-3 ps-4 pe-4 bg-white border border-black text-black placeholder:text-gray-500 rounded-md text-sm"
           placeholder="search"
           disabled={showRandom}
         />
@@ -193,8 +193,8 @@ export default function Tips() {
         {showRandom
           ? RecoArticles.map((article, index) => (
             <div className="ktq5" key={index}>
-              <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
-              <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
+              <h3 className="pt-3 font-semibold text-title-faq text-black">{article.title}</h3>
+              <p className="pt-2 value-text text-faq text-black fkrr1">{article.article_content}</p>
               <div>
                 <a href={article.link} className="text-blue-500 text-sm">Read More</a>
                 {article.liked ?
@@ -204,7 +204,7 @@ export default function Tips() {
                     <FontAwesomeIcon icon={faHeart} /> Liked !
                   </button>
                   :
-                  <button className="text-white text-sm mt-4 ml-40" onClick={() => {
+                  <button className="text-black text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, true)
                   }} >
                     <FontAwesomeIcon icon={faHeart} /> add like
@@ -215,8 +215,8 @@ export default function Tips() {
           ))
           : filteredArticles.map((article, index) => (
             <div className="ktq5" key={index}>
-              <h3 className="pt-3 font-semibold text-title-faq text-white">{article.title}</h3>
-              <p className="pt-2 value-text text-faq text-gray-200 fkrr1">{article.article_content}</p>
+              <h3 className="pt-3 font-semibold text-title-faq text-black">{article.title}</h3>
+              <p className="pt-2 value-text text-faq text-black fkrr1">{article.article_content}</p>
               <div>
                 <a href={article.link} className="text-blue-500 text-sm mt-4">Read More</a>
 
@@ -227,7 +227,7 @@ export default function Tips() {
                     <FontAwesomeIcon icon={faHeart} /> Liked !
                   </button>
                   :
-                  <button className="text-white text-sm mt-4 ml-40" onClick={() => {
+                  <button className="text-black text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, true)
                   }} >
                     <FontAwesomeIcon icon={faHeart} /> add like

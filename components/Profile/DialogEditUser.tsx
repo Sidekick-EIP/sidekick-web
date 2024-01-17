@@ -121,6 +121,7 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
             handleClose(true);
             setIsLoading(false);
         } catch (err: any) {
+            setIsLoading(false);
             if (err.response) {
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 useAlert(err.response.data.message, "error");
@@ -217,7 +218,7 @@ export default function DialogEditUser({open, onClose, user, type = 'PROFILE'}: 
                         >
                             <MenuItem value={'BEGINNER'}>Débutant</MenuItem>
                             <MenuItem value={'IRREGULAR_TRAINING'}>Entrainement irrégulier</MenuItem>
-                            <MenuItem value={'INTERMEDIATE'}>Intermédiaire</MenuItem>
+                            {/* <MenuItem value={'INTERMEDIATE'}>Intermédiaire</MenuItem> */}
                             <MenuItem value={'ADVANCED'}>Avancé</MenuItem>
                         </Select>
                     </FormControl>

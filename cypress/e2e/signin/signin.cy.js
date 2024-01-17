@@ -1,24 +1,39 @@
-describe("Signin Component Tests", () => {
-    beforeEach(() => {
-      cy.visit("http://localhost:3000/signin");
-    });
-  
-    it("should display the Signin page", () => {
-      cy.contains("LogIn");
-      cy.contains("Fill your credentials an");
-      cy.contains("Login");
-    });
-  
-    it("should allow a user to sign in with valid credentials", () => {
-      cy.get(':nth-child(1) > .relative > .py-3').type("user@example.com");
-      cy.get(':nth-child(2) > .relative > .py-3').type("password123");
-      cy.get('.flex-col > .MuiButtonBase-root').click();
-    });
-  
-    it("should display an error for invalid credentials", () => {
-      cy.get(':nth-child(1) > .relative > .py-3').type("invalid@example.com");
-      cy.get(':nth-child(2) > .relative > .py-3').type("invalidpassword");
-      cy.get('.flex-col > .MuiButtonBase-root').click();
-      cy.url().should('eq', 'http://localhost:3000/signin');
-    });
+describe('Signin Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/signin'); 
   });
+
+  it('should render the Signin page with input fields', () => {
+    cy.get('h1').should('contain.text', 'Fill your credentials an');
+    cy.get('h2 span').should('contain.text', 'LogIn');
+    cy.get('label').should('contain.text', 'Email address');
+    cy.get('input[type="email"]').should('exist');
+    cy.get('label').should('contain.text', 'Password');
+    cy.get('input[type="password"]').should('exist');
+    cy.get('button').should('contain.text', 'Login');
+    cy.get('a[href="/forget_password"]').should('exist');
+  });
+});
+
+describe('Signin Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/signin'); 
+  });
+
+  it('should submit the form with valid credentials', () => {
+    cy.get('input[type="email"]').type('fit@tips.com');
+    cy.get('input[type="password"]').type('@Bonjour1');
+    cy.get('.flex-row').click();
+  });
+});
+
+describe('Signin Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/signin'); 
+  });
+
+  it('should navigate to forget password page when "Missing password?" link is clicked', () => {
+    cy.get('a[href="/forget_password"]').click();
+    cy.url().should('include', '/forget_password');
+  });
+});

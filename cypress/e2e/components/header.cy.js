@@ -12,7 +12,7 @@ describe('Header', () => {
 
   it('should navigate to signup page when clicking "Signup"', () => {
     cy.visit('http://localhost:3000');
-    cy.get('[href="/signup"] > .MuiButtonBase-root').click();
+    cy.get('[href="/signup"] > .bg-white').click();
     cy.url().should('eq', 'http://localhost:3000/signup');
   });
 
