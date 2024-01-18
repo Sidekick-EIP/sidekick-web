@@ -65,28 +65,30 @@ export default function Home(): JSX.Element {
     const useAlert: any = useSnackBar();
 
     useEffect(() => {
-        if (!isToReload)
-            return;
-        (async () => {
-            try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_infos`, {
-                    headers: {
-                        Authorization: `Bearer ${data?.user.access_token}`
+        if (data) {
+            if (!isToReload)
+                return;
+            (async () => {
+                try {
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_infos`, {
+                        headers: {
+                            Authorization: `Bearer ${data?.user.access_token}`
+                        }
+                    });
+                    console.log(response.data)
+                    setUser(response.data);
+                } catch (err: any) {
+                    if (err.response) {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        useAlert(err.response.data.message, "error");
+                    } else {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        useAlert(err.message, "error");
                     }
-                });
-                console.log(response.data)
-                setUser(response.data);
-            } catch (err: any) {
-                if (err.response) {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    useAlert(err.response.data.message, "error");
-                } else {
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    useAlert(err.message, "error");
                 }
-            }
-        })();
-    }, [isToReload, useAlert]);
+            })();
+        }
+    }, [data, isToReload, useAlert]);
 
     if (!user)
         return <div className="container mx-auto">
