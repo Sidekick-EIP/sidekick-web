@@ -59,7 +59,7 @@ export default function Planning() {
                     <div className="relative">
                         <input onChange={e => setCode(e.target.value)}
                                value={code}
-                               className="py-3 ps-2 sm:ps-11 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4"
+                               className="py-3 ps-11 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-11"
                                placeholder="123456"
                                required/>
                         <div
