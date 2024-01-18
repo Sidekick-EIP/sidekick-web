@@ -143,9 +143,9 @@ export default function Main() {
                     </li>
                     <li className="relative mb-6 sm:mb-0">
                         <div className="flex items-center">
-                            <div className="z-10 flex items-center justify-center w-6 h-6 bg-orange-100 rounded-full ring-0 ring-white sm:ring-8 dark:ring-gray-900 shrink-0">
+                            <div className="z-10 flex items-center justify-center w-6 h-6 bg-orange-100 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
                                 <svg className="w-2.5 h-2.5 text-orange-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                                 </svg>
                             </div>
                             <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
@@ -160,7 +160,7 @@ export default function Main() {
 
             </div>
 
-            <div className="pt-10 px-16  max-w-7xl container flex flex-col">
+            <div className="pt-10 px-16 text-center max-w-7xl container flex flex-col">
                 <h1 className="font-bold text-2xl text-[#F25D29] mt-1">
                     L'équipe
                 </h1>
@@ -274,7 +274,7 @@ export default function Main() {
 
             <div className="pt-10 px-16 max-w-7xl container text-center mb-20">
                 <h1 className="mb-2 text-2xl font-semibold text-[#F25D29]">
-                    Des questions sur le projet? La page FAQ est la pour vous !
+                    Des questions sur le projet?
                 </h1>
                 <p className="mb-6 pt-2 value-text text-md text-orange-950 fkrr1 text-2xl">
                     Nous somme la pour vous !
