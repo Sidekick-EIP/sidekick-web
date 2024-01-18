@@ -33,7 +33,7 @@ const pages = [{
 
 const pagesAuth = [{
     label: 'BackOffice',
-    href: '/backoffice/support',
+    href: '/backoffice',
 }, {
     label: 'Planning',
     href: '/planning',
