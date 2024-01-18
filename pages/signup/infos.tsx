@@ -1,13 +1,13 @@
-import {useForm} from "react-hook-form";
-import {useFormState} from "@/components/Providers";
-import {Button, Input, TextField} from "@mui/material";
-import {Field} from "@/components/Form/Field";
-import {useRouter} from "next/router";
-import {GetServerSidePropsContext} from "next";
-import {authOptions} from "../api/auth/[...nextauth]";
-import {getServerSession} from "next-auth";
+import { useForm } from "react-hook-form";
+import { useFormState } from "@/components/Providers";
+import { Button, Input, TextField } from "@mui/material";
+import { Field } from "@/components/Form/Field";
+import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 import Stepper from "@/components/Form/Stepper";
-import React from "react";
+import React, { useState } from "react";
 
 const Infos = () => {
     const router = useRouter();
@@ -15,11 +15,28 @@ const Infos = () => {
     const {
         handleSubmit,
         register,
-        formState: {errors},
-    } = useForm({defaultValues: state, mode: "onSubmit"});
+        formState: { errors },
+    } = useForm({ defaultValues: state, mode: "onSubmit" });
+    const [genders, setGenders] = useState<any>([
+        "MALE",
+        "FEMALE",
+        "PREFER_NOT_TO_SAY"
+    ]);
+    const [levels, setLevels] = useState<any>([
+        "BEGINNER",
+        "MEDIUM",
+        "IRREGULAR_TRAINING",
+        "ADVANCED",
+    ]);
+    const [goals, setGoals] = useState<any>([
+        "LOSE_WEIGHT",
+        "STAY_IN_SHAPE",
+        "GAIN_MUSCLE_MASS",
+        "BUILD_MUSCLE",
+    ]);
 
     const saveData = (data: any) => {
-        setState({...state, ...data});
+        setState({ ...state, ...data });
         router.push("/signup/sport");
     };
 
@@ -31,9 +48,9 @@ const Infos = () => {
                 </h1>
 
                 <div className='flex flex-col items-center justify-center space-y-4'>
-                    <Stepper/>
+                    <Stepper />
                     <form onSubmit={handleSubmit(saveData)}
-                          className='flex flex-col items-center space-y-4 max-w-lg w-full'>
+                        className='flex flex-col items-center space-y-4 max-w-lg w-full'>
                         <fieldset className="flex flex-row space-x-4 w-full">
 
                             <div className="flex flex-col w-full">
@@ -41,10 +58,10 @@ const Infos = () => {
                                     <div className="pt-2 text-start">
                                         <label className="text-sm text-orange-950">Firstname</label>
                                         <input
-                                            {...register("firstname", {required: "First name is required"})}
+                                            {...register("firstname", { required: "First name is required" })}
                                             placeholder="Firstname"
                                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                            required/>
+                                            required />
                                     </div>
                                     {/* <TextField
                       {...register("firstname", {required: "First name is required"})}
@@ -68,11 +85,11 @@ const Infos = () => {
                                     <div className="pt-2 text-start">
                                         <label className="text-sm text-orange-950">Size (cm)</label>
                                         <input
-                                            {...register("size", {required: "Size is required", min: 50, max: 300})}
+                                            {...register("size", { required: "Size is required", min: 50, max: 300 })}
                                             type="number"
                                             placeholder="160"
                                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                            required/>
+                                            required />
                                     </div>
                                     {/* <TextField
                                         {...register("size", {required: "Size is required", min: 50, max: 300})}
@@ -100,10 +117,10 @@ const Infos = () => {
                                     <div className="pt-2 text-start">
                                         <label className="text-sm text-orange-950">Lastname</label>
                                         <input
-                                            {...register("lastname", {required: "Last name is required"})}
+                                            {...register("lastname", { required: "Last name is required" })}
                                             placeholder="Lastname"
                                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                            required/>
+                                            required />
                                     </div>
 
                                     {/* <TextField
@@ -136,32 +153,44 @@ const Infos = () => {
                                             type="date"
                                             placeholder="YYYY-MM-DD"
                                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                            required/>
+                                            required />
+                                    </div>
+                                </Field>
+
+                                <Field>
+                                    <div className="pt-2 text-start">
+                                        <label className="text-sm text-orange-950">Objectif
+                                        </label>
+                                        <select id="countries" required placeholder="fe" {...register("level", { required: "Goal is required" })}
+                                            className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2">
+                                                {levels.map((level: any) => (
+                                                    <option value={level}>{level}</option>
+                                                ))}
+                                        </select>
                                     </div>
                                 </Field>
                             </div>
                         </fieldset>
 
                         <div className="flex flex-col w-full">
-                            <Field error={errors?.username}>
+                            <Field error={errors?.location}>
                                 <div className="pt-2 text-start">
-                                    <label className="text-sm text-orange-950">Username</label>
-                                    <input
-                                        {...register("username", {required: "Username is required"})}
-                                        placeholder="Username"
+                                    <label className="text-sm text-orange-950">Location</label>
+                                    <textarea
+                                        {...register("location", { required: "Location is required" })}
+                                        placeholder="Location"
                                         className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
                                         required/>
                                 </div>
                             </Field>
-
                             <Field error={errors?.description}>
                                 <div className="pt-2 text-start">
-                                    <label className="text-sm text-orange-950">Birth Date</label>
+                                    <label className="text-sm text-orange-950">Description</label>
                                     <textarea
-                                        {...register("description", {required: "Description is required"})}
+                                        {...register("description", { required: "Description is required" })}
                                         placeholder="Description"
                                         className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                        required rows={4}/>
+                                        required rows={4} />
                                 </div>
                             </Field>
                         </div>
@@ -169,12 +198,12 @@ const Infos = () => {
                             {errors.firstname ? (
                                 <>
                                     {errors.firstname.type === "required" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Un prenom est requis.
                                         </p>
                                     )}
                                     {errors.firstname.type === "pattern" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Poids non correct.
                                         </p>
                                     )}
@@ -184,12 +213,12 @@ const Infos = () => {
                             {errors.size ? (
                                 <>
                                     {errors.size.type === "required" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Une taille est requise.
                                         </p>
                                     )}
                                     {errors.size.type === "pattern" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Une taille est requise.
                                         </p>
                                     )}
@@ -199,12 +228,12 @@ const Infos = () => {
                             {errors.lastname ? (
                                 <>
                                     {errors.lastname.type === "required" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Un nom est requis.
                                         </p>
                                     )}
                                     {errors.lastname.type === "pattern" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             nom non correct.
                                         </p>
                                     )}
@@ -214,12 +243,12 @@ const Infos = () => {
                             {errors.birth_date ? (
                                 <>
                                     {errors.birth_date.type === "required" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Une date de naissance est requise.
                                         </p>
                                     )}
                                     {errors.birth_date.type === "pattern" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Date de naissance non correcte.
                                         </p>
                                     )}
@@ -229,12 +258,12 @@ const Infos = () => {
                             {errors.description ? (
                                 <>
                                     {errors.description.type === "required" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Une description est requise.
                                         </p>
                                     )}
                                     {errors.description.type === "pattern" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Description non correcte.
                                         </p>
                                     )}
@@ -244,12 +273,12 @@ const Infos = () => {
                             {errors.username ? (
                                 <>
                                     {errors.username.type === "required" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Un nom d'utilisateur est requis.
                                         </p>
                                     )}
                                     {errors.username.type === "pattern" && (
-                                        <p style={{color: "white"}}>
+                                        <p style={{ color: "white" }}>
                                             Nom d'utilisateur est incorect.
                                         </p>
                                     )}
@@ -257,7 +286,7 @@ const Infos = () => {
                             ) : null}
                         </div>
                         <button type='submit' className="flex flex-row justify-center w-full items-center bg-orangePrimary hover:underline text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                            <p style={{color: 'white'}}>Next {">"}</p>
+                            <p style={{ color: 'white' }}>Next {">"}</p>
                         </button>
                     </form>
                 </div>
@@ -272,7 +301,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const session = await getServerSession(context.req, context.res, authOptions);
 
     if (session) {
-        return {redirect: {destination: "/"}};
+        return { redirect: { destination: "/" } };
     }
 
     return {

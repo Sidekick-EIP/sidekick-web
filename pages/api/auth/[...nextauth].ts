@@ -79,19 +79,21 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
-        username: { label: "Username", type: "text" },
         gender: { label: "Gender", type: "text" },
         birth_date: { label: "Birth date", type: "text" },
         description: { label: "Description", type: "text" },
         firstname: { label: "Firstname", type: "text" },
         lastname: { label: "Lastname", type: "text" },
         weight: { label: "Weight", type: "text" },
+        goal_weight: { label: "Weight", type: "text" },
+        level: {label: "Level", type: "text"},
+        location: {label: "Level", type: "text"},
         size: { label: "size", type: "text" },
         goal: { label: "Goal", type: "text" },
-        sport_frequence: { label: "Sport frequence", type: "text" },
+        activities: { label: "Activities", type: "array" },
       },
       async authorize(credentials, req) {
-        const { email, password, username, gender, birth_date, description, firstname, lastname, weight, size, goal, sport_frequence } = credentials as {
+        const { email, password, gender, birth_date, description, firstname, lastname, weight, size, goal, activities, goal_weight, level, location } = credentials as {
           email: string,
           password: string,
           username: string,
@@ -103,7 +105,10 @@ export const authOptions: NextAuthOptions = {
           weight: string,
           size: string,
           goal: string,
-          sport_frequence: string,
+          activities: string,
+          goal_weight: string,
+          level: string,
+          location: string,
         };
         console.log(credentials);
         try {
@@ -128,16 +133,18 @@ export const authOptions: NextAuthOptions = {
               "Authorization": `Bearer ${tokens.access_token}`,
             },
             body: JSON.stringify({
-              username,
               gender,
-              birth_date,
+              birth_date: new Date(birth_date).toISOString(),
               description,
               firstname,
               lastname,
-              weight,
-              size,
+              weight: parseInt(weight),
+              size: parseInt(size),
               goal,
-              sport_frequence,
+              activities: [activities],
+              goal_weight: parseInt(goal_weight),
+              level,
+              location
             }),
           });
 
