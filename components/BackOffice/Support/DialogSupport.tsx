@@ -1,4 +1,4 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, ListItemText} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, ListItemText, Paper} from "@mui/material";
 import {Session} from "next-auth";
 import {useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
@@ -63,7 +63,7 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
             setIsLoading(false)
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useAlert("Ticket close with success", "success");
-            onClose(true);
+            handleClose(true);
         } catch (err: any) {
             setIsLoading(false)
             if (err.response) {
@@ -89,7 +89,7 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
             setIsLoading(false)
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useAlert("Ticket respond with success", "success");
-            onClose(true);
+            handleClose(true);
         } catch (err: any) {
             setIsLoading(false)
             if (err.response) {
@@ -102,7 +102,12 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
         }
     }
 
-    return <Dialog open={open} onClose={() => onClose(false)} fullWidth maxWidth={'sm'}>
+    function handleClose(isToReload: boolean) {
+        setContent("");
+        onClose(isToReload);
+    }
+
+    return <Dialog open={open} onClose={() => handleClose(false)} fullWidth maxWidth={'md'}>
         {!isLoading && dataSupports !== null ? <DialogTitle>
             {dataSupports.title}
         </DialogTitle> : <div className="flex justify-center items-center p-10">
@@ -110,27 +115,35 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
         </div>}
         {dataSupports !== null && <><DialogContent>
             <Grid container item xs={12} sx={{mt: 0}} spacing={1}>
-                <Grid item xs={6}>
-                    <ListItemText primary={"Date d'envoye"}
-                                  secondary={dayjs(dataSupports.responses[0].createdAt).toString()}/>
-                </Grid>
-                <Grid item xs={6}>
-                    <ListItemText primary={"Utilisateurs"} secondary={dataSupports.responses[0].user.email}/>
-                </Grid>
-                <Grid item xs={12}>
-                    <ListItemText primary={"Messages"} secondary={dataSupports.responses[0].content}/>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField value={content} onChange={(e: any) => setContent(e.target.value)} fullWidth multiline
-                               rows={4} label={'Réponse'}/>
-                </Grid>
+                {dataSupports.responses.map((elem: any, index: any) => <Grid container item xs={12} justifyContent={'center'}>
+                    <Grid item xs={12}>
+                        <Paper variant={'outlined'} sx={{p: 1}}>
+                            <Grid item xs={12} spacing={1}>
+
+                                {/* <Grid item xs={6}>
+                                                <Typography variant={'caption'}>{elem.user.email}</Typography>
+                                            </Grid> */}
+                                <Grid item xs={12}>
+                                    <Typography>{elem.content}</Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography variant={'caption'} fontStyle={'italic'}>{dayjs(elem.createdAt).toString()}</Typography>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid>
+                </Grid>)}
+            </Grid>
+            <Grid item xs={12} sx={{mt: 3}}>
+                <TextField value={content} onChange={(e: any) => setContent(e.target.value)} fullWidth multiline
+                           rows={4} label={'Send a message at the customer'}/>
             </Grid>
         </DialogContent>
             <DialogActions>
-                <LoadingButton loading={isLoading} onClick={handleCloseTickets}>
+                <LoadingButton disabled={dataSupports.status === "CLOSED"} loading={isLoading} onClick={handleCloseTickets}>
                     Close ticket
                 </LoadingButton>
-                <LoadingButton loading={isLoading} onClick={handleRespond}>
+                <LoadingButton disabled={dataSupports.status === "CLOSED"} loading={isLoading} onClick={handleRespond}>
                     SEND
                 </LoadingButton>
             </DialogActions>

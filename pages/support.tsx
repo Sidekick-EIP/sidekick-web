@@ -85,6 +85,9 @@ export default function Support() {
                 )}
                 <p style={{ color: 'white' }}>Send message</p>
             </button>
+            <a href="/tickets" className="flex flex-row justify-center w-full items-center text-orange-950 hover:underline">
+                <p>My tickets</p>
+            </a>
         </form>
     </div>
 
