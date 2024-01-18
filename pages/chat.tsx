@@ -166,7 +166,7 @@ export default function Chat() {
                             type='text'
                             value={messageInput}
                             onChange={handleMessageChange}
-                            placeholder="Enter your message..."
+                            placeholder="Entrez votre message..."
                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
                             required
                         />

@@ -190,7 +190,7 @@ function Header() {
                                         </ListItemAvatar>
                                         <ListItemText
                                             primary={session.user.email}
-                                            secondary={session.user.admin ? "Administracteur" : "Utilisateurs"}/>
+                                            secondary={session.user.admin ? "Administrateur" : "Utilisateur"}/>
                                     </ListItem>
                                 </Box>
                                 <Popover open={Boolean(anchorElUser)} anchorEl={anchorElUser}
@@ -206,7 +206,7 @@ function Header() {
                                     <List>
                                         <ListItem button onClick={() => router.push('/profile')}>
                                             <ListItemText
-                                                primary={"Mon profile"}/>
+                                                primary={"Mon profil"}/>
                                         </ListItem>
                                         <ListItem button onClick={() => router.push('/support')}>
                                             <ListItemText

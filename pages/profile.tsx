@@ -137,7 +137,7 @@ export default function Home(): JSX.Element {
         </div>
 
         <div className="border-b border-orangePrimary text-start w-full flex flex-row justify-between pb-2">
-            <p className="text-orangePrimary font-bold">Information personnel</p>
+            <p className="text-orangePrimary font-bold"> Mes informations personnelles</p>
             <button type="button" onClick={() => {
                 setTypeEdit('PROFILE')
                 setOpen(true)
@@ -148,7 +148,7 @@ export default function Home(): JSX.Element {
                     <path strokeLinecap="round" strokeLinejoin="round"
                           d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
                 </svg>
-                Edit information personnel
+                Edit mes informations personnelles
             </button>
         </div>
 
@@ -168,7 +168,7 @@ export default function Home(): JSX.Element {
         </div>
 
         <div className="mt-10 border-b border-orangePrimary text-start w-full flex flex-row justify-between pb-2">
-            <p className="text-orangePrimary font-bold">Activité et objectif</p>
+            <p className="text-orangePrimary font-bold">Activités et objectifs</p>
             <button type="button" onClick={() => {
                 setTypeEdit('SPORT')
                 setOpen(true)
@@ -179,7 +179,7 @@ export default function Home(): JSX.Element {
                     <path strokeLinecap="round" strokeLinejoin="round"
                           d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
                 </svg>
-                Edit mes objectif et activité
+                Edit mes objectifs et activités
             </button>
         </div>
 
