@@ -72,13 +72,13 @@ export default function Tickets() {
                     >
                         <Typography sx={{width: '33%', flexShrink: 0}}>
                             {support.title} - <span
-                            style={{fontStyle: 'italic'}}>{new Date(support.createdAt).getFullYear() + '/' + (new Date(support.createdAt).getMonth() + 1) + '/' + new Date(support.createdAt).getDate() + ' ' + new Date(support.createdAt).getHours() + ':' + new Date(support.createdAt).getMinutes() + ':' + new Date(support.createdAt).getSeconds()}</span>
+                            style={{fontStyle: 'italic', fontSize: 11}}>{new Date(support.createdAt).getFullYear() + '/' + (new Date(support.createdAt).getMonth() + 1) + '/' + new Date(support.createdAt).getDate() + ' ' + new Date(support.createdAt).getHours() + ':' + new Date(support.createdAt).getMinutes() + ':' + new Date(support.createdAt).getSeconds()}</span>
                         </Typography>
                         <Typography sx={{color: 'text.secondary'}}>{support.status}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Grid container item xs={12} sx={{mt: 0}} spacing={1}>
-                            {support.responses.map((elem: any, index: any) => <Grid key={index + '-message'} container
+                            {support.responses && support.responses.length && support.responses.map((elem: any, index: any) => <Grid key={index + '-message'} container
                                                                                     item xs={12}
                                                                                     justifyContent={'center'}>
                                 <Grid item xs={12}>
