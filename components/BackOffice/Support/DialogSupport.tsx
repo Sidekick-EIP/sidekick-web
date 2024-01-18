@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
 import {LoadingButton} from "@mui/lab";
+import Box from "@mui/material/Box";
 
 interface DialogSupportProps {
     open: boolean;
@@ -109,13 +110,14 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
 
     return <Dialog open={open} onClose={() => handleClose(false)} fullWidth maxWidth={'md'}>
         {!isLoading && dataSupports !== null ? <DialogTitle>
-            {dataSupports.title}
+            {dataSupports.title} - {dataSupports.user.email}
         </DialogTitle> : <div className="flex justify-center items-center p-10">
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-orange-950"></div>
         </div>}
         {dataSupports !== null && <><DialogContent>
             <Grid container item xs={12} sx={{mt: 0}} spacing={1}>
-                {dataSupports.responses.map((elem: any, index: any) => <Grid container item xs={12} justifyContent={'center'}>
+                {dataSupports.responses.map((elem: any, index: any) => <Grid container item xs={12}
+                                                                             justifyContent={'center'}>
                     <Grid item xs={12}>
                         <Paper variant={'outlined'} sx={{p: 1}}>
                             <Grid item xs={12} spacing={1}>
@@ -127,7 +129,8 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
                                     <Typography>{elem.content}</Typography>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Typography variant={'caption'} fontStyle={'italic'}>{dayjs(elem.createdAt).toString()}</Typography>
+                                    <Typography variant={'caption'}
+                                                fontStyle={'italic'}>{dayjs(elem.createdAt).toString()}</Typography>
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -139,13 +142,20 @@ export default function DialogSupport({open, onClose, idSupport}: DialogSupportP
                            rows={4} label={'Send a message at the customer'}/>
             </Grid>
         </DialogContent>
-            <DialogActions>
-                <LoadingButton disabled={dataSupports.status === "CLOSED"} loading={isLoading} onClick={handleCloseTickets}>
-                    Close ticket
-                </LoadingButton>
-                <LoadingButton disabled={dataSupports.status === "CLOSED"} loading={isLoading} onClick={handleRespond}>
-                    SEND
-                </LoadingButton>
+            <DialogActions sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 1}}>
+                <Typography>
+                    {dataSupports.status}
+                </Typography>
+                <Box>
+                    <LoadingButton disabled={dataSupports.status === "CLOSED"} loading={isLoading}
+                                   onClick={handleCloseTickets}>
+                        Close ticket
+                    </LoadingButton>
+                    <LoadingButton variant={'outlined'} disabled={dataSupports.status === "CLOSED"} loading={isLoading}
+                                   onClick={handleRespond}>
+                        SEND
+                    </LoadingButton>
+                </Box>
             </DialogActions>
         </>}
     </Dialog>
