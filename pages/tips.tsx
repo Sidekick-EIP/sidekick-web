@@ -159,7 +159,7 @@ export default function Tips() {
   }, []);
 
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font mb-10">
 
       <div className="pt-12 max-w-5xl mx-auto md:px-1 px-3">
         <div className="ktq4 text-center">
@@ -174,7 +174,7 @@ export default function Tips() {
       <div className="pt-4 max-w-5xl mx-auto fsac4 md:px-1 px-3">
         <button
           onClick={toggleArticles}
-          className="w-64 text-black text-sm mt-4 bg-blue-500 px-3 py-2 rounded-md"
+          className="w-64 text-white text-sm mt-4 bg-orange-400 px-3 py-2 rounded-md"
         >{showRandom ? "Recommended" : "Random"}</button>
 
 
@@ -198,10 +198,10 @@ export default function Tips() {
               <div>
                 <a href={article.link} className="text-blue-500 text-sm">Read More</a>
                 {article.liked ?
-                  <button className="text-blue-500 text-sm mt-4 ml-40" onClick={() => {
+                  <button className="text-orange-700 text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, false)
                   }} >
-                    <FontAwesomeIcon icon={faHeart} /> Liked !
+                    <FontAwesomeIcon icon={faHeart}/> Liked !
                   </button>
                   :
                   <button className="text-black text-sm mt-4 ml-40" onClick={() => {
@@ -221,7 +221,7 @@ export default function Tips() {
                 <a href={article.link} className="text-blue-500 text-sm mt-4">Read More</a>
 
                 {article.liked ?
-                  <button className="text-blue-500 text-sm mt-4 ml-40" onClick={() => {
+                  <button className="text-orange-700 text-sm mt-4 ml-40" onClick={() => {
                     toggleArticlesLike(article, false)
                   }} >
                     <FontAwesomeIcon icon={faHeart} /> Liked !

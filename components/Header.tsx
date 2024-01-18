@@ -205,16 +205,10 @@ function Header() {
                                          }}>
                                     <List>
                                         <ListItem button onClick={() => router.push('/profile')}>
-                                            <ListItemIcon>
-                                                {/* <People/> */}
-                                            </ListItemIcon>
                                             <ListItemText
                                                 primary={"Mon profile"}/>
                                         </ListItem>
                                         <ListItem button onClick={() => router.push('/support')}>
-                                            <ListItemIcon>
-                                                {/* <SupportAgent/> */}
-                                            </ListItemIcon>
                                             <ListItemText
                                                 primary={"Support"}/>
                                         </ListItem>
@@ -223,9 +217,6 @@ function Header() {
                                             await signOut();
                                             await router.push('/')
                                         }}>
-                                            <ListItemIcon>
-                                                {/* <Logout/> */}
-                                            </ListItemIcon>
                                             <ListItemText
                                                 primary={"Logout"}/>
                                         </ListItem>
