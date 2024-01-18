@@ -30,7 +30,7 @@ export default function Users() {
             (async () => {
                 try {
                     setIsLoading(true)
-                    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_admin?cursor=${page}`, {
+                    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_admin?sidekick=${hasSidekick}`, {
                         headers: {
                             Authorization: `Bearer ${data?.user.access_token}`
                         }
@@ -56,7 +56,7 @@ export default function Users() {
     }, [data, isToReload]);
 
     const fetchUsers = async () => {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_admin?cursor=${page}&sidekick=${hasSidekick}&email=${email}`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user_admin?sidekick=${hasSidekick}&email=${email}`, {
             headers: {
                 Authorization: `Bearer ${data?.user.access_token}`
             }
