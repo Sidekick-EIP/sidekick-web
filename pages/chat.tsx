@@ -18,7 +18,7 @@ export default function Chat() {
     const useAlert: any = useSnackBar();
     const [messageElementsfull, setmessageElementsfull] = useState([]);
 
-    const [sidekick_name, setsidekickName] = useState("...");
+    const [sidekick_name, setsidekickName] = useState("sidekick");
     const [avatar, setAvatar] = useState("../Theo.png");
     const [socket, setSocket] = useState<any>(null);
 
