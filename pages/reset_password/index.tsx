@@ -44,10 +44,10 @@ export default function Planning() {
 
     return (
         <div className='flex flex-col items-center justify-center w-full mt-32 px-4 py-2'>
-            <h1 className="text-2xl text-orange-950 sm:text-4xl">
+            <h1 className="text-2xl text-center text-orange-950 sm:text-4xl">
                 Fill your new password
             </h1>
-            <h2 className="mt-1 sm:mt-3 text-4xl font-bold text-white sm:text-6xl">
+            <h2 className="mt-1 sm:mt-3 text-center text-4xl font-bold text-white sm:text-6xl">
                 <span className="bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 text-transparent">Reset password</span>
             </h2>
 
