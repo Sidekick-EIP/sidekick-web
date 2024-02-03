@@ -4,7 +4,7 @@ export const Field = ({ children, label, error }: any) => {
   const id = getChildId(children);
 
   return (
-    <div className="col-sm-12 mb-3">
+    <div className="col-sm-4 mb-3">
       <label htmlFor={id} className="form-label">
         {label}
       </label>

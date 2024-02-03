@@ -63,22 +63,6 @@ const Infos = () => {
                                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
                                             required />
                                     </div>
-                                    {/* <TextField
-                      {...register("firstname", {required: "First name is required"})}
-                      label="Prenom"
-                      type="text"
-                      id="firstname"
-                      placeholder="Paul"
-                      focused
-                      color="white"
-                      InputProps={{
-                        style: {
-                          fontStyle: 'italic',
-                          color: "Silver",
-                        },
-                      }}
-                      className="w-full"
-                  /> */}
                                 </Field>
 
                                 <Field>
@@ -91,22 +75,6 @@ const Infos = () => {
                                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
                                             required />
                                     </div>
-                                    {/* <TextField
-                                        {...register("size", {required: "Size is required", min: 50, max: 300})}
-                                        label="Taille (cm)"
-                                        type="number"
-                                        id="size"
-                                        placeholder="160"
-                                        focused
-                                        color="white"
-                                        InputProps={{
-                                            style: {
-                                                fontStyle: 'italic',
-                                                color: 'silver', // Customize the color here
-                                            },
-                                        }}
-                                        className="w-full"
-                                    /> */}
                                 </Field>
 
                             </div>
@@ -123,22 +91,6 @@ const Infos = () => {
                                             required />
                                     </div>
 
-                                    {/* <TextField
-                                        {...register("lastname", {required: "Last name is required"})}
-                                        label="Nom"
-                                        type="text"
-                                        id="lastname"
-                                        placeholder="Lastname"
-                                        focused
-                                        color="white"
-                                        InputProps={{
-                                            style: {
-                                                fontStyle: 'italic',
-                                                color: 'silver', // Customize the color here
-                                            },
-                                        }}
-                                        className="w-full"
-                                    /> */}
                                 </Field>
 
                                 <Field>
@@ -163,9 +115,9 @@ const Infos = () => {
                                         </label>
                                         <select id="countries" required placeholder="fe" {...register("level", { required: "Goal is required" })}
                                             className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2">
-                                                {levels.map((level: any) => (
-                                                    <option value={level}>{level}</option>
-                                                ))}
+                                            {levels.map((level: any) => (
+                                                <option value={level}>{level}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </Field>
@@ -180,7 +132,7 @@ const Infos = () => {
                                         {...register("location", { required: "Location is required" })}
                                         placeholder="Location"
                                         className="py-3 border border-orange-300 w-full text-orange-950 bg-white placeholder:text-orange-950 rounded-md text-sm sm:p-4 sm:ps-2"
-                                        required/>
+                                        required />
                                 </div>
                             </Field>
                             <Field error={errors?.description}>
