@@ -8,7 +8,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { MoreVertical } from "react-feather";
 import {Grid, Paper} from "@mui/material";
 import dayjs from "dayjs";
 
@@ -68,7 +68,7 @@ export default function Tickets() {
             {dataSupports.map((support: any, index: number) => (
                 <Accordion key={index} expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
+                        expandIcon={<MoreVertical/>}
                     >
                         <Typography sx={{width: '33%', flexShrink: 0}}>
                             {support.title} - <span
